@@ -6,6 +6,7 @@
 //
 //--------------------------------------------------------------------
 
+// 2016112158 ±èÈñ¼ö
 #include "listarr.h"
 #include <iomanip>
 using namespace std;
@@ -42,19 +43,28 @@ throw (logic_error)
 // list. In either case, moves the cursor to newDataItem.
 
 {
-	
+
 	// pre-lab
 	if (isFull())
 	{
 		cout << "List is full. You cannot insert" << endl;
 		return;
 	}
-		
 
-	cursor++;
-	size++;
-	dataItems[cursor] = newDataItem;
+	if (cursor == size - 1)
+	{
+		cursor++;
+		size++;
+		dataItems[cursor] = newDataItem;
 
+	}
+	else
+	{
+		cursor = size;
+		size++;
+		dataItems[cursor] = newDataItem;
+	}
+	
 }
 
 //--------------------------------------------------------------------
@@ -72,10 +82,18 @@ void List::remove() throw (logic_error)
 		return;
 	}
 		
+	if (cursor == size - 1)
+	{
+		dataItems[cursor] = NULL;
+		cursor--;
+		size--;
+	}
+	else
+	{
+		dataItems[cursor] = dataItems[size - 1];
+		size--;
+	}
 
-	dataItems[cursor] = NULL;
-	cursor--;
-	size--;
 	
 }
 
@@ -130,18 +148,18 @@ bool List::isFull() const
 
 //--------------------------------------------------------------------
 
-int List::gotoBeginning() throw (logic_error)
+bool List::gotoBeginning() throw (logic_error)
 // Moves the cursor to the beginning of the list.
 {
 	// pre-lab
 	cursor = 0;
 	
-	return 1;
+	return true;
 }
 
 //--------------------------------------------------------------------
 
-int List::gotoEnd() throw (logic_error)
+bool List::gotoEnd() throw (logic_error)
 
 // Moves the cursor to the end of the list.
 
@@ -164,6 +182,7 @@ bool List::gotoNext() throw (logic_error)
 	if (cursor != maxSize - 1)
 	{
 		cursor++;
+		cout << "Output : " << dataItems[cursor] << endl;
 		return true;
 	}
 	else
@@ -184,6 +203,7 @@ bool List::gotoPrior() throw (logic_error)
 	if (cursor != -1)
 	{
 		cursor--;
+		cout << "Output : " << dataItems[cursor] << endl;
 		return true;
 	}
 	else
@@ -238,7 +258,26 @@ void List::showStructure() const
 //--------------------------------------------------------------------
 
 //in-lab
-void List::countBases(List& dnaSequence, int& aCount, int& cCount, int& tCount, int& gCount) 
+void List::countBases(List& dnasequence, int& aCount, int& cCount, int& tCount, int& gCount)
 {
-	for(int i = 0 ;)
+	aCount = 0, cCount = 0, tCount = 0, gCount = 0;
+	for (int i = 0; i < maxSize; i++)
+	{
+		switch (dataItems[i])
+		{
+		case 'A':
+			aCount++;
+			break;
+		case 'C':
+			cCount++;
+			break;
+		case 'G':
+			gCount++;
+			break;
+		case 'T':
+			tCount++;
+			break;
+		}
+	}
+
 }

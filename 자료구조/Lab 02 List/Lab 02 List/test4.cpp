@@ -6,6 +6,7 @@
 //
 //--------------------------------------------------------------------
 
+// 2016112158 ±èÈñ¼ö
 #include <iostream>
 #include "listarr.h"
 using namespace std;
@@ -127,12 +128,12 @@ void main()
 			break;
 
 		//in-lab
-		//case 'S': case 's':
-		//	testList.countBases(testList, aCount, cCount, tCount, gCount);
-		//	cout << "aCount = " << aCount << endl;
-		//	cout << "cCount = " << cCount << endl;
-		//	cout << "tCount = " << tCount << endl;
-		//	cout << "gCount = " << gCount << endl;
+		case 'S': case 's':
+			testList.countBases(testList, aCount, cCount, tCount, gCount);
+			cout << "aCount = " << aCount << endl;
+			cout << "cCount = " << cCount << endl;
+			cout << "tCount = " << tCount << endl;
+			cout << "gCount = " << gCount << endl;
 
 		case 'Q': case 'q':                   // Quit test program
 			break;

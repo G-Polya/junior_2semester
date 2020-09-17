@@ -7,6 +7,7 @@
 //--------------------------------------------------------------------
 // #pragma warning( disable : 4290 )
 
+// 2016112158 ±èÈñ¼ö
 #include <stdexcept>
 #include <iostream>
 
@@ -40,9 +41,9 @@ public:
 	bool isFull() const;                     // List is full
 
 	// List iteration operations
-	int gotoBeginning()                     // Go to beginning
+	bool gotoBeginning()                     // Go to beginning
 		throw (logic_error);
-	int gotoEnd()                           // Go to end
+	bool gotoEnd()                           // Go to end
 		throw (logic_error);
 	bool gotoNext()                          // Go to next data item
 		throw (logic_error);
@@ -55,7 +56,7 @@ public:
 	void showStructure() const;
 
 	//in-lab
-	void countBases(List& dnaSequence, int& aCount, int& cCount, int& tCount, int& gCount);
+	void countBases(List& dnasequence, int& aCount, int& cCount, int& tCount, int& gCount);
 
 	// In-lab operations
 	bool find(const DataType& searchDataItem)     // Find data item
