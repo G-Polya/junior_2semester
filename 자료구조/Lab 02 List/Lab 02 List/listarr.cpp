@@ -43,19 +43,28 @@ throw (logic_error)
 // list. In either case, moves the cursor to newDataItem.
 
 {
-	
+
 	// pre-lab
 	if (isFull())
 	{
 		cout << "List is full. You cannot insert" << endl;
 		return;
 	}
-		
 
-	cursor++;
-	size++;
-	dataItems[cursor] = newDataItem;
+	if (cursor == size - 1)
+	{
+		cursor++;
+		size++;
+		dataItems[cursor] = newDataItem;
 
+	}
+	else
+	{
+		cursor = size;
+		size++;
+		dataItems[cursor] = newDataItem;
+	}
+	
 }
 
 //--------------------------------------------------------------------
@@ -73,10 +82,18 @@ void List::remove() throw (logic_error)
 		return;
 	}
 		
+	if (cursor == size - 1)
+	{
+		dataItems[cursor] = NULL;
+		cursor--;
+		size--;
+	}
+	else
+	{
+		dataItems[cursor] = dataItems[size - 1];
+		size--;
+	}
 
-	dataItems[cursor] = NULL;
-	cursor--;
-	size--;
 	
 }
 
@@ -165,6 +182,7 @@ bool List::gotoNext() throw (logic_error)
 	if (cursor != maxSize - 1)
 	{
 		cursor++;
+		cout << "Output : " << dataItems[cursor] << endl;
 		return true;
 	}
 	else
@@ -185,6 +203,7 @@ bool List::gotoPrior() throw (logic_error)
 	if (cursor != -1)
 	{
 		cursor--;
+		cout << "Output : " << dataItems[cursor] << endl;
 		return true;
 	}
 	else
