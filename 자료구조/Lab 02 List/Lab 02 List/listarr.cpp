@@ -81,7 +81,7 @@ void List::remove() throw (logic_error)
 		cout << "List is empty. You cannot remove" << endl;
 		return;
 	}
-		
+	
 	if (cursor == size - 1)
 	{
 		dataItems[cursor] = NULL;
@@ -179,7 +179,7 @@ bool List::gotoNext() throw (logic_error)
 // returns false.
 {
 	// pre-lab
-	if (cursor != maxSize - 1)
+	if (cursor != size - 1)
 	{
 		cursor++;
 		cout << "Output : " << dataItems[cursor] << endl;
