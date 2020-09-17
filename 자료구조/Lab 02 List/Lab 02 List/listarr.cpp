@@ -167,7 +167,7 @@ bool List::gotoEnd() throw (logic_error)
 	// pre-lab
 	cursor = size - 1;
 
-	return 1;
+	return true;
 }
 
 //--------------------------------------------------------------------
