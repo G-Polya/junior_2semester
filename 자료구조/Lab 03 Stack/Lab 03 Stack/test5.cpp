@@ -45,10 +45,12 @@ void main()
 		{
 		case '+':                                  // push
 			testStack.push(testElement);
+			cout << "Push " << testElement << endl;
+
 			break;
 
 		case '-':                                  // pop
-			testStack.pop();
+			cout << "Popped " << testStack.pop() << endl;		
 			break;
 
 		case 'C': case 'c':                       // clear

@@ -20,11 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-<<<<<<< HEAD
-    <ProjectGuid>{E737B92C-63B8-4F62-9C68-66525CE40E48}</ProjectGuid>
-=======
-    <ProjectGuid>{2096A18E-DAEA-4316-9D1A-66AE87743E0D}</ProjectGuid>
->>>>>>> parent of 501e4c4... no message
+    <ProjectGuid>{D3D1A7FA-7AE4-4B3F-8809-F32E51BAE909}</ProjectGuid>
     <RootNamespace>Lab03Stack</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>

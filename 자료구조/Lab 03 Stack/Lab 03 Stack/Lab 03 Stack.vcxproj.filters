@@ -15,17 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <ClCompile Include="stackarr.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="test5.cpp">
-=======
-    <ClCompile Include="test5.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="stackarr.cpp">
->>>>>>> parent of 501e4c4... no message
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
