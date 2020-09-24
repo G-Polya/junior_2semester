@@ -6,8 +6,8 @@
 //
 //--------------------------------------------------------------------
 
+//2016112158 ±èÈñ¼ö
 #include <iostream>
-//#include "stackarr.h"
 #include "stackarr.cpp"
 //#include "stackdwn.cpp"
 using namespace std;
@@ -44,12 +44,11 @@ void main()
 		switch (cmd)
 		{
 		case '+':                                  // push
-			cout << "Push " << testElement << endl;
 			testStack.push(testElement);
 			break;
 
 		case '-':                                  // pop
-			cout << "Popped " << testStack.pop() << endl;
+			testStack.pop();
 			break;
 
 		case 'C': case 'c':                       // clear

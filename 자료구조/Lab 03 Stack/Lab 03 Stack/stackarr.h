@@ -6,6 +6,7 @@
 //
 //--------------------------------------------------------------------
 
+//2016112158 ±èÈñ¼ö
 const int defMaxStackSize = 10;   // Default maximum stack size
 
 template < class DT >
