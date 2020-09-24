@@ -67,10 +67,13 @@ DT Stack<DT>::pop()
 template<class DT>
 void Stack<DT>::clear()
 {
-	delete[] element;
-	element = new DT(maxSize);
-	//while (!empty())
-	//	pop();
+	int count = 0;
+	for (int i = 0; i < top; i++)
+	{
+		element[top] = NULL;
+		top--;
+		count++;
+	}
 }
 
 // Is stack empty?
