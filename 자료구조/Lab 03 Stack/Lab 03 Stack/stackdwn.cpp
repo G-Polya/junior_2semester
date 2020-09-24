@@ -7,8 +7,8 @@ using namespace std;
 
 // Constructor
 template<class DT>
-Stack<DT>::Stack(int maxNumber) 
-	:maxSize(maxNumber), top(-1)
+Stack<DT>::Stack(int maxNumber)
+	:maxSize(maxNumber), top(maxNumber)
 {
 	element = new DT[maxSize];
 	for (int i = 0; i < maxSize; i++)
@@ -29,13 +29,12 @@ Stack<DT>::~Stack()
 template<class DT>
 void Stack<DT>::push(const DT& newElement)
 {
-	if (!full()) 
+	if (!full())
 	{
 		cout << "Push " << newElement << endl;
-
-		top++;
+		top--;
 		element[top] = newElement;
-
+		
 	}
 	else
 		cout << "Stack is Full" << endl;
@@ -49,7 +48,7 @@ DT Stack<DT>::pop()
 	{
 		DT tmp = element[top];
 		element[top] = NULL;
-		top--;
+		top++;
 		cout << "Popped " << tmp << endl;
 
 		return tmp;
@@ -60,27 +59,24 @@ DT Stack<DT>::pop()
 		return NULL;
 	}
 
-	
+
 }
 
 // remove all
 template<class DT>
 void Stack<DT>::clear()
 {
-	for (int i = 0; i < top; i++)
+	for (int i = maxSize; i > -1; i--)
 		element[i] = NULL;
 
-	top = -1;
-		
-		
-	
+	top = maxSize;
 }
 
 // Is stack empty?
 template<class DT>
 bool Stack<DT>::empty() const
 {
-	if (top == -1)
+	if (top == maxSize)
 		return true;
 	else
 		return false;
@@ -90,7 +86,7 @@ bool Stack<DT>::empty() const
 template<class DT>
 bool Stack<DT>::full() const
 {
-	if (top == maxSize - 1)
+	if (top == 0)
 		return true;
 	else
 		return false;
@@ -106,7 +102,7 @@ void Stack<DT>::showStructure() const
 	{
 		for (int i = 0; i < maxSize; i++)
 		{
-			cout << "| " << element[i] << " |";
+			cout<<"| " << element[i]<< " |";
 		}
 		cout << endl;
 	}

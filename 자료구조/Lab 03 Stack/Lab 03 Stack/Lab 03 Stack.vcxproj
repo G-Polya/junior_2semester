@@ -123,6 +123,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="stackarr.cpp" />
+    <ClCompile Include="stackdwn.cpp" />
+    <ClCompile Include="test5.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stackarr.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

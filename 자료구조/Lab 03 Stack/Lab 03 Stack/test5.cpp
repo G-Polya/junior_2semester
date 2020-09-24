@@ -8,8 +8,8 @@
 
 //2016112158 ±èÈñ¼ö
 #include <iostream>
-#include "stackarr.cpp"
-//#include "stackdwn.cpp"
+// #include "stackarr.cpp"
+#include "stackdwn.cpp"
 using namespace std;
 
 //--------------------------------------------------------------------
