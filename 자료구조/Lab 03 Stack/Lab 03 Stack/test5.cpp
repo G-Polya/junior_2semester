@@ -8,8 +8,8 @@
 
 //2016112158 ±èÈñ¼ö
 #include <iostream>
-// #include "stackarr.cpp"
-#include "stackdwn.cpp"
+#include "stackarr.cpp"
+// #include "stackdwn.cpp"
 using namespace std;
 
 //--------------------------------------------------------------------
@@ -45,12 +45,11 @@ void main()
 		{
 		case '+':                                  // push
 			testStack.push(testElement);
-			cout << "Push " << testElement << endl;
-
+			
 			break;
 
 		case '-':                                  // pop
-			cout << "Popped " << testStack.pop() << endl;		
+			testStack.pop();
 			break;
 
 		case 'C': case 'c':                       // clear

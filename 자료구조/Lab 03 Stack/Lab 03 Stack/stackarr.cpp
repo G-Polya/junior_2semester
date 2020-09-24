@@ -31,7 +31,7 @@ void Stack<DT>::push(const DT& newElement)
 {
 	if (!full()) 
 	{
-		
+		cout << "Push " << newElement << endl;
 		top++;
 		element[top] = newElement;
 
@@ -49,7 +49,8 @@ DT Stack<DT>::pop()
 		DT tmp = element[top];
 		element[top] = NULL;
 		top--;
-		
+		cout << "Popped " << tmp << endl;
+
 		return tmp;
 	}
 	else
@@ -66,17 +67,9 @@ template<class DT>
 void Stack<DT>::clear()
 {
 	for (int i = 0; i < top; i++)
-<<<<<<< HEAD
-		element[top] = NULL;
-	top = -1;
-=======
 		element[i] = NULL;
 
 	top = -1;
-		
-		
-	
->>>>>>> test
 }
 
 // Is stack empty?
