@@ -20,11 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-<<<<<<< HEAD
-    <ProjectGuid>{D3D1A7FA-7AE4-4B3F-8809-F32E51BAE909}</ProjectGuid>
-=======
-    <ProjectGuid>{08E7DCF2-14C5-4FB6-AC89-FF6A0DAF42B9}</ProjectGuid>
->>>>>>> test
+    <ProjectGuid>{1740AE79-D843-4D84-9CD9-3B6ED075EAD9}</ProjectGuid>
     <RootNamespace>Lab03Stack</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -127,12 +123,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="stackarr.cpp" />
-    <ClCompile Include="stackdwn.cpp" />
-    <ClCompile Include="test5.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="stackarr.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
