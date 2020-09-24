@@ -97,7 +97,7 @@ bool Stack<DT>::full() const
 template<class DT>
 void Stack<DT>::showStructure() const
 {
-	for (int i = 0; i < maxSize; i++)
+	for (int i = 0; i < top; i++)
 	{
 		cout << element[i] << " ";
 	}
