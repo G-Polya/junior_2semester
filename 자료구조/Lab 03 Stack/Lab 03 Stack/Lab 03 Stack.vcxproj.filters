@@ -19,6 +19,12 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="test5.cpp">
+<<<<<<< HEAD
+=======
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="stackdwn.cpp">
+>>>>>>> test
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
