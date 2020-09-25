@@ -16,6 +16,7 @@ using namespace std;
 
 void main()
 {
+	
 	Stack<char> testStack(8),     // Test stack
 		assignStack(8);   // Destination for assignment
 	char testElement;             // Stack element
