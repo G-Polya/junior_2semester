@@ -2,11 +2,11 @@
 #include "listarr.h"
 using namespace std;
 
-void main()
+int main()
 {
 	char cmd;                 // Input command
 
-	List* personList = new List(9);
+	List personList(9);
 
 	do
 	{
@@ -28,8 +28,7 @@ void main()
 		switch (cmd)
 		{
 		case 'R':                                  // read
-			
-			personList->read();
+			personList.read();
 			break;
 
 		case '+':                                  // add
@@ -53,5 +52,5 @@ void main()
 		}
 	} while (cmd != 'Q' && cmd != 'q');
 
-	
+	return 0;
 }
