@@ -8,22 +8,24 @@ int main()
 
 	List personList(9);
 
+	
+	
 	do
 	{
 		cout << endl << "Commands:" << endl;
 		cout << "  R  : read from a file" << endl;
 		cout << "  +  : add a new entry" << endl;
-		cout << "  -  : remove an entry"<< endl;
+		cout << "  -  : remove an entry" << endl;
 		cout << "  W  : write to a file" << endl;
 		cout << "  M  : select a month" << endl;
-		cout << "  Q   : Quit the program" << endl;
+		cout << "  Q  : Quit the program" << endl;
 		cout << endl;
 
 
 
 		cout << endl << "Command: ";                  // Read command
 		cin >> cmd;
-		
+
 
 		switch (cmd)
 		{
@@ -38,10 +40,11 @@ int main()
 			break;
 
 		case 'W':                                  // write
-			
+
 			break;
 
 		case 'M':                                  // select
+			personList.select();
 			break;
 
 		case 'Q': case 'q':                   // Quit test program
@@ -51,6 +54,7 @@ int main()
 			cout << "Inactive or invalid command" << endl;
 		}
 	} while (cmd != 'Q' && cmd != 'q');
+	
 
 	return 0;
 }

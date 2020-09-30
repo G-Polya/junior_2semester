@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include "Person.h"
+#include "Month.h"
 using namespace std;
 
 const int defMaxListSize = 10;   // Default maximum list size
@@ -29,7 +30,13 @@ public:
 		throw (logic_error);
 	void clear();                                 // Clear list
 
-	void read();
+	string getNamefromMonth(int month);
+	int getMonthfromName(string name);
+	int getBirthdays(string name);
+	void printSummary();
+
+	void read();			// read from file
+	void select();			//
 
 
 	// List status operations
@@ -60,6 +67,7 @@ public:
 
 private:
 	// Data members
+	Month monthes[12];
 	int maxSize,
 		size,             // Actual number of data item in the list
 		cursor;           // Cursor array index

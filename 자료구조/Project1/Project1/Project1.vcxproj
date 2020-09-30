@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{177DD666-45C2-4682-A5EC-A6F0A9B4BF94}</ProjectGuid>
-    <RootNamespace>Project1phonebirthdayBook</RootNamespace>
+    <ProjectGuid>{06093A50-06AF-4558-8506-26B9B79F03D2}</ProjectGuid>
+    <RootNamespace>Project1</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -125,10 +125,12 @@
   <ItemGroup>
     <ClCompile Include="listarr.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Month.cpp" />
     <ClCompile Include="Person.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="listarr.h" />
+    <ClInclude Include="Month.h" />
     <ClInclude Include="Person.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -15,10 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="listarr.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="listarr.cpp">
+    <ClCompile Include="Month.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Person.cpp">
@@ -27,6 +30,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="listarr.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Month.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Person.h">
