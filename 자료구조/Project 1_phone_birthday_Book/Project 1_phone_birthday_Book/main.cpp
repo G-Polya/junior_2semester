@@ -6,6 +6,7 @@ void main()
 {
 	char cmd;                 // Input command
 
+	List* personList = new List(9);
 
 	do
 	{
@@ -27,6 +28,8 @@ void main()
 		switch (cmd)
 		{
 		case 'R':                                  // read
+			
+			personList->read();
 			break;
 
 		case '+':                                  // add
@@ -49,4 +52,6 @@ void main()
 			cout << "Inactive or invalid command" << endl;
 		}
 	} while (cmd != 'Q' && cmd != 'q');
+
+	
 }

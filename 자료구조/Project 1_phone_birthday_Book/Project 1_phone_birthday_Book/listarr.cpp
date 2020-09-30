@@ -74,7 +74,7 @@ void List::remove() throw (logic_error)
 	
 	if (cursor == size - 1)
 	{
-		dataItems[cursor] = NULL;
+		dataItems[cursor] = Person(NULL, NULL, NULL);
 		cursor--;
 		size--;
 	}
@@ -108,7 +108,7 @@ void List::clear()
 // Removes all the data items from a list.
 {
 	for (int i = 0; i < size; i++)
-		dataItems[i] = NULL;
+		dataItems[i] = Person(NULL,NULL,NULL);
 	cursor = -1;
 	size = 0;
 }
@@ -134,6 +134,55 @@ bool List::isFull() const
 	else
 		return false;
 
+}
+
+void List::read()
+{
+	string fileName;
+	//cout << "Enter the name of the file: ";
+	//cin >> fileName;
+	//fileName = fileName + ".txt";
+	fileName = "FriendFile.txt";
+	fstream in;
+	in.open(fileName);
+
+	string s;
+	int count = 0;
+	if (!in.is_open())
+		cout << "파일 열기 실패" << endl;
+	else
+	{
+		while (getline(in, s))
+		{
+			count++;
+			cout << s << endl;
+		}
+		in.close();
+
+		cout << "Count : " << count << endl;
+	}
+	
+	in.open(fileName);
+	if (!in.is_open())
+		cout << "파일 열기 실패" << endl;
+	else
+	{
+		string* stringList = new string[count];
+		int i = 0;
+
+		while (getline(in, s))
+			stringList[i++] = s;
+		in.close();
+		
+		int numberOfentry = (count + 1) / 4;
+		cout << "Total number of entries in the list: " << numberOfentry << endl;
+		for (int i = 0; numberOfentry; i++)
+		{
+			dataItems[i].setAll(stringList[0 + 4 * i], stringList[1 + 4 * i], stringList[2 + 4 * i]);
+		}
+	}
+	
+	
 }
 
 //--------------------------------------------------------------------
@@ -202,7 +251,7 @@ bool List::gotoPrior() throw (logic_error)
 
 //--------------------------------------------------------------------
 
-DT List::getCursor() const throw (logic_error)
+Person List::getCursor() const throw (logic_error)
 // Returns the item marked by the cursor.
 
 {

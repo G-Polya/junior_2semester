@@ -22,6 +22,12 @@ string Person::getBirthday()
 {
 	return this->birthday;
 }
+void Person::getAll(string& name, string& phoneNumber, string& birthday)
+{
+	name = this->name;
+	phoneNumber = this->phoneNumber;
+	birthday = this->birthday;
+}
 
 // setter
 void Person::setName(string name)
@@ -35,4 +41,25 @@ void Person::setPhoneNumber(string phoneNumber)
 void Person::setBirthday(string birthday)
 {
 	this->birthday = birthday;
+}
+void Person::setAll(string name, string phoneNumber, string birthday)
+{
+	this->name = name;
+	this->phoneNumber = phoneNumber;
+	this->birthday = birthday;
+}
+
+void Person::printAll()
+{
+	cout << name << endl;
+	cout << phoneNumber << endl;
+	cout << birthday << endl;
+}
+
+
+ostream& operator<<(ostream& out, Person& person)
+{
+	out << person.getName() << " " << person.getPhoneNumber() << " " << person.getBirthday() << endl;
+	//out << 14 << endl;
+	return out;
 }

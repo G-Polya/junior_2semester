@@ -1,15 +1,8 @@
-//--------------------------------------------------------------------
-//
-//                                                          listarr.h
-//
-//  Class declaration for the array implementation of the List ADT
-//
-//--------------------------------------------------------------------
-// #pragma warning( disable : 4290 )
 
 // 2016112158 ±èÈñ¼ö
 #include <stdexcept>
 #include <iostream>
+#include <fstream>
 #include "Person.h"
 using namespace std;
 
@@ -35,6 +28,9 @@ public:
 	void replace(const Person& newDataItem)   // Replace data item
 		throw (logic_error);
 	void clear();                                 // Clear list
+
+	void read();
+
 
 	// List status operations
 	bool isEmpty() const;                    // List is empty
