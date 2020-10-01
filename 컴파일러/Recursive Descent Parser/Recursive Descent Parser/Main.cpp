@@ -16,17 +16,17 @@ FILE *ucodeFile;                        // ucode file
 #define FILE_LEN 30
 
 // 어째선지 콘솔로 실행하면 Lexcial Error발생...
-void main(int argc, char* argv[])
+void main()
 {
-	char fileName[FILE_LEN];
+	const char* fileName= "example.mc";
 	int err;
 
 	printf(" *** start of Mini C Compiler\n");
-	if (argc != 2) {	
-		icg_error(1);
-		exit(1);
-	}
-	strcpy_s(fileName, argv[1]);
+	//if (argc != 2) {	
+	//	icg_error(1);
+	//	exit(1);
+	//}
+	//strcpy_s(fileName, argv[1]);
 	
 //	strcpy_s(fileName, "example.mc");			// 비주얼스튜디오로 실행하면 Error가 발생하지 않음.
 	printf("   * source file name: %s\n", fileName);

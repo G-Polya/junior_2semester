@@ -10,7 +10,8 @@
 #define ID_LENGTH 12
 #define MAX_LENGTH 1000
 
-
+#include <string>
+using namespace std;
 
 struct tokenType {
 	int number;
