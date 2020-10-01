@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{E6ED0717-BBA3-4F32-A59D-51C2F5DF8BD0}</ProjectGuid>
-    <RootNamespace>RecursiveDescentParser</RootNamespace>
+    <ProjectGuid>{46164B8F-6612-4719-9BF6-1970B6C336AC}</ProjectGuid>
+    <RootNamespace>test</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -123,13 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="notOptimizedRDParser.cpp" />
-    <ClCompile Include="Scanner.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="notOptimizedRDParser.h" />
-    <ClInclude Include="Scanner.h" />
+    <ClCompile Include="spl_rdp.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

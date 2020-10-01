@@ -4,14 +4,16 @@
 ***************************************************************/
 
 #pragma once
+#include <string.h>
+#include <ctype.h>
+#include <math.h>
 
 
-#define NO_KEYWORD 15
+#define NO_KEYWORD 17
 #define ID_LENGTH 12
 #define MAX_LENGTH 1000
 
-#include <string>
-using namespace std;
+
 
 struct tokenType {
 	int number;
@@ -45,8 +47,9 @@ enum tsymbol {
 	twhile,    tlbrace,      tor,    trbrace,      tchar,    tdouble,
 	/* 42         43          44        45           46         47     */
 	tfor,       tswitch,     tcase,  tdefault,   tcontinue,   tbreak,
-	/* 48		  49		  50	      51                           */
-    tcolon,  tcharlit,   tstringlit,   tcomment
+	/* 48		  49		  50	    51           52         53     */
+    tcolon,      tlabel,   tInteger,  tcharlit,  tstringlit, tcomment,
+	/* 54         55          56        57           58         59    */
 };
 
 struct tokenType scanner();

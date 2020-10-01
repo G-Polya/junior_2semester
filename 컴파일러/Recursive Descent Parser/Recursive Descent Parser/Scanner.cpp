@@ -3,10 +3,7 @@
 ***************************************************************/
 
 #include <stdio.h>
-#include <string.h>
-#include <ctype.h>
-#include <math.h>
-#include <string>
+
 
 #include "Scanner.h"
 
@@ -32,23 +29,28 @@ const char* tokenName[] = {
 	"==",       ">",       ">=",      "[",      "]",        "eof",
 	/* 24         25         26        27         28         29        */
 	//   ...........    word symbols ................................. //
-	/* 30         31         32        33         34         35        */
 	"const",    "else",     "if",      "int",     "return",  "void",
-	/* 36         37         38        39         40         41        */
+	/* 30         31         32        33         34         35        */
 	"while",    "{",        "||",       "}",	 "char",    "double",
-	/* 42         43         44        45         46         47       */
+	/* 36         37         38        39         40         41        */
 	"for",     "switch",   "case",   "default", "continue", "break",
-	/* 48         49         50   */
-    ":"
+	/* 42         43         44        45         46         47       */
+    ":",        "label",    "Integer"
+	/* 48         49         50        51         52         53       */
+	
 };
 
 // 키워드들
 const char* keyword[NO_KEYWORD] = {
-	"const",  "else",    "if",    "int",    "return",  "void",    "while"	,	"char",	"double","for","switch","case","default","continue","break"
+	"const",    "else",    "if", "int", "return",    "void",  "while", "char", "double",  "for",
+	"label", "Integer","switch","case","default","continue",  "break",
+	
 };
 
 enum tsymbol tnum[NO_KEYWORD] = {
-	tconst,    telse,     tif,     tint,     treturn,   tvoid,     twhile	, tchar, tdouble,tfor,tswitch,tcase,tdefault,tcontinue,tbreak
+	tconst,    telse,     tif,     tint,     treturn,    tvoid,     twhile, tchar, tdouble,tfor,
+	tlabel, tInteger, tswitch,    tcase,	tdefault,tcontinue,		tbreak,
+	
 };
 
 struct tokenType scanner()

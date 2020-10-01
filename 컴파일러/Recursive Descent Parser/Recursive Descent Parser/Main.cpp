@@ -4,10 +4,12 @@
 #include <ctype.h>
 #include <stdlib.h>
 
+#include <iostream>
 #include "Scanner.h"
-
+#include "Parser.h"
 void icg_error(int n);
 
+using namespace std;
 
 FILE *astFile;                          // AST file
 FILE *sourceFile;                       // miniC source program
@@ -38,10 +40,9 @@ void main()
 	}
 	
 	
+/*	printf(" === start of Scanner\n");
 	struct tokenType token;
-	
-	printf(" === start of Scanner\n");
-	
+
 	token = scanner();
 	
 	while (token.number != teof) {
@@ -50,12 +51,14 @@ void main()
 		printToken(token);
 		token = scanner();
 		
-	} /* while (1) */
+	}*/ /* while (1) */
 
-
+	
+	
 	printf(" === start of Parser\n");
-	printf(" > Not yet implemented...\n");
-	//root = parser();
+	getNextSymbol();
+	//printf(" > Not yet implemented...\n");
+	pD();
 	//printTree(root, 0);
 	
 	printf(" === start of ICG\n");
