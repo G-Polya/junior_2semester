@@ -17,6 +17,3 @@ void pSemicolon();
 void pComma();
 
 
-//void enter(string name);
-//void leave(string name);
-//void spaces(int local_level);

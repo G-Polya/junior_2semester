@@ -6,7 +6,7 @@
 
 #include <iostream>
 #include "Scanner.h"
-#include "Parser.h"
+#include "OptimizedRDParser.h"
 void icg_error(int n);
 
 using namespace std;

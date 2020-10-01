@@ -21,7 +21,7 @@
     <ClCompile Include="Scanner.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="notOptimizedRDParser.cpp">
+    <ClCompile Include="OptimizedRDParser.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -29,7 +29,7 @@
     <ClInclude Include="Scanner.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="notOptimizedRDParser.h">
+    <ClInclude Include="OptimizedRDParser.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
