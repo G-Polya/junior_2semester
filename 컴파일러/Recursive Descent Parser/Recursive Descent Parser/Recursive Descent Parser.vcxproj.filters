@@ -15,13 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Scanner.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="OptimizedRDParser.cpp">
+    <ClCompile Include="notOptimizedMain.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="notOptimizedRDParser.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -29,7 +29,7 @@
     <ClInclude Include="Scanner.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="OptimizedRDParser.h">
+    <ClInclude Include="notOptimizedRDParser.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

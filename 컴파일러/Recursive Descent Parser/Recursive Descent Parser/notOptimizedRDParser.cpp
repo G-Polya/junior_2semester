@@ -2,16 +2,27 @@
 #include "notOptimizedRDParser.h"
 #include <iostream>
 #include <string>
+#include <vector>
+#include <iomanip>
+using namespace std;
 
 int parsingNumber;
 struct tokenType nextSymbol;
+vector<int> leftParse;
 
-using namespace std;
 
 void getNextSymbol()
 {
 	nextSymbol = scanner();
 	// cout << nextSymbol.number << endl;
+}
+
+void printParse()
+{
+	cout << "LeftParse is ";
+	for (int i = 0; i < leftParse.size(); i++)
+		cout << leftParse[i] << " ";
+	cout << endl;
 }
 
 void error(int n)
@@ -20,28 +31,28 @@ void error(int n)
 	switch (n)
 	{
 	case 1:
-		cout << "\n pD Error: " << n << endl;
+		cout << "\npD Error: " << n << endl;
 		break;
 	case 2:
-		cout << "\n pL Error: " << n << endl;
+		cout << "\npL Error: " << n << endl;
 		break;
 	case 3:
-		cout << "\n pR Error: " << n << endl;
+		cout << "\npR Error: " << n << endl;
 		break;
 	case 4:
-		cout << "\n pLabel Error: " << n << endl;
+		cout << "\npLabel Error: " << n << endl;
 		break;
 	case 5:
-		cout << "\n pInteger Error: " << n << endl;
+		cout << "\npInteger Error: " << n << endl;
 		break;
 	case 6:
-		cout << "\n pId Error: " << n << endl;
+		cout << "\npId Error: " << n << endl;
 		break;
 	case 7:
-		cout << "\n pSemicolon Error: " << n << endl;
+		cout << "\npSemicolon Error: " << n << endl;
 		break;
 	case 8:
-		cout << "\n pComma Error: " << n << endl;
+		cout << "\npComma Error: " << n << endl;
 		break;
 	}
 
@@ -49,18 +60,20 @@ void error(int n)
 }
 void pD()
 {
-	
+	cout << "Procedure" << setw(19) << "Symbol number" << endl;
+	cout <<"pD() : " << setw(15) << nextSymbol.number << endl;
+
 	if (nextSymbol.number == tlabel)
 	{
 		parsingNumber = 1;
-		cout << parsingNumber << endl;
+		leftParse.push_back(parsingNumber);
 		pLabel();
 		pL();
 	}
 	else if (nextSymbol.number == tInteger)
 	{
 		parsingNumber = 2;
-		cout << parsingNumber << endl;
+		leftParse.push_back(parsingNumber);
 		pInteger();
 		pL();
 	}
@@ -71,10 +84,12 @@ void pD()
 
 void pL()
 {
+	cout << "pL() : " << setw(15) << nextSymbol.number << endl;
+	
 	if (nextSymbol.number == tident)
 	{
 		parsingNumber = 3;
-		cout << parsingNumber << endl;
+		leftParse.push_back(parsingNumber);
 		pId();
 		pR();
 	}
@@ -84,16 +99,18 @@ void pL()
 
 void pR()
 {
+	cout << "pR() : " << setw(15) << nextSymbol.number << endl;
+	
 	if (nextSymbol.number == tsemicolon)
 	{
 		parsingNumber = 4;
-		cout << parsingNumber << endl;
+		leftParse.push_back(parsingNumber);
 		pSemicolon();
 	}		
 	else if (nextSymbol.number == tcomma)
 	{
 		parsingNumber = 5;
-		cout << parsingNumber << endl;
+		leftParse.push_back(parsingNumber);
 		pComma();
 		pL();
 	}
@@ -103,6 +120,7 @@ void pR()
 
 void pLabel()
 {
+	cout << "pLabel() : "<<setw(11) << nextSymbol.number << endl;
 	if (nextSymbol.number == tlabel)
 		nextSymbol = scanner();
 	else
@@ -111,6 +129,8 @@ void pLabel()
 
 void pInteger()
 {
+	cout << "pInteger() : " << setw(9) << nextSymbol.number << endl;
+
 	if (nextSymbol.number == tInteger)
 		nextSymbol = scanner();
 	else
@@ -119,6 +139,8 @@ void pInteger()
 
 void pId()
 {
+	cout << "pId() : " << setw(14) << nextSymbol.number << endl;
+
 	if (nextSymbol.number == tident)
 		nextSymbol = scanner();
 	else
@@ -127,6 +149,8 @@ void pId()
 
 void pSemicolon()
 {
+	cout << "pSemicolon() : " << setw(7) << nextSymbol.number << endl;
+
 	if (nextSymbol.number == tsemicolon)
 		nextSymbol = scanner();
 	else
@@ -135,6 +159,8 @@ void pSemicolon()
 
 void pComma()
 {
+	cout << "pComma() : " << setw(11) << nextSymbol.number << endl;
+
 	if (nextSymbol.number == tcomma)
 		nextSymbol = scanner();
 	else

@@ -123,12 +123,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="OptimizedRDParser.cpp" />
+    <ClCompile Include="notOptimizedMain.cpp" />
+    <ClCompile Include="notOptimizedRDParser.cpp" />
     <ClCompile Include="Scanner.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="OptimizedRDParser.h" />
+    <ClInclude Include="notOptimizedRDParser.h" />
     <ClInclude Include="Scanner.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

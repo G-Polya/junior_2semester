@@ -41,15 +41,16 @@ enum tsymbol {
 	tequal,     tgreat,    tgreate,  tlbracket,  trbracket,    teof,
 	/* 24         25          26        27           28         29     */
 	//   ...........    word symbols ................................. //
-	/* 30         31          32        33           34         35     */
+
 	tconst,     telse,       tif,      tint,      treturn,    tvoid,
-	/* 36         37          38        39           40         41     */
+	/* 30         31          32        33           34         35     */
 	twhile,    tlbrace,      tor,    trbrace,      tchar,    tdouble,
-	/* 42         43          44        45           46         47     */
+	/* 36         37          38        39           40         41     */
 	tfor,       tswitch,     tcase,  tdefault,   tcontinue,   tbreak,
-	/* 48		  49		  50	    51           52         53     */
+	/* 42         43          44        45           46         47     */
     tcolon,      tlabel,   tInteger,  tcharlit,  tstringlit, tcomment,
-	/* 54         55          56        57           58         59    */
+	/* 48		  49		  50	    51           52         53     */
+
 };
 
 struct tokenType scanner();

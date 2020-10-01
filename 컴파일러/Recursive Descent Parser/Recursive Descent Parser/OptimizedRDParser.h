@@ -5,5 +5,6 @@ void getNextSymbol();
 
 // nonterminal procedure
 void pD();
+void printParse();
 //void pL();
 //void pR();
