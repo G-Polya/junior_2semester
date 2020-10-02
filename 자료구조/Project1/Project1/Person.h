@@ -33,5 +33,6 @@ public:
 
 	friend ostream& operator<<(ostream& out, Person& person);
 	
+	
 
 };

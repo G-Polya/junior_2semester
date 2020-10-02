@@ -50,6 +50,19 @@ throw (logic_error)
 		cursor++;
 		size++;
 		dataItems[cursor] = newDataItem;
+		int month = atoi(dataItems[cursor].getBirthday().substr(0, 2).c_str());
+		for (int i = 0; i < 12; i++)
+		{
+			if (monthes[i].getMonth() == month)	// entry가 태어난 월과 monthes 배열안의 month와 비교해서 같으면
+			{
+				int currentNumber = monthes[i].getNumber();
+				monthes[i].setNumber(currentNumber + 1);	// monthes배열안의 원소의 numberOfentry 증가
+
+				//즉, List 안에 들어있는 entry가 태어난 월들이 2,2,4라면
+				//monthes안의 원소의 month(2,2,4)와 비교해서 같으면 Feburary, Feburary, April의 numberOfentry를 증가시킨다는 뜻
+
+			}
+		}
 
 	}
 	else
@@ -58,37 +71,70 @@ throw (logic_error)
 		size++;
 		dataItems[cursor] = newDataItem;
 	}
+
 	
 }
 
 //--------------------------------------------------------------------
 
-void List::remove() throw (logic_error)
+void List::remove(string name) throw (logic_error)
 
 // Removes the data items  marked by the cursor from a list. Moves the
 // cursor to the next data item item in the list. Assumes that the
 // first list data items "follows" the last list data item.
 {
 	// pre-lab
+	Person person;
+	int currentCursor;
+	for (int i = 0; i < size; i++)
+	{
+		if (name == dataItems[i].getName())
+		{
+			person = dataItems[i];
+			currentCursor = i;
+		}
+	}
+
+	//cout << "Person : " << person.getName() << ", currentCursor : " << currentCursor << endl;
+
 	if (isEmpty())
 	{
 		cout << "List is empty. You cannot remove" << endl;
 		return;
 	}
 	
-	if (cursor == size - 1)
+	int month = atoi(person.getBirthday().substr(0, 2).c_str());
+	for (int i = 0; i < 12; i++)
 	{
-		dataItems[cursor] = Person(NULL, NULL, NULL);
+		if (monthes[i].getMonth() == month)	// entry가 태어난 월과 monthes 배열안의 month와 비교해서 같으면
+		{
+			int currentNumber = monthes[i].getNumber();
+			monthes[i].setNumber(currentNumber - 1);	// monthes배열안의 원소의 numberOfentry 증가
+
+			//즉, List 안에 들어있는 entry가 태어난 월들이 2,2,4라면
+			//monthes안의 원소의 month(2,2,4)와 비교해서 같으면 Feburary, Feburary, April의 numberOfentry를 증가시킨다는 뜻
+
+		}
+	}
+
+	if (currentCursor == size - 1)
+	{
 		cursor--;
 		size--;
 	}
-	else
+	else                // 끝에 있는 데이터를 현재 커서 위치에 저장 
 	{
-		dataItems[cursor] = dataItems[size - 1];
+		dataItems[currentCursor] = dataItems[size - 1];
 		size--;
 	}
 
 	
+}
+
+void List::printCursorSize()
+{
+	cout << "Cursor : " << cursor << endl;
+	cout << "Size : " << size << endl;
 }
 
 //--------------------------------------------------------------------
@@ -147,63 +193,48 @@ void List::read()
 	//cin >> fileName;
 	//fileName = fileName + ".txt";
 	fileName = "FriendFile.txt";
-	fstream in;
-	in.open(fileName);
+	ifstream fileIn;
+
+	fileIn.open(fileName);
 
 	string s;
 	int count = 0;
-	if (!in.is_open())
+	if (!fileIn.is_open())
 		cout << "파일 열기 실패" << endl;
 	else
 	{
-		while (getline(in, s))
+		while (getline(fileIn, s))
 			count++;
 
-		in.close();
+		fileIn.close();
 
 		
 	}
 	
-	in.open(fileName);
-	if (!in.is_open())
+	fileIn.open(fileName);
+	if (!fileIn.is_open())
 		cout << "파일 열기 실패" << endl;
 	else
 	{
 		string* stringList = new string[count];
 		int i = 0;
 
-		while (getline(in, s))
+		while (getline(fileIn, s))
 			stringList[i++] = s;
-		in.close();
+		fileIn.close();
 
 		int numberOfentry = (count + 1) / 4;
 		cout << "Total number of entries in the list: " << numberOfentry << endl;
 		for (int i = 0; i < numberOfentry; i++)
 			insert(Person(stringList[0 + 4 * i], stringList[1 + 4 * i], stringList[2 + 4 * i]));
 		
-		printSummary();
+		
 	}
 }
 
 void List::printSummary()
 {
-	for (int i = 0; i < size; i++)
-	{
-		int month = atoi(dataItems[i].getBirthday().substr(0, 2).c_str());		// List안에 들어있는 entry가 태어난 월
 
-		for (int i = 0; i < 12; i++)
-		{
-			if (monthes[i].getMonth() == month)	// entry가 태어난 월과 monthes 배열안의 month와 비교해서 같으면
-			{
-				int currentNumber = monthes[i].getNumber();
-				monthes[i].setNumber(currentNumber + 1);	// monthes배열안의 원소의 numberOfentry 증가
-
-				//즉, List 안에 들어있는 entry가 태어난 월들이 2,2,4라면
-				//monthes안의 원소의 month(2,2,4)와 비교해서 같으면 Feburary, Feburary, April의 numberOfentry를 증가시킨다는 뜻
-
-			}
-		}
-	}
 
 	cout << "Number of birthdays in " << endl;
 	for (int i = 0; i < 12; i++)
@@ -267,6 +298,51 @@ void List::select()
 			dataItems[i].printAll();
 			cout << endl;
 		}
+	}
+}
+
+void List::write()
+{
+	string fileName;
+	fileName = "FriendFileUpdate.txt";
+	//cout << "Enter the name of the file: ";
+	//cin >> fileName;
+	//fileName = fileName + ".txt";
+	ofstream fileOut;
+	fileOut.open(fileName);
+
+	if (fileOut.is_open())
+	{
+		for (int i = 0; i < size; i++)
+		{
+			fileOut << dataItems[i].getName() << endl;
+			cout << dataItems[i].getName() << endl;
+
+			fileOut << dataItems[i].getPhoneNumber() << endl;
+			cout << dataItems[i].getPhoneNumber() << endl;
+
+			fileOut << dataItems[i].getBirthday() << endl;
+			cout << dataItems[i].getBirthday() << endl;
+
+			fileOut << endl;
+			cout << endl;		
+		}
+	}
+	else
+		cout << "FriendFileUpdate 파일 연결 실패" << endl;
+
+	
+
+	fileOut.close();
+
+}
+
+void List::printList()
+{
+	for (int i = 0; i < size; i++)
+	{
+		dataItems[i].printAll();
+		cout << endl;
 	}
 }
 

@@ -24,7 +24,7 @@ public:
 	// List manipulation operations
 	void insert(const Person& newDataItem)    // Insert after cursor
 		throw (logic_error);
-	void remove()                                 // Remove data item
+	void remove(string name)                  // Remove data item
 		throw (logic_error);
 	void replace(const Person& newDataItem)   // Replace data item
 		throw (logic_error);
@@ -36,8 +36,11 @@ public:
 	void printSummary();
 
 	void read();			// read from file
-	void select();			//
+	void select();			// get totalnumber of birthdays in selected month
+	void write();			// write contents of list to file
 
+	void printCursorSize(); // print cursor and size
+	void printList();
 
 	// List status operations
 	bool isEmpty() const;                    // List is empty
@@ -71,6 +74,7 @@ private:
 	int maxSize,
 		size,             // Actual number of data item in the list
 		cursor;           // Cursor array index
+	
 	Person* dataItems;  // Array containing the list data item
 };
 

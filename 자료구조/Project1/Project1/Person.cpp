@@ -63,3 +63,4 @@ ostream& operator<<(ostream& out, Person& person)
 	//out << 14 << endl;
 	return out;
 }
+

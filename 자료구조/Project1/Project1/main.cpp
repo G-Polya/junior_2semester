@@ -19,6 +19,7 @@ int main()
 		cout << "  W  : write to a file" << endl;
 		cout << "  M  : select a month" << endl;
 		cout << "  Q  : Quit the program" << endl;
+		cout << "  S  : print List " << endl;
 		cout << endl;
 
 
@@ -31,16 +32,48 @@ int main()
 		{
 		case 'R':                                  // read
 			personList.read();
+		//	personList.printCursorSize();
+			personList.printSummary();
 			break;
 
 		case '+':                                  // add
+		{
+			string name;
+			string phoneNumber;
+			string birthday;
+			cout << "Add an entry : " << endl;
+			cout << "Name : ";
+			getline(cin, name);
+			getline(cin, name);
+			cout << "Phone : ";
+			cin >> phoneNumber;
+			cout << "Birthday : ";
+			cin >> birthday;
+			
+			
+			personList.insert(Person(name, phoneNumber, birthday));
+		//	personList.printCursorSize();
+			personList.printSummary();
 			break;
+
+		}
 
 		case '-':                                  // remove
+		{
+			cout << "Remove an entry: " << endl;
+			string name;
+			cout << "Name : ";
+			getline(cin, name);
+			getline(cin, name);
+			personList.remove(name);
+			//personList.printCursorSize();
+			personList.printSummary();
 			break;
 
+		}
+			
 		case 'W':                                  // write
-
+			personList.write();
 			break;
 
 		case 'M':                                  // select
@@ -48,6 +81,9 @@ int main()
 			break;
 
 		case 'Q': case 'q':                   // Quit test program
+			break;
+		case 'S':
+			personList.printList();
 			break;
 
 		default:                               // Invalid command

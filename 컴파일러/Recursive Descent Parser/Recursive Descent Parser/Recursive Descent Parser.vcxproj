@@ -123,7 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="notOptimizedMain.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="notOptimizedRDParser.cpp" />
     <ClCompile Include="Scanner.cpp" />
   </ItemGroup>
