@@ -50,19 +50,7 @@ throw (logic_error)
 		cursor++;
 		size++;
 		dataItems[cursor] = newDataItem;
-		int month = atoi(dataItems[cursor].getBirthday().substr(0, 2).c_str());
-		for (int i = 0; i < 12; i++)
-		{
-			if (monthes[i].getMonth() == month)	// entry가 태어난 월과 monthes 배열안의 month와 비교해서 같으면
-			{
-				int currentNumber = monthes[i].getNumber();
-				monthes[i].setNumber(currentNumber + 1);	// monthes배열안의 원소의 numberOfentry 증가
 
-				//즉, List 안에 들어있는 entry가 태어난 월들이 2,2,4라면
-				//monthes안의 원소의 month(2,2,4)와 비교해서 같으면 Feburary, Feburary, April의 numberOfentry를 증가시킨다는 뜻
-
-			}
-		}
 
 	}
 	else
@@ -72,7 +60,19 @@ throw (logic_error)
 		dataItems[cursor] = newDataItem;
 	}
 
-	
+	int month = atoi(dataItems[cursor].getBirthday().substr(0, 2).c_str());
+	for (int i = 0; i < 12; i++)
+	{
+		if (monthes[i].getMonth() == month)	// entry가 태어난 월과 monthes 배열안의 month와 비교해서 같으면
+		{
+			int currentNumber = monthes[i].getNumber();
+			monthes[i].setNumber(currentNumber + 1);	// monthes배열안의 원소의 numberOfentry 증가
+
+			//즉, List 안에 들어있는 entry가 태어난 월들이 2,2,4라면
+			//monthes안의 원소의 month(2,2,4)와 비교해서 같으면 Feburary, Feburary, April의 numberOfentry를 증가시킨다는 뜻
+
+		}
+	}
 	
 }
 
@@ -86,13 +86,13 @@ void List::remove(string name) throw (logic_error)
 {
 	// pre-lab
 	Person person;
-	int currentCursor;
+//	int currentCursor;
 	for (int i = 0; i < size; i++)
 	{
 		if (name == dataItems[i].getName())
 		{
 			person = dataItems[i];
-			currentCursor = i;
+			cursor = i;
 		}
 	}
 
@@ -118,14 +118,14 @@ void List::remove(string name) throw (logic_error)
 		}
 	}
 
-	if (currentCursor == size - 1)
+	if (cursor == size - 1)
 	{
 		cursor--;
 		size--;
 	}
 	else                // 끝에 있는 데이터를 현재 커서 위치에 저장 
 	{
-		dataItems[currentCursor] = dataItems[size - 1];
+		dataItems[cursor] = dataItems[size - 1];
 		cursor--;
 		size--;
 	}
@@ -200,7 +200,7 @@ void List::read()
 			stringList[i++] = s;
 		fileIn.close();
 
-		int numberOfentry = (count + 1) / 4;
+		int numberOfentry = (count + 1) / 4;	// 4는 이름, 전화번호, 생일, 그리고 \n하나를 의미한다 
 		cout << "Total number of entries in the list: " << numberOfentry << endl;
 		for (int i = 0; i < numberOfentry; i++)
 			insert(Person(stringList[0 + 4 * i], stringList[1 + 4 * i], stringList[2 + 4 * i]));
@@ -284,6 +284,7 @@ void List::write()
 	//fileName = "FriendFileUpdate.txt";
 	cout << "Enter the name of the file: ";
 	cin >> fileName;
+	cout << "The list is written into " << fileName << endl;
 	fileName = fileName + ".txt";
 	ofstream fileOut;
 	fileOut.open(fileName);
@@ -304,6 +305,7 @@ void List::write()
 			fileOut << endl;
 			cout << endl;		
 		}
+		
 	}
 	else
 		cout << "FriendFileUpdate 파일 연결 실패" << endl;

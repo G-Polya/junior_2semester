@@ -33,7 +33,7 @@ int main()
 		{
 		case 'R':                                  // read
 			personList.read();
-			personList.printCursorSize();
+		//	personList.printCursorSize();
 			personList.printSummary();
 			break;
 
@@ -53,7 +53,7 @@ int main()
 			
 			
 			personList.insert(Person(name, phoneNumber, birthday));
-			personList.printCursorSize();
+		//	personList.printCursorSize();
 			personList.printSummary();
 			break;
 
@@ -67,7 +67,7 @@ int main()
 			getline(cin, name);
 			getline(cin, name);
 			personList.remove(name);
-			personList.printCursorSize();
+		//	personList.printCursorSize();
 			personList.printSummary();
 			break;
 
