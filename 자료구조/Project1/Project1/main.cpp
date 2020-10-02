@@ -19,7 +19,8 @@ int main()
 		cout << "  W  : write to a file" << endl;
 		cout << "  M  : select a month" << endl;
 		cout << "  Q  : Quit the program" << endl;
-		cout << "  S  : print List " << endl;
+		cout << "  P  : print List " << endl;
+		cout << "  S  : print Summary " << endl;
 		cout << endl;
 
 
@@ -32,7 +33,7 @@ int main()
 		{
 		case 'R':                                  // read
 			personList.read();
-		//	personList.printCursorSize();
+			personList.printCursorSize();
 			personList.printSummary();
 			break;
 
@@ -52,7 +53,7 @@ int main()
 			
 			
 			personList.insert(Person(name, phoneNumber, birthday));
-		//	personList.printCursorSize();
+			personList.printCursorSize();
 			personList.printSummary();
 			break;
 
@@ -66,7 +67,7 @@ int main()
 			getline(cin, name);
 			getline(cin, name);
 			personList.remove(name);
-			//personList.printCursorSize();
+			personList.printCursorSize();
 			personList.printSummary();
 			break;
 
@@ -82,10 +83,12 @@ int main()
 
 		case 'Q': case 'q':                   // Quit test program
 			break;
-		case 'S':
+		case 'P':
 			personList.printList();
 			break;
-
+		case 'S':
+			personList.printSummary();
+			break;
 		default:                               // Invalid command
 			cout << "Inactive or invalid command" << endl;
 		}

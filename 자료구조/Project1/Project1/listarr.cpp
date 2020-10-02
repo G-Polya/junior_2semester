@@ -73,6 +73,7 @@ throw (logic_error)
 	}
 
 	
+	
 }
 
 //--------------------------------------------------------------------
@@ -125,6 +126,7 @@ void List::remove(string name) throw (logic_error)
 	else                // 끝에 있는 데이터를 현재 커서 위치에 저장 
 	{
 		dataItems[currentCursor] = dataItems[size - 1];
+		cursor--;
 		size--;
 	}
 
@@ -137,33 +139,8 @@ void List::printCursorSize()
 	cout << "Size : " << size << endl;
 }
 
-//--------------------------------------------------------------------
 
-void List::replace(const Person& newDataItem)
-throw (logic_error)
 
-// Replaces the item marked by the cursor with newDataItem and
-// leaves the cursor at newDataItem.
-{
-	// Requires that the list is not empty
-	// pre-lab
-	if (isEmpty())
-		return;
-
-	dataItems[cursor] = newDataItem;
-}
-//--------------------------------------------------------------------
-
-void List::clear()
-// Removes all the data items from a list.
-{
-	for (int i = 0; i < size; i++)
-		dataItems[i] = Person(NULL,NULL,NULL);
-	cursor = -1;
-	size = 0;
-}
-
-//--------------------------------------------------------------------
 
 bool List::isEmpty() const
 // Returns 1 if a list is empty. Otherwise, returns 0.
@@ -189,10 +166,10 @@ bool List::isFull() const
 void List::read()
 {
 	string fileName;
-	//cout << "Enter the name of the file: ";
-	//cin >> fileName;
-	//fileName = fileName + ".txt";
-	fileName = "FriendFile.txt";
+	cout << "Enter the name of the file: ";
+	cin >> fileName;
+	fileName = fileName + ".txt";
+	//fileName = "FriendFile.txt";
 	ifstream fileIn;
 
 	fileIn.open(fileName);
@@ -236,7 +213,7 @@ void List::printSummary()
 {
 
 
-	cout << "Number of birthdays in " << endl;
+	cout << "Number of birthdays in the list: "<<size << endl;
 	for (int i = 0; i < 12; i++)
 	{
 		int numberOfmonth = monthes[i].getNumber();
@@ -285,9 +262,9 @@ int List::getBirthdays(string name)
 void List::select()
 {
 	string monthName;
-	//cout << "Enter the selected month: ";
-	//cin >> monthName;
-	monthName = "January";
+	cout << "Enter the selected month: ";
+	cin >> monthName;
+	//monthName = "January";
 	cout << "Total number of birthdays in " + monthName + " : " << getBirthdays(monthName) << endl;
 	for (int i = 0; i < size; i++)
 	{
@@ -304,10 +281,10 @@ void List::select()
 void List::write()
 {
 	string fileName;
-	fileName = "FriendFileUpdate.txt";
-	//cout << "Enter the name of the file: ";
-	//cin >> fileName;
-	//fileName = fileName + ".txt";
+	//fileName = "FriendFileUpdate.txt";
+	cout << "Enter the name of the file: ";
+	cin >> fileName;
+	fileName = fileName + ".txt";
 	ofstream fileOut;
 	fileOut.open(fileName);
 
@@ -344,122 +321,4 @@ void List::printList()
 		dataItems[i].printAll();
 		cout << endl;
 	}
-}
-
-//--------------------------------------------------------------------
-
-bool List::gotoBeginning() throw (logic_error)
-// Moves the cursor to the beginning of the list.
-{
-	// pre-lab
-	cursor = 0;
-	
-	return true;
-}
-
-//--------------------------------------------------------------------
-
-bool List::gotoEnd() throw (logic_error)
-
-// Moves the cursor to the end of the list.
-
-{
-	// pre-lab
-	cursor = size - 1;
-
-	return true;
-}
-
-//--------------------------------------------------------------------
-
-bool List::gotoNext() throw (logic_error)
-
-// If the cursor is not at the end of a list, then moves the
-// cursor to the next item in the list and returns true. Otherwise,
-// returns false.
-{
-	// pre-lab
-	if (cursor != size - 1)
-	{
-		cursor++;
-		cout << "Output : " << dataItems[cursor] << endl;
-		return true;
-	}
-	else
-		return false;
-
-}
-
-//--------------------------------------------------------------------
-bool List::gotoPrior() throw (logic_error)
-
-// If the cursor is not at the beginning of a list, then moves the
-// cursor to the preceeding item in the list and returns true.
-// Otherwise, returns false.
-
-{
-	// pre-lab
-	if (cursor != -1)
-	{
-		cursor--;
-		cout << "Output : " << dataItems[cursor] << endl;
-		return true;
-	}
-	else
-		return false;
-
-}
-
-//--------------------------------------------------------------------
-
-Person List::getCursor() const throw (logic_error)
-// Returns the item marked by the cursor.
-
-{
-	// pre-lab
-	return dataItems[cursor];
-
-}
-
-//--------------------------------------------------------------------
-
-void List::showStructure() const
-// Outputs the data items in a list. If the list is empty, outputs
-// "Empty list". This operation is intended for testing/debugging
-// purposes only.
-
-{
-     // pre-lab
-	if (isEmpty())
-		cout << "Empty list" << endl;
-	else
-	{
-		cout << "Size: " << size << " Cursor: " << cursor << endl;
-		for (int i = 0; i < maxSize; i++)
-		{
-			
-			cout << setw(5) << "[" << i << "]" ;
-			
-		}
-		cout << endl;
-
-		for (int i = 0; i < size; i++)
-		{
-			
-			cout << setw(7) << dataItems[i];
-		}
-		
-
-	}
-	
-}
-
-//--------------------------------------------------------------------
-
-//in-lab
-
-void List::countBases(List& dnasequence, int& aCount, int& cCount, int& tCount, int& gCount)
-{
-	aCount = 0, cCount = 0, tCount = 0, gCount = 0;
-	
 }
