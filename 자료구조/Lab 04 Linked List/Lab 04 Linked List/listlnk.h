@@ -81,6 +81,7 @@ public:
 		throw (bad_alloc);
 
 	ListNode<DT>* getPrior();		// get prior node pointer of current cursor
+	
 
 private:
 

@@ -15,8 +15,8 @@ ListNode<DT>::ListNode(const DT& nodeData, ListNode* nextPtr)
 template<class DT>
 List<DT>::List(int ignored)
 {
-	head = new ListNode<DT>();
-	//head->next = NULL;
+	head = NULL;
+//	head->next = NULL;
 	cursor = head;
 }
 
@@ -63,6 +63,7 @@ void List<DT>::insert(const DT& newData)
 	else
 		cout << "List is Full" << endl;
 
+	//showStructure();
 }
 
 //------------------------------------------------
@@ -74,28 +75,34 @@ void List<DT>::remove()
 	if (!isEmpty())
 	{
 		ListNode<DT>* tempNode = cursor;
-		if (cursor->next != NULL)
+	
+		
+		if (cursor == head && cursor->next == NULL)
+		{
+			delete tempNode;
+			head = NULL;
+			cursor = head;
+		}
+		else if (cursor == head && cursor->next != NULL)
+		{
+			cursor = cursor->next;
+			head = cursor;
+			delete tempNode;
+		}
+		else if (cursor->next != NULL)
 		{
 			ListNode<DT>* prior = getPrior();
 			prior->next = cursor->next;
 			cursor = cursor->next;
 			delete tempNode;
 		}
-		else 
+		else if(cursor->next == NULL)
 		{
 			ListNode<DT>* prior = getPrior();
 			prior->next = NULL;
 			cursor = head;
 			delete tempNode;
 		}
-
-		if (cursor == head)
-		{
-			cursor->next = NULL;
-			cursor = NULL;
-			delete tempNode;
-		}
-
 		
 	}
 	else
@@ -170,12 +177,11 @@ void List<DT>::gotoBeginning()
 template<class DT>
 void List<DT>::gotoEnd()
 {
-	ListNode<DT>* tempNode = head;
-
-	while (!tempNode->next)
-		tempNode = tempNode->next;
-	
-	cursor = tempNode;
+	if (!isEmpty())
+		while (cursor->next)
+			cursor = cursor->next;
+	else
+		cout << "List is Empty" << endl;
 }
 
 //------------------------------------------------
@@ -211,7 +217,7 @@ ListNode<DT>* List<DT>::getPrior()		// get prior node pointer of current cursor
 	{
 		ListNode<DT>* tempNode = head;
 
-		while (!tempNode->next)
+		while (tempNode->next)
 		{
 			tempNode = tempNode->next;
 			if (tempNode->next == cursor)
@@ -230,14 +236,18 @@ bool List<DT>::gotoPrior()
 	if (!isEmpty())
 	{
 		ListNode<DT>* tempNode = head;
+		if (cursor == tempNode)
+			return false;
 
-		while (!tempNode->next)
+		while (tempNode->next)
 		{
 			tempNode = tempNode->next;
-			if (tempNode->next = cursor)
+			if (tempNode->next == cursor)
+			{
+				cursor = tempNode;
+
 				return true;
-			else
-				return false;
+			}
 		}
 	}
 	else
@@ -268,13 +278,26 @@ DT& List<DT>::getCursor() const
 template<class DT>
 void List<DT>::showStructure() const
 {
+	
+	// cout<<"Loc: " << getCursorloc() << endl;
 	if (!isEmpty())
 	{
-		for (ListNode<DT>* iter = head; iter = iter->next; iter != NULL)
-		{
+		for (ListNode<DT>* iter = head; iter != NULL; iter = iter->next)
 			cout << iter->dataItem << " ";
+			
+		
+		cout << endl;
+		
+		for (auto iter = head; iter!= cursor->next; iter = iter->next)
+		{
+			if (iter != cursor)
+				cout << "  ";
+			else if (iter == cursor)
+				cout << "^";
 		}
 		cout << endl;
+	
+		
 	}
 	else
 		cout << "Empty List" << endl;
@@ -294,3 +317,4 @@ void List<DT>::insertBefore(const DT& newElement) {
         insert(newElement);
     }
 }
+

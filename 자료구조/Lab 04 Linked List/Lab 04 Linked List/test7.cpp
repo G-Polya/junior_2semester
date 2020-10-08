@@ -57,6 +57,7 @@ void main()
         case '+':                                  // insert
             cout << "Insert " << testData << endl;
             testList.insert(testData);
+			
             break;
 
         case '-':                                  // remove
