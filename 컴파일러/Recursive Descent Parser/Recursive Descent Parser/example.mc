@@ -1,1 +1,1 @@
-Integer x, y, z;
+label x; Integer y;

@@ -308,7 +308,7 @@ void List::write()
 		
 	}
 	else
-		cout << "FriendFileUpdate 파일 연결 실패" << endl;
+		cout << fileName <<" 파일 연결 실패" << endl;
 
 	
 

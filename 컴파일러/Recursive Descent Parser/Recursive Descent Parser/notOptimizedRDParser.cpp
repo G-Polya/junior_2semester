@@ -1,4 +1,5 @@
-
+// 2016112158 김희수
+// EBNF를 사용하지 않은 RDP
 #include "notOptimizedRDParser.h"
 #include <iostream>
 #include <string>
@@ -10,13 +11,14 @@ int parsingNumber;
 struct tokenType nextSymbol;
 vector<int> leftParse;
 
-
+// 다음 심볼을 읽어오는 함수
 void getNextSymbol()
 {
 	nextSymbol = scanner();
 	// cout << nextSymbol.number << endl;
 }
 
+// left parse 출력
 void printParse()
 {
 	cout << "LeftParse is ";
@@ -25,6 +27,7 @@ void printParse()
 	cout << endl;
 }
 
+// 에러메시지 출력
 void error(int n)
 {
 	cout << "\n*** Error: " << n << endl;
@@ -58,19 +61,21 @@ void error(int n)
 
 	exit(1);
 }
+
+// nonterminal <D>를 처리하기 위한 프로시져
 void pD()
 {
 	cout << "Procedure" << setw(19) << "Symbol number" << endl;
-	cout <<"pD() : " << setw(15) << nextSymbol.number << endl;
+	cout <<"pD() : " << setw(15) << nextSymbol.number << endl;	// 읽어온 심볼의 symbol number 출력
 
-	if (nextSymbol.number == tlabel)
+	if (nextSymbol.number == tlabel)		// productin-rule 1을 처리
 	{
 		parsingNumber = 1;
 		leftParse.push_back(parsingNumber);
 		pLabel();
 		pL();
 	}
-	else if (nextSymbol.number == tInteger)
+	else if (nextSymbol.number == tInteger) // productin-rule 2를 처리
 	{
 		parsingNumber = 2;
 		leftParse.push_back(parsingNumber);
@@ -82,11 +87,12 @@ void pD()
 
 }
 
+// nonterminal <L>를 처리하기 위한 프로시져
 void pL()
 {
 	cout << "pL() : " << setw(15) << nextSymbol.number << endl;
 	
-	if (nextSymbol.number == tident)
+	if (nextSymbol.number == tident)		// production-rule 3을 처리
 	{
 		parsingNumber = 3;
 		leftParse.push_back(parsingNumber);
@@ -97,17 +103,18 @@ void pL()
 		error(2);
 }
 
+// nonterminal <L>를 처리하기 위한 프로시져
 void pR()
 {
 	cout << "pR() : " << setw(15) << nextSymbol.number << endl;
 	
-	if (nextSymbol.number == tsemicolon)
+	if (nextSymbol.number == tsemicolon)		// production-rule 4를 처리
 	{
 		parsingNumber = 4;
 		leftParse.push_back(parsingNumber);
 		pSemicolon();
 	}		
-	else if (nextSymbol.number == tcomma)
+	else if (nextSymbol.number == tcomma)		// production-rule 5를 처리
 	{
 		parsingNumber = 5;
 		leftParse.push_back(parsingNumber);
@@ -118,6 +125,7 @@ void pR()
 		error(3);
 }
 
+// terminal 'label'를 처리하기 위한 프로시져
 void pLabel()
 {
 	cout << "pLabel() : "<<setw(11) << nextSymbol.number << endl;
@@ -127,6 +135,7 @@ void pLabel()
 		error(4);
 }
 
+// terminal 'Integer'를 처리하기 위한 프로시져
 void pInteger()
 {
 	cout << "pInteger() : " << setw(9) << nextSymbol.number << endl;
@@ -137,6 +146,7 @@ void pInteger()
 		error(5);
 }
 
+// terminal <id>를 처리하기 위한 프로시져
 void pId()
 {
 	cout << "pId() : " << setw(14) << nextSymbol.number << endl;
@@ -147,6 +157,7 @@ void pId()
 		error(6);
 }
 
+// terminal ';'를 처리하기 위한 프로시져
 void pSemicolon()
 {
 	cout << "pSemicolon() : " << setw(7) << nextSymbol.number << endl;
@@ -157,6 +168,7 @@ void pSemicolon()
 		error(7);
 }
 
+// terminal ','를 처리하기 위한 프로시져
 void pComma()
 {
 	cout << "pComma() : " << setw(11) << nextSymbol.number << endl;

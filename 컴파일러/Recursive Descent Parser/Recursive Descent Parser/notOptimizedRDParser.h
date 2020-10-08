@@ -1,5 +1,6 @@
 #pragma once
-
+// 2016112158 김희수
+// EBNF를 사용하지 않은 RDP
 #include "Scanner.h"
 
 void getNextSymbol();

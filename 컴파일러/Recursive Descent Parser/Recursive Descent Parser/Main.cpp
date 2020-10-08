@@ -5,8 +5,8 @@
 #include <stdlib.h>
 
 #include <iostream>
-#include "notOptimizedRDParser.h"
-// #include "OptimizedRDParser.h"
+// #include "notOptimizedRDParser.h"
+#include "OptimizedRDParser.h"
 void icg_error(int n);
 
 using namespace std;
@@ -53,14 +53,16 @@ void main()
 
 	} /* while (1) */
 
-	rewind(sourceFile);
+	rewind(sourceFile);	// 파일 다시읽기
 
+	
+	// Parser 시작
 	printf("\n === start of Parser\n");
-	getNextSymbol();
+	getNextSymbol(); // 시작심볼을 읽는다
 	//printf(" > Not yet implemented...\n");
-	pD();
+	pD();	
 	cout << endl;
-	printParse();
+	printParse();		// left parse 출력
 	//printTree(root, 0);
 
 	printf("\n === start of ICG\n");
