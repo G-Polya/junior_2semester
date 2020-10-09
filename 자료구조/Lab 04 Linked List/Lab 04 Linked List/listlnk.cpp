@@ -72,42 +72,31 @@ void List<DT>::insert(const DT& newData)
 template<class DT>
 void List<DT>::remove()
 {
+	ListNode<DT>* deletingCursor = cursor;
 	if (!isEmpty())
 	{
-		ListNode<DT>* tempNode = cursor;
-	
-		
-		if (cursor == head && cursor->next == NULL)				// List에 노드 하나만 있을 경우, cursor가 head를 가리킴 ex) 1
+		if ((cursor == head) && (cursor->next == NULL))
 		{
-			delete tempNode;
+			cursor = NULL;
 			head = NULL;
-			cursor = head;
 		}
-		else if (cursor == head && cursor->next != NULL)		// List에 여러개 있고, cursor는 head를 가리킴
+		else if (cursor == head)
 		{
-			cursor = cursor->next;
+			gotoNext();
 			head = cursor;
-			delete tempNode;
 		}
-		else if (cursor->next != NULL)							// List에 여러개 있고, cursor는 head가 아니고 끝의 원소도 아님
+		else
 		{
-			ListNode<DT>* prior = getPrior();
-			prior->next = cursor->next;
-			cursor = cursor->next;
-			delete tempNode;
+			gotoPrior();
+			cursor->next = deletingCursor->next;
+			if (deletingCursor->next != NULL)
+				gotoNext();
+			else
+				gotoBeginning();
 		}
-		else if(cursor->next == NULL)							// List에 여러개 있고, cursor는 끝을 가리킴
-		{
-			ListNode<DT>* prior = getPrior();
-			prior->next = NULL;
-			cursor = head;
-			delete tempNode;
-		}
-		
 	}
-	else
-		cout << "List is Empty" << endl;
-	
+
+	delete deletingCursor;
 }
 
 
