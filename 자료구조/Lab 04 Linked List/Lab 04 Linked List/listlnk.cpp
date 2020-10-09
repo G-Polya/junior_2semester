@@ -52,7 +52,7 @@ void List<DT>::insert(const DT& newData)
 				cursor->next = newNode;
 				cursor = newNode;
 			}
-			else                          // cursor가 List의 끝에 있을 경우
+			else                           // cursor가 List의 끝일 경우
 			{
 				cursor->next = newNode;
 				cursor = newNode;
@@ -77,26 +77,26 @@ void List<DT>::remove()
 		ListNode<DT>* tempNode = cursor;
 	
 		
-		if (cursor == head && cursor->next == NULL)
+		if (cursor == head && cursor->next == NULL)				// List에 노드 하나만 있을 경우, cursor가 head를 가리킴 ex) 1
 		{
 			delete tempNode;
 			head = NULL;
 			cursor = head;
 		}
-		else if (cursor == head && cursor->next != NULL)
+		else if (cursor == head && cursor->next != NULL)		// List에 여러개 있고, cursor는 head를 가리킴
 		{
 			cursor = cursor->next;
 			head = cursor;
 			delete tempNode;
 		}
-		else if (cursor->next != NULL)
+		else if (cursor->next != NULL)							// List에 여러개 있고, cursor는 head가 아니고 끝의 원소도 아님
 		{
 			ListNode<DT>* prior = getPrior();
 			prior->next = cursor->next;
 			cursor = cursor->next;
 			delete tempNode;
 		}
-		else if(cursor->next == NULL)
+		else if(cursor->next == NULL)							// List에 여러개 있고, cursor는 끝을 가리킴
 		{
 			ListNode<DT>* prior = getPrior();
 			prior->next = NULL;
@@ -186,6 +186,20 @@ void List<DT>::gotoEnd()
 
 //------------------------------------------------
 
+template<class DT>
+ListNode<DT>* List<DT>::getNext()
+{
+	if (!isEmpty())
+	{
+		if (cursor->next != NULL)
+		{
+			cursor = cursor->next;
+			return cursor;
+		}
+	}
+}
+
+//------------------------------------------------
 
 template<class DT>
 bool List<DT>::gotoNext()
@@ -207,6 +221,29 @@ bool List<DT>::gotoNext()
 	}
 	
 }
+
+template<class DT>
+bool List<DT>::hasNext()
+{
+	if (!isEmpty())
+	{
+		if (cursor->next != NULL)
+		{
+			// cursor = cursor->next;
+			return true;
+		}
+		else
+			return false;
+	}
+	else
+	{
+		cout << "List is Empty" << endl;
+		return false;
+	}
+
+}
+
+
 
 //------------------------------------------------
 
@@ -269,11 +306,9 @@ DT& List<DT>::getCursor() const
 	{
 		return cursor->dataItem;
 	}
-	else
-		cout << "List is Empty" << endl;
-		
-	
 }
+
+
 
 template<class DT>
 void List<DT>::showStructure() const
