@@ -83,7 +83,7 @@ public:
 	ListNode<DT>* getPrior();		// get prior node pointer of current cursor
 	
 	bool hasNext();
-	bool retrieve(int& num);
+	
 
 private:
 
