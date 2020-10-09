@@ -72,15 +72,15 @@ void List<DT>::insert(const DT& newData)
 template<class DT>
 void List<DT>::remove()
 {
-	ListNode<DT>* deletingCursor = cursor;
+	ListNode<DT>* tempNode = cursor;
 	if (!isEmpty())
 	{
-		if ((cursor == head) && (cursor->next == NULL))
+		if ((cursor == head) && (cursor->next == NULL))		// 커서가 head이고 다음 노드가 없음
 		{
 			cursor = NULL;
 			head = NULL;
 		}
-		else if (cursor == head)
+		else if (cursor == head)							// 커서가 head이고 다음 노드 있음
 		{
 			gotoNext();
 			head = cursor;
@@ -88,15 +88,15 @@ void List<DT>::remove()
 		else
 		{
 			gotoPrior();
-			cursor->next = deletingCursor->next;
-			if (deletingCursor->next != NULL)
+			cursor->next = tempNode->next;
+			if (tempNode->next != NULL)
 				gotoNext();
 			else
 				gotoBeginning();
 		}
 	}
 
-	delete deletingCursor;
+	delete tempNode;
 }
 
 
