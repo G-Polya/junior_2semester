@@ -97,6 +97,9 @@ void addTerm(List<PolyNode>* list, int c, int d)
 		{
 			list->insert(newNode);
 		}
+
+		if (list->getCursor().getCoef() == 0)		// 계수가 0인 노드는 삭제한다.
+			list->remove();
 		
 	}
 	else
