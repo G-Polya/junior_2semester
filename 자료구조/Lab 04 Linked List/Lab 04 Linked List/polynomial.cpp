@@ -64,19 +64,21 @@ int compareDeg(List<PolyNode>* list, int d)
 	else if (cursorDegree < d)     // 커서의 차수가 새로운 노드의 차수보다 작을 경우
 	{
 		list->gotoPrior();
+		//compareDeg(list, d);
 		return 2;
 	}
 	else if (cursorDegree > d)     // 커서의 차수가 새로운 노드의 차수보다 클 경우
 	{
 		list->gotoNext();
+		//compareDeg(list, d);
 		return 3;
 	}
 		
-	else
-	{
-		list->gotoNext();
-		compareDeg(list, d);
-	}	
+	//else
+	//{
+	//	list->gotoNext();
+	//	compareDeg(list, d);
+	//}	
 }
 
 
