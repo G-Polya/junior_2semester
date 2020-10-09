@@ -55,17 +55,23 @@ int compareDeg(List<PolyNode>* list, int d)
 		else if (cursorDegree > d)  // 커서의 차수가 새로운 노드의 차수보다 클 경우
 			return 3;
 		else                        // 마지막 원소인데 degree가 다르다
-		{
 			return 0;
-		}
+		
 	}
 	
 	if (cursorDegree == d)
 		return 1;
 	else if (cursorDegree < d)     // 커서의 차수가 새로운 노드의 차수보다 작을 경우
+	{
+		list->gotoPrior();
 		return 2;
+	}
 	else if (cursorDegree > d)     // 커서의 차수가 새로운 노드의 차수보다 클 경우
+	{
+		list->gotoNext();
 		return 3;
+	}
+		
 	else
 	{
 		list->gotoNext();
