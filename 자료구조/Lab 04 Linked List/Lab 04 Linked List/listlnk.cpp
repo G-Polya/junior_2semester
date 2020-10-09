@@ -282,9 +282,11 @@ bool List<DT>::gotoPrior()
 		if (cursor == tempNode)
 			return false;
 
+		
 		while (tempNode->next)
 		{
-			if (!head->next->next)
+			tempNode = tempNode->next;
+			if (!tempNode->next)
 			{
 				cursor = tempNode;
 				return true;
@@ -292,7 +294,6 @@ bool List<DT>::gotoPrior()
 			else
 			{
 				
-				tempNode = tempNode->next;
 				if (tempNode->next == cursor)
 				{
 					cursor = tempNode;
