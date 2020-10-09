@@ -46,6 +46,7 @@ bool compareDeg(List<PolyNode>* list, int d)
 {
 	int cursorDegree = list->getCursor().getDegree();
 	bool has = list->hasNext();		// true면 뒤에 노드가 있음. false면 마지막 노드
+
 	if (!has)
 	{
 		if (cursorDegree == d)
