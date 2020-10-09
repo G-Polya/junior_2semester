@@ -184,20 +184,6 @@ void List<DT>::gotoEnd()
 		cout << "List is Empty" << endl;
 }
 
-//------------------------------------------------
-
-template<class DT>
-ListNode<DT>* List<DT>::getNext()
-{
-	if (!isEmpty())
-	{
-		if (cursor->next != NULL)
-		{
-			cursor = cursor->next;
-			return cursor;
-		}
-	}
-}
 
 //------------------------------------------------
 
@@ -249,16 +235,19 @@ bool List<DT>::hasNext()
 
 template<class DT>
 ListNode<DT>* List<DT>::getPrior()		// get prior node pointer of current cursor
-{	
+{
+	ListNode<DT>* tempNode = head;
+
 	if (!isEmpty())
 	{
-		ListNode<DT>* tempNode = head;
-
-		while (tempNode->next)
+		if (cursor == head)
+			return false;
+		else
 		{
-			tempNode = tempNode->next;
-			if (tempNode->next == cursor)
-				return tempNode;
+			while (tempNode->next != cursor)
+				tempNode = tempNode->next;
+			cursor = tempNode;
+			return cursor;
 		}
 	}
 	else
@@ -270,22 +259,19 @@ ListNode<DT>* List<DT>::getPrior()		// get prior node pointer of current cursor
 template<class DT>
 bool List<DT>::gotoPrior()
 {
+	ListNode<DT>* tempNode = head;
 	if (!isEmpty())
 	{
-		ListNode<DT>* tempNode = head;
-		if (cursor == tempNode)
+		if (cursor == head)
 			return false;
-
-		while (tempNode->next)
+		else
 		{
-			tempNode = tempNode->next;
-			if (tempNode->next == cursor)
-			{
-				cursor = tempNode;
+			while (tempNode->next != cursor)
+				tempNode = tempNode->next;
 
-				return true;
-			}
+			cursor = tempNode;
 		}
+		return true;
 	}
 	else
 	{
@@ -348,7 +334,8 @@ void List<DT>::insertBefore(const DT& newElement) {
         head = node; cursor = node;
     }
     else {
-        gotoPrior();
+		gotoPrior();
+		
         insert(newElement);
     }
 }
