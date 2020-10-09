@@ -3,10 +3,11 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
+#include <chrono>
 
 #include <iostream>
-// #include "notOptimizedRDParser.h"
-#include "OptimizedRDParser.h"
+#include "notOptimizedRDParser.h"
+// #include "OptimizedRDParser.h"
 void icg_error(int n);
 
 using namespace std;
@@ -58,12 +59,16 @@ void main()
 	
 	// Parser 시작
 	printf("\n === start of Parser\n");
+	chrono::steady_clock::time_point begin = chrono::steady_clock::now();
 	getNextSymbol(); // 시작심볼을 읽는다
 	//printf(" > Not yet implemented...\n");
 	pD();	
 	cout << endl;
+	chrono::steady_clock::time_point end = chrono::steady_clock::now();
+	auto elapsed_time = chrono::duration_cast<chrono::microseconds>(end - begin).count();
 	printParse();		// left parse 출력
-	//printTree(root, 0);
+	cout << "Elapsed time to parse : " << elapsed_time <<" microseconds" <<endl;
+	
 
 	printf("\n === start of ICG\n");
 	printf(" > Not yet implemented...\n");

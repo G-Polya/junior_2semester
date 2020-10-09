@@ -27,6 +27,12 @@ void error(int n)
 	case 1:
 		cout << "\n tident Error: " << n << endl;
 		break;
+	case 2:
+		cout << "\n tident Error: " << n << endl;
+		break;
+	case 3:
+		cout << "\n tident Error: " << n << endl;
+		break;
 
 	}
 
@@ -40,28 +46,54 @@ void pD()
 	cout << "pD() : " << setw(15) << nextSymbol.number << endl;	// 읽어온 심볼의 symbol number를 출력한다
 	parsingNumber = 1;		// production-rule number
 	leftParse.push_back(parsingNumber);		// left parse 출력을 위해 production-rule number를 저장
-	getNextSymbol();
-	if ((nextSymbol.number == tlabel) ||(nextSymbol.number == tInteger) )
-		getNextSymbol();
-
-	if (nextSymbol.number == tident)
-		getNextSymbol();
-	else
-		error(1);
-
-	while (nextSymbol.number == tcomma)
+	
+	cout << endl;
+	if ((nextSymbol.number == tlabel) || (nextSymbol.number == tInteger))
 	{
+		if (nextSymbol.number == tlabel)
+			cout << "label" << endl;
+		else
+			cout << "Integer" << endl;
 		getNextSymbol();
 		if (nextSymbol.number == tident)
+		{
+			cout << "identfier" << endl;
 			getNextSymbol();
+			while (nextSymbol.number == tcomma)
+			{
+				cout << "comma" << endl;
+				getNextSymbol();
+				if (nextSymbol.number == tident)
+				{
+					cout << "identifier" << endl;
+					getNextSymbol();	
+				}
+					
+				else
+					error(1);
+			}
+			if (nextSymbol.number == tsemicolon)
+				cout << "semicolon" << endl;
+		}
 		else
-			error(1);
+			error(2);
 	}
+	else
+		error(3);
+		
+	
+
+	
+	/*else
+		error(2);
+*/
+	
 }
 
 // left parse 출력
 void printParse()
 {
+	cout << "left parse : ";
 	for (int i = 0; i < leftParse.size(); i++)
 		cout << leftParse[i] << " ";
 	cout << endl;
