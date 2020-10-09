@@ -34,12 +34,6 @@ public:
     void addCoef(int added) {
         coefficient += added;
     }
-
-	friend ostream& operator<<(ostream& out, PolyNode& node)
-	{
-		out << node.getCoef() << "x^"<<node.getDegree();
-		return out;
-	}
 };
 
 int compareDeg(List<PolyNode>* list, int d)
@@ -63,9 +57,7 @@ int compareDeg(List<PolyNode>* list, int d)
 		return 1;
 	else if (cursorDegree < d)     // 커서의 차수가 새로운 노드의 차수보다 작을 경우
 	{
-		// list->gotoPrior();
-		//return compareDeg(list, d);
-
+		
 		return 2;
 	}
 	else if (cursorDegree > d)     // 커서의 차수가 새로운 노드의 차수보다 클 경우
@@ -75,11 +67,6 @@ int compareDeg(List<PolyNode>* list, int d)
 		
 	}
 		
-	//else
-	//{
-	//	list->gotoNext();
-	//	compareDeg(list, d);
-	//}	
 }
 
 
