@@ -80,7 +80,6 @@ public:
 	void insertBefore(const DT& newElement) // Insert before cursor
 		throw (bad_alloc);
 
-	ListNode<DT>* getPrior();		// get prior node pointer of current cursor
 	
 	bool hasNext();
 	

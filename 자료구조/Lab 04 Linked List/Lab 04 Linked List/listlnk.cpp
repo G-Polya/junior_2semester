@@ -222,27 +222,7 @@ bool List<DT>::hasNext()
 
 //------------------------------------------------
 
-template<class DT>
-ListNode<DT>* List<DT>::getPrior()		// get prior node pointer of current cursor
-{
-	ListNode<DT>* tempNode = head;
 
-	if (!isEmpty())
-	{
-		if (cursor == head)
-			return false;
-		else
-		{
-			while (tempNode->next != cursor)
-				tempNode = tempNode->next;
-			cursor = tempNode;
-			return cursor;
-		}
-	}
-	else
-		cout << "List is Empty" << endl;
-	
-}
 //------------------------------------------------
 
 template<class DT>
