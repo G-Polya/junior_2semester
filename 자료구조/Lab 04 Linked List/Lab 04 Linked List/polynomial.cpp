@@ -63,15 +63,16 @@ int compareDeg(List<PolyNode>* list, int d)
 		return 1;
 	else if (cursorDegree < d)     // 커서의 차수가 새로운 노드의 차수보다 작을 경우
 	{
-		list->gotoPrior();
-		//compareDeg(list, d);
+		// list->gotoPrior();
+		//return compareDeg(list, d);
+
 		return 2;
 	}
 	else if (cursorDegree > d)     // 커서의 차수가 새로운 노드의 차수보다 클 경우
 	{
 		list->gotoNext();
-		//compareDeg(list, d);
-		return 3;
+		return compareDeg(list, d);
+		
 	}
 		
 	//else
@@ -100,23 +101,21 @@ void addTerm(List<PolyNode>* list, int c, int d)
 		}
 		else if(compare == 2)			// 커서의 차수가 새로운 노드의 차수보다 작을 경우	//x^2와 x^4
 		{
-			// list->gotoPrior();
-			list->insert(newNode);
+			
+			//cout << list->getCursor().getCoef() << " " << list->getCursor().getDegree() << endl;
+			list->insertBefore(newNode);
 		}
 		else if (compare == 3)		// 커서의 차수가 새로운 노드의 차수보다 클 경우		   // x^2와 x^0
 		{
 			//list->gotoNext();
 			list->insert(newNode);
 		}
-		else
-			list->insert(newNode);
+		//else
+		//	list->insert(newNode);
 	}
 	else
 	{
-//		PolyNode newNode(c, d);
 		list->insert(newNode);
-		
-		
 	}
 	
 	

@@ -256,9 +256,15 @@ ListNode<DT>* List<DT>::getPrior()		// get prior node pointer of current cursor
 
 		while (tempNode->next)
 		{
-			tempNode = tempNode->next;
-			if (tempNode->next == cursor)
+			if (!head->next->next)
 				return tempNode;
+			else
+			{
+				tempNode = tempNode->next;
+				if (tempNode->next == cursor)
+					return tempNode;
+			}
+			
 		}
 	}
 	else
@@ -278,13 +284,25 @@ bool List<DT>::gotoPrior()
 
 		while (tempNode->next)
 		{
-			tempNode = tempNode->next;
-			if (tempNode->next == cursor)
+			if (!head->next->next)
 			{
 				cursor = tempNode;
-
 				return true;
 			}
+			else
+			{
+				
+				tempNode = tempNode->next;
+				if (tempNode->next == cursor)
+				{
+					cursor = tempNode;
+
+					return true;
+				}
+				
+				
+			}
+			
 		}
 	}
 	else
@@ -348,7 +366,8 @@ void List<DT>::insertBefore(const DT& newElement) {
         head = node; cursor = node;
     }
     else {
-        gotoPrior();
+		gotoPrior();
+		
         insert(newElement);
     }
 }

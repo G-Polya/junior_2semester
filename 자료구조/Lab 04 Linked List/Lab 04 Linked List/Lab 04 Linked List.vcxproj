@@ -124,7 +124,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="listlnk.cpp" />
-    <ClCompile Include="polynomial.cpp" />
+    <ClCompile Include="test7.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="listlnk.h" />
