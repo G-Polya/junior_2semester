@@ -184,20 +184,6 @@ void List<DT>::gotoEnd()
 		cout << "List is Empty" << endl;
 }
 
-//------------------------------------------------
-
-template<class DT>
-ListNode<DT>* List<DT>::getNext()
-{
-	if (!isEmpty())
-	{
-		if (cursor->next != NULL)
-		{
-			cursor = cursor->next;
-			return cursor;
-		}
-	}
-}
 
 //------------------------------------------------
 
