@@ -249,22 +249,19 @@ bool List<DT>::hasNext()
 
 template<class DT>
 ListNode<DT>* List<DT>::getPrior()		// get prior node pointer of current cursor
-{	
+{
+	ListNode<DT>* tempNode = head;
+
 	if (!isEmpty())
 	{
-		ListNode<DT>* tempNode = head;
-
-		while (tempNode->next)
+		if (cursor == head)
+			return false;
+		else
 		{
-			if (!head->next->next)
-				return tempNode;
-			else
-			{
+			while (tempNode->next != cursor)
 				tempNode = tempNode->next;
-				if (tempNode->next == cursor)
-					return tempNode;
-			}
-			
+			cursor = tempNode;
+			return cursor;
 		}
 	}
 	else
@@ -276,35 +273,19 @@ ListNode<DT>* List<DT>::getPrior()		// get prior node pointer of current cursor
 template<class DT>
 bool List<DT>::gotoPrior()
 {
+	ListNode<DT>* tempNode = head;
 	if (!isEmpty())
 	{
-		ListNode<DT>* tempNode = head;
-		if (cursor == tempNode)
+		if (cursor == head)
 			return false;
-
-		
-		while (tempNode->next)
+		else
 		{
-			tempNode = tempNode->next;
-			if (!tempNode->next)
-			{
-				cursor = tempNode;
-				return true;
-			}
-			else
-			{
-				
-				if (tempNode->next == cursor)
-				{
-					cursor = tempNode;
+			while (tempNode->next != cursor)
+				tempNode = tempNode->next;
 
-					return true;
-				}
-				
-				
-			}
-			
+			cursor = tempNode;
 		}
+		return true;
 	}
 	else
 	{
