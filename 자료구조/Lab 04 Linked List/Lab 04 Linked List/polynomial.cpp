@@ -48,11 +48,11 @@ int compareDeg(List<PolyNode>* list, int d)
 	bool has = list->hasNext();		// true면 뒤에 노드가 있음. false면 마지막 노드
 	if (!has)
 	{
-		if (cursorDegree == d)
+		if (cursorDegree == d)		// 커서의 차수와 새로운 노드의 차수가 같을 경우
 			return 1;
-		else if (cursorDegree < d)
+		else if (cursorDegree < d)  // 커서의 차수가 새로운 노드의 차수보다 작을 경우
 			return 2;
-		else if (cursorDegree > d)
+		else if (cursorDegree > d)  // 커서의 차수가 새로운 노드의 차수보다 클 경우
 			return 3;
 		else                        // 마지막 원소인데 degree가 다르다
 		{
@@ -61,10 +61,10 @@ int compareDeg(List<PolyNode>* list, int d)
 	}
 	
 	if (cursorDegree == d)
-		return true;
-	else if (cursorDegree < d)
+		return 1;
+	else if (cursorDegree < d)     // 커서의 차수가 새로운 노드의 차수보다 작을 경우
 		return 2;
-	else if (cursorDegree > d)
+	else if (cursorDegree > d)     // 커서의 차수가 새로운 노드의 차수보다 클 경우
 		return 3;
 	else
 	{
@@ -90,13 +90,14 @@ void addTerm(List<PolyNode>* list, int c, int d)
 		{
 			list->getCursor().addCoef(c);
 		}
-		else if(compare == 2)
+		else if(compare == 2)			// 커서의 차수가 새로운 노드의 차수보다 작을 경우	//x^2와 x^4
 		{
+			// list->gotoPrior();
 			list->insert(newNode);
 		}
-		else if (compare == 3)
+		else if (compare == 3)		// 커서의 차수가 새로운 노드의 차수보다 클 경우		   // x^2와 x^0
 		{
-			list->gotoPrior();
+			//list->gotoNext();
 			list->insert(newNode);
 		}
 		else
