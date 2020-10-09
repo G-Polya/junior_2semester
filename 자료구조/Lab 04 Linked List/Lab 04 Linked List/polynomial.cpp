@@ -42,30 +42,30 @@ public:
 	}
 };
 
-bool compareDeg(List<PolyNode>* list, int d)
+int compareDeg(List<PolyNode>* list, int d)
 {
 	int cursorDegree = list->getCursor().getDegree();
 	bool has = list->hasNext();		// true면 뒤에 노드가 있음. false면 마지막 노드
 	if (!has)
 	{
 		if (cursorDegree == d)
-			return true;
-		/*else if (cursorDegree < d)
+			return 1;
+		else if (cursorDegree < d)
 			return 2;
 		else if (cursorDegree > d)
-			return 3;*/
+			return 3;
 		else                        // 마지막 원소인데 degree가 다르다
 		{
-			return false;
+			return 0;
 		}
 	}
 	
 	if (cursorDegree == d)
-		return 1;
-	//else if (cursorDegree < d)
-	//	return 2;
-	//else if (cursorDegree > d)
-	//	return 3;
+		return true;
+	else if (cursorDegree < d)
+		return 2;
+	else if (cursorDegree > d)
+		return 3;
 	else
 	{
 		list->gotoNext();
@@ -84,21 +84,23 @@ void addTerm(List<PolyNode>* list, int c, int d)
 		list->gotoBeginning();
 		
 		
-		bool compare = compareDeg(list, d);
+		int compare = compareDeg(list, d);
 		
 		if (compare == 1)
 		{
 			list->getCursor().addCoef(c);
 		}
-		//else if(compare == 2)
-		//{
-		//	list->insert(newNode);
-		//}
-		//else if (compare == 3)
-		//{
-		//	list->gotoPrior();
-		//	list->insert(newNode);
-		//}
+		else if(compare == 2)
+		{
+			list->insert(newNode);
+		}
+		else if (compare == 3)
+		{
+			list->gotoPrior();
+			list->insert(newNode);
+		}
+		else
+			list->insert(newNode);
 	}
 	else
 	{
