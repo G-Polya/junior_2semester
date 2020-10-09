@@ -34,6 +34,8 @@ public:
     void addCoef(int added) {
         coefficient += added;
     }
+
+
 };
 
 int compareDeg(List<PolyNode>* list, int d)
@@ -67,6 +69,7 @@ int compareDeg(List<PolyNode>* list, int d)
 		
 	}
 		
+	
 }
 
 
@@ -86,19 +89,15 @@ void addTerm(List<PolyNode>* list, int c, int d)
 		{
 			list->getCursor().addCoef(c);
 		}
-		else if(compare == 2)			// 커서의 차수가 새로운 노드의 차수보다 작을 경우	//x^2와 x^4
+		else if(compare == 2)			// 커서의 차수가 새로운 노드의 차수보다 작을 경우	
 		{
-			
-			//cout << list->getCursor().getCoef() << " " << list->getCursor().getDegree() << endl;
 			list->insertBefore(newNode);
 		}
-		else if (compare == 3)		// 커서의 차수가 새로운 노드의 차수보다 클 경우		   // x^2와 x^0
+		else if (compare == 3)		// 커서의 차수가 새로운 노드의 차수보다 클 경우		  
 		{
-			//list->gotoNext();
 			list->insert(newNode);
 		}
-		//else
-		//	list->insert(newNode);
+		
 	}
 	else
 	{
@@ -108,20 +107,18 @@ void addTerm(List<PolyNode>* list, int c, int d)
 	
 }
 
+// 다항식을 재귀적으로 출력
 void recursivePrint(bool& next, List<PolyNode>& list)
 {
 	if (next)
 	{
-		if (list.getCursor().getDegree() == 0)
+		if (list.getCursor().getDegree() == 0)			// 0차 항은 계수만 출력
 			cout << " + " << list.getCursor().getCoef();
-		else if (list.getCursor().getCoef() == 1)
+		else if (list.getCursor().getCoef() == 1)		// 계수가 1이면 계수 생략
 			cout << " + " << "x^" << list.getCursor().getCoef();
-		else if (list.getCursor().getCoef() < 0)
-		{
-			cout << list.getCursor().getCoef() << "x^" << list.getCursor().getDegree();
-		}
-			
-		else
+		else if (list.getCursor().getCoef() < 0)		// 계수가 음수일때
+			cout <<" - " <<-list.getCursor().getCoef() << "x^" << list.getCursor().getDegree();	
+		else                                            // 그 외
 			cout << " + " << list.getCursor().getCoef() << "x^" << list.getCursor().getDegree();		
 		
 		next = list.gotoNext();
@@ -145,9 +142,16 @@ void showPolynomial(List<PolyNode>& list)
 		//cout << next << endl;
 		while (next)
 		{
-			list.gotoBeginning();
+			list.gotoBeginning();								// 리스트 처음으로 이동
+			int cursorCoef = list.getCursor().getCoef();
 			
-			cout << list.getCursor().getCoef() << "x^" << list.getCursor().getDegree();
+			if (cursorCoef == -1)
+				cout << "-x^" << list.getCursor().getDegree();
+			else if (cursorCoef == 1)
+				cout << "x^" << list.getCursor().getDegree();
+			else
+				cout << list.getCursor().getCoef() << "x^" << list.getCursor().getDegree();
+			
 			next = list.gotoNext();
 			recursivePrint(next, list);
 		
