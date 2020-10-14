@@ -1,0 +1,105 @@
+
+Commands:
+  +x : Enqueue x
+  -  : Dequeue
+  C  : Clear the queue
+  E  : Empty queue?
+  >  : put in front(In-Lab2)
+  =  : get from rear(In-Lab2)
+  Q  : Quit the test program
+
+Empty Queue
+
+Command: +a +b +c
+Enqueue a
+a
+
+Command: Enqueue b
+a       b
+
+Command: Enqueue c
+a       b       c
+
+Command: - -
+Dequeued a
+b       c
+
+Command: Dequeued b
+c
+
+Command: e f
+Queue is NOT empty
+c
+
+Command: Queue is NOT full
+c
+
+Command: +d +e +f +g +h +i +j +k
+Enqueue d
+c       d
+
+Command: Enqueue e
+c       d       e
+
+Command: Enqueue f
+c       d       e       f
+
+Command: Enqueue g
+c       d       e       f       g
+
+Command: Enqueue h
+c       d       e       f       g       h
+
+Command: Enqueue i
+c       d       e       f       g       h       i
+
+Command: Enqueue j
+c       d       e       f       g       h       i       j
+
+Command: Enqueue k
+c       d       e       f       g       h       i       j       k
+
+Command: e f
+Queue is NOT empty
+c       d       e       f       g       h       i       j       k
+
+Command: Queue is NOT full
+c       d       e       f       g       h       i       j       k
+
+Command: c
+Clear the queue
+Empty Queue
+
+Command: e f
+Queue is empty
+Empty Queue
+
+Command: Queue is NOT full
+Empty Queue
+
+Command: >a >b >c
+Enqueue ain the front
+a
+
+Command: Enqueue bin the front
+b       a
+
+Command: Enqueue cin the front
+c       b       a
+
+Command: +d +e
+Enqueue d
+c       b       a       d
+
+Command: Enqueue e
+c       b       a       d       e
+
+Command: =
+get e from rear
+c       b       a       d
+
+Command: -
+Dequeued c
+b       a       d
+
+Command: q

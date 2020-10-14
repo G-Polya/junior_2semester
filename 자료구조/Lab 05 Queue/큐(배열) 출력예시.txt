@@ -1,0 +1,130 @@
+
+Commands:
+  +x : Enqueue x
+  -  : Dequeue
+  C  : Clear the queue
+  E  : Empty queue?
+  >  : put in front(In-Lab2)
+  =  : get from rear(In-Lab2)
+  Q  : Quit the test program
+
+Empty queue
+
+Command: +a +b +c
+Enqueue a
+0       1       2       3       4       5       6       7
+a
+
+Command: Enqueue b
+0       1       2       3       4       5       6       7
+a       b
+
+Command: Enqueue c
+0       1       2       3       4       5       6       7
+a       b       c
+
+Command: - -
+Dequeued a
+0       1       2       3       4       5       6       7
+        b       c
+
+Command: Dequeued b
+0       1       2       3       4       5       6       7
+                c
+
+Command: e f
+Queue is NOT empty
+0       1       2       3       4       5       6       7
+                c
+
+Command: Queue is NOT full
+0       1       2       3       4       5       6       7
+                c
+
+Command: +d +e +f +g +h +i +j +k
+Enqueue d
+0       1       2       3       4       5       6       7
+                c       d
+
+Command: Enqueue e
+0       1       2       3       4       5       6       7
+                c       d       e
+
+Command: Enqueue f
+0       1       2       3       4       5       6       7
+                c       d       e       f
+
+Command: Enqueue g
+0       1       2       3       4       5       6       7
+                c       d       e       f       g
+
+Command: Enqueue h
+0       1       2       3       4       5       6       7
+                c       d       e       f       g       h
+
+Command: Enqueue i
+0       1       2       3       4       5       6       7
+i               c       d       e       f       g       h
+
+Command: Enqueue j
+0       1       2       3       4       5       6       7
+i       j       c       d       e       f       g       h
+
+Command: Enqueue k
+Queue is Full, you can't Enqueue!
+0       1       2       3       4       5       6       7
+i       j       c       d       e       f       g       h
+
+Command: e f
+Queue is NOT empty
+0       1       2       3       4       5       6       7
+i       j       c       d       e       f       g       h
+
+Command: Queue is full
+0       1       2       3       4       5       6       7
+i       j       c       d       e       f       g       h
+
+Command: c
+Clear the queue
+Empty queue
+
+Command: e f
+Queue is empty
+Empty queue
+
+Command: Queue is NOT full
+Empty queue
+
+Command: >a >b >c
+Enqueue ain the front
+0       1       2       3       4       5       6       7
+a
+
+Command: Enqueue bin the front
+0       1       2       3       4       5       6       7
+a                                                       b
+
+Command: Enqueue cin the front
+0       1       2       3       4       5       6       7
+a                                               c       b
+
+Command: +d +e
+Enqueue d
+0       1       2       3       4       5       6       7
+a       d                                       c       b
+
+Command: Enqueue e
+0       1       2       3       4       5       6       7
+a       d       e                               c       b
+
+Command: =
+get e from rear
+0       1       2       3       4       5       6       7
+a       d                                       c       b
+
+Command: -
+Dequeued c
+0       1       2       3       4       5       6       7
+a       d                                               b
+
+Command: q
