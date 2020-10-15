@@ -56,6 +56,11 @@ DT Queue<DT>::dequeue()
 	{
 		front = (front + 1) % maxSize;
 	
+		if (front == (rear + 1) % maxSize)	// empty가 되는 경우
+		{
+			front = -1;
+			rear = -1;
+		}
 		return element[current];
 	}
 }
@@ -140,7 +145,7 @@ DT Queue<DT>::getRear()
 	{
 		current = rear;
 
-		if (front == rear)
+		if (front == rear % maxSize)		// empty가 되는 경우
 		{
 			front = -1;
 			rear = -1;
