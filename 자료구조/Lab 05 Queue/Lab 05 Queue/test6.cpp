@@ -7,8 +7,8 @@
 //--------------------------------------------------------------------
 
 #include <iostream>
-// #include "queuearr.cpp"
-#include "queueLnk.cpp"
+#include "queuearr.cpp"
+// #include "queueLnk.cpp"
 
 using namespace std;
 
@@ -71,7 +71,7 @@ void main()
 			break;
 
 		case '>':
-			cout << "Enqueue " << testElement << "in the front" << endl;
+			cout << "Enqueue " << testElement << " in the front" << endl;
 			testQueue.putFront(testElement);
 			break;
 

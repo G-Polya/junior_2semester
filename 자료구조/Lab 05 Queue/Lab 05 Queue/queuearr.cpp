@@ -3,15 +3,17 @@
 
 using namespace std;
 
+// constructor
 template<class DT>
 Queue<DT>::Queue(int maxNumber)
 {
 	maxSize = maxNumber;
-	front = -1;
-	rear = -1;
+	front = -1;		// 초기 front 위치
+	rear = -1;		// 초기 rear 위치
 	element = new DT[maxSize];
 }
 
+// destructor
 template<class DT>
 Queue<DT>::~Queue()
 {
@@ -21,45 +23,47 @@ Queue<DT>::~Queue()
 template<class DT>
 void Queue<DT>::enqueue(const DT& newData)
 {
-	if (!isFull())
+	
+	if(isFull())
+		cout << "Queue is full" << endl;
+	else
 	{
 		if (!isEmpty())
 		{
-			rear++;
-			if (rear == maxSize)
-				rear = 0;
+			rear = (rear + 1) % maxSize;
 		}
 		else
 		{
 			front = 0;
 			rear = 0;
 		}
-	
+
 		element[rear] = newData;
 	}
-	else
-		cout << "Queue is full" << endl;
 }
 
 template<class DT>
 DT Queue<DT>::dequeue()
 {
 	int current = front;
-	if (!isEmpty())
-	{
-		front++;
-		if (front == maxSize)
-			front = 0;
 
-		if ((front == rear + 1) || ((front == 0) && (rear == maxSize - 1)))
+	if (isEmpty())
+	{
+		cout << "Queue is Empty" << endl;
+	}
+	else
+	{
+		front = (front + 1) % maxSize;
+
+		if (front == rear + 1)
 		{
 			front = -1;
 			rear = -1;
 		}
+
+	
 		return element[current];
 	}
-	else
-		cout << "Queue is Empty" << endl;
 }
 
 template<class DT>
@@ -120,9 +124,7 @@ void Queue<DT>::putFront(const DT& newData)
 	{
 		if (!isEmpty())
 		{
-			front--;
-			if (front < 0)
-				front = maxSize - 1;
+			front = (front - 1 + maxSize) % maxSize;		// (0 -1 + 8) mod 8 = 7 , (7 - 1 + 8) mod 8 = 6
 		}
 		else
 		{
