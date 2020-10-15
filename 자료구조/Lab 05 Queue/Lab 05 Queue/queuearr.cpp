@@ -34,6 +34,7 @@ void Queue<DT>::enqueue(const DT& newData)
 		}
 		else
 		{
+			// 비어있으면 0부터 원소가 들어감
 			front = 0;
 			rear = 0;
 		}
@@ -54,13 +55,6 @@ DT Queue<DT>::dequeue()
 	else
 	{
 		front = (front + 1) % maxSize;
-
-		if (front == rear + 1)
-		{
-			front = -1;
-			rear = -1;
-		}
-
 	
 		return element[current];
 	}
@@ -76,12 +70,8 @@ void Queue<DT>::clear()
 template<class DT>
 bool Queue<DT>::isFull() const
 {
-	if (front == 0 && rear == (maxSize - 1))
-		return true;
-	else if (rear == (front - 1))
-		return true;
-	else
-		return false;
+
+	return ((rear + 1) % maxSize == front);
 }
 
 template<class DT>
@@ -101,15 +91,17 @@ void Queue<DT>::showStructure() const
 		for (int i = 0; i < maxSize; i++)
 			cout << i << "\t";
 		cout << endl;
-		if (rear >= front)
+
+
+		if (rear >= front)			// rear 인덱스가 front 인덱스보다 뒤에 있는 경우..즉 rear = 7, front = 0 인 경우
 			for (int i = 0; i < maxSize; i++)
 				if ((i >= front) && (i <= rear))
-					cout << element[i] << "\t";
+					cout << element[i] << "\t";   // front에서 rear까지의 원소들을 출력
 				else
 					cout << " \t";
-		else
+		else                        // rear가 front보다 앞.  front = 6, rear = 1인 경우
 			for (int i = 0; i < maxSize; i++)
-				if ((i >= front) || (i <= rear))
+				if ((i >= front) || (i <= rear))  // front에서 rear 범위 밖에 있는 원소들을 출력
 					cout << element[i] << "\t";
 				else
 					cout << " \t";
@@ -146,6 +138,8 @@ DT Queue<DT>::getRear()
 		cout << "Queue is Empty" << endl;
 	else
 	{
+		current = rear;
+
 		if (front == rear)
 		{
 			front = -1;
@@ -153,9 +147,8 @@ DT Queue<DT>::getRear()
 		}
 		else
 		{
-			rear--;
-			if (rear < 0)
-				rear = maxSize - 1;
+			rear = (rear - 1 + maxSize) % maxSize;
+		
 		}
 		return element[current];
 	}

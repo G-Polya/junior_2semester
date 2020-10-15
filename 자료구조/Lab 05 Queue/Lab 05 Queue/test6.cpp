@@ -76,7 +76,8 @@ void main()
 			break;
 
 		case '=':
-			if (!testQueue.isEmpty()) {
+			if (!testQueue.isEmpty()) 
+			{
 				cout << "get " << testQueue.getRear() << " from rear" << endl;
 			}
 			break;
