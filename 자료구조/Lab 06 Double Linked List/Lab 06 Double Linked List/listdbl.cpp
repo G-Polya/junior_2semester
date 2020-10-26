@@ -241,45 +241,23 @@ void List<DT>::showStructure() const
 template < class DT >
 void List<DT>::reverse()
 {
-	//if (isEmpty())
-	//	cout << "Empty List" << endl;
-	//else
-	//{
-	//	ListNode<DT>* first = head;			
-	//	ListNode<DT>* last = cursor;	// 끝에서부터 시작
-	//	
-	//	while (last->next != NULL)		// 끝에서 시작하도록 last 포인터를 끝으로 이동
-	//		last = last->next;
-
-	//	while (first != last)
-	//	{
-	//		// data swap
-	//		DT temp = first->dataItem;
-	//		first->dataItem = last->dataItem;
-	//		last->dataItem = temp;
-
-
-	//		first = first->next;
-	//		last = last->prior;
-	//	}
-	//}
 	if (isEmpty())
 		cout << "Empty List" << endl;
 	else
 	{
-		ListNode<DT>* tempPtr = new ListNode<DT>(NULL, NULL, NULL);
-		ListNode<DT>* headPtr = head;
+		ListNode<DT>* tempNode = new ListNode<DT>(NULL, NULL, NULL);
+		ListNode<DT>* tempHead = head;
 		
-		while (headPtr != NULL)
+		while (tempHead != NULL)
 		{
-			tempPtr = headPtr->prior;
-			headPtr->prior = headPtr->next;
-			headPtr->next = tempPtr;
-			headPtr = headPtr->prior;
+			tempNode = tempHead->prior;
+			tempHead->prior = tempHead->next;
+			tempHead->next = tempNode;
+			tempHead = tempHead->prior;
 		}
 
-		if (tempPtr != NULL)
-			head = tempPtr->prior;
+		if (tempNode != NULL)
+			head = tempNode->prior;
 	}
 }
 
