@@ -18,3 +18,11 @@ pool.getConnection((err, conn) => {
 
     conn.end(); //release to pool
 });
+// 결과
+// [
+//     {
+//       number: 1,
+//       directory: 'C:UserswlskaDocumentsjunior_2s',
+//       fileName: 'testFile'
+//     }
+// ]
