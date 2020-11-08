@@ -47,13 +47,13 @@ io.sockets.on('connection', function(socket){
         notes.push(data)
         io.sockets.emit('new note', data)
         // Use node's db injection format to filter incoming data
-        db.query('INSERT INTO notes (note) VALUES (?)', data.note)
+        db.query('INSERT INTO users (user_key, user_id) VALUES (?,?)', data.user_key, data.user_id)
     })
  
     // Check to see if initial query/notes are set
     if (! isInitNotes) {
         // Initial app start, run db query
-        db.query('SELECT * FROM notes')
+        db.query('SELECT * FROM users')
             .on('result', function(data){
                 // Push results onto the notes array
                 notes.push(data)
