@@ -1,3 +1,4 @@
+// Server.js
 const express = require("express");
 const http = require("http");
 const app = express();
@@ -46,13 +47,13 @@ io.sockets.on('connection', function(socket){
         notes.push(data)
         io.sockets.emit('new note', data)
         // Use node's db injection format to filter incoming data
-        db.query('INSERT INTO users (user_key, user_id) VALUES (?,?)', data.user_key, user_id)
+        db.query('INSERT INTO notes (note) VALUES (?)', data.note)
     })
  
     // Check to see if initial query/notes are set
     if (! isInitNotes) {
         // Initial app start, run db query
-        db.query('SELECT * FROM users')
+        db.query('SELECT * FROM notes')
             .on('result', function(data){
                 // Push results onto the notes array
                 notes.push(data)
@@ -68,4 +69,3 @@ io.sockets.on('connection', function(socket){
         socket.emit('initial notes', notes)
     }
 })
-
