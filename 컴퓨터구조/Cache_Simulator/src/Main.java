@@ -39,38 +39,38 @@ public class Main {
 		
 		System.out.println(fileName + " conatins " + addresses.size() + " instructions.");
 
-		SingleLevelCache OneLevelCache = new SingleLevelCache(l1NumberOfBlocks, l1BytesPerBlock);	// Creating a new single cache object with giving blocks and block size
-		OneLevelCache.contentChecker1(addresses);				// Calling the method that checks for content in the cache
+		SingleLevelCache oneLevelCache = new SingleLevelCache(l1NumberOfBlocks, l1BytesPerBlock);	// Creating a new single cache object with giving blocks and block size
+		oneLevelCache.contentChecker1(addresses);				// Calling the method that checks for content in the cache
 		System.out.println("One level cache");
-		System.out.println("L1 hits:       " +	OneLevelCache.getHits());
-		System.out.println("L1 misses:     " +  OneLevelCache.getMisses());
-		System.out.println(String.format("Total hit ratio: %.4f", OneLevelCache.get_hitRatio()));
-		System.out.println("Cycles:     " +  OneLevelCache.getCycles());
+		System.out.println("L1 hits:       " +	oneLevelCache.getHits1());
+		System.out.println("L1 misses:     " +  oneLevelCache.getMisses1());
+		System.out.println(String.format("Total hit ratio: %.4f", oneLevelCache.get_hitRatio()));
+		System.out.println("Cycles:     " +  oneLevelCache.getCycles());
 		System.out.println("----------------------------------\n");
 
-		TwoLevelCache TwoLevelCache = new TwoLevelCache(l1NumberOfBlocks, l1BytesPerBlock,l2NumberOfBlocks, l2BytesPerBlock);	// Creating a new single cache object with giving blocks and block sizes
-		TwoLevelCache.contentChecker1(addresses);	// Calling the method that checks for content in the cache
+		TwoLevelCache twoLevelCache = new TwoLevelCache(l1NumberOfBlocks, l1BytesPerBlock,l2NumberOfBlocks, l2BytesPerBlock);	// Creating a new single cache object with giving blocks and block sizes
+		twoLevelCache.contentChecker1(addresses);	// Calling the method that checks for content in the cache
 		System.out.println("Two level cache");
-		System.out.println("L1 hits:       " + TwoLevelCache.getHits1());
-		System.out.println("L1 misses:     " + TwoLevelCache.getMisses1());
-		System.out.println("L2 hits:       " + TwoLevelCache.getHits2());
-		System.out.println("L2 misses:     " + TwoLevelCache.getMisses2());
-		System.out.println(String.format("Total hit ratio: %.4f", TwoLevelCache.get_TotalhitRatio(addresses)));
-		System.out.println("Cycles:        " + TwoLevelCache.getCycles());
+		System.out.println("L1 hits:       " + twoLevelCache.getHits1());
+		System.out.println("L1 misses:     " + twoLevelCache.getMisses1());
+		System.out.println("L2 hits:       " + twoLevelCache.getHits2());
+		System.out.println("L2 misses:     " + twoLevelCache.getMisses2());
+		System.out.println(String.format("Total hit ratio: %.4f", twoLevelCache.get_TotalhitRatio(addresses)));
+		System.out.println("Cycles:        " + twoLevelCache.getCycles());
 		System.out.println("----------------------------------\n");
 
 		// ------------------------------------------- 업그레이드한 부분 ------------------------------------------- 
-		ThreeLevelCache ThreeLevelCache = new  ThreeLevelCache(l1NumberOfBlocks, l1BytesPerBlock,l2NumberOfBlocks, l2BytesPerBlock,l3NumberOfBlocks,l3NumberOfBlocks);	// Creating a new single cache object with giving blocks and block sizes
-		ThreeLevelCache.contentChecker1(addresses);	// Calling the method that checks for content in the cache
+		ThreeLevelCache threeLevelCache = new  ThreeLevelCache(l1NumberOfBlocks, l1BytesPerBlock,l2NumberOfBlocks, l2BytesPerBlock,l3NumberOfBlocks,l3NumberOfBlocks);	// Creating a new single cache object with giving blocks and block sizes
+		threeLevelCache.contentChecker1(addresses);	// Calling the method that checks for content in the cache
 		System.out.println("Three level cache");
-		System.out.println("L1 hits:       " + ThreeLevelCache.getHits1());
-		System.out.println("L1 misses:     " + ThreeLevelCache.getMisses1());
-		System.out.println("L2 hits:       " + ThreeLevelCache.getHits2());
-		System.out.println("L2 misses:     " + ThreeLevelCache.getMisses2());
-		System.out.println("L3 hits:       " + ThreeLevelCache.getHits3());
-		System.out.println("L3 misses:     " + ThreeLevelCache.getMisses3());
-		System.out.println(String.format("Total hit ratio: %.4f", ThreeLevelCache.get_TotalhitRatio(addresses)));
-		System.out.println("Cycles:        " + ThreeLevelCache.getCycles());
+		System.out.println("L1 hits:       " + threeLevelCache.getHits1());
+		System.out.println("L1 misses:     " + threeLevelCache.getMisses1());
+		System.out.println("L2 hits:       " + threeLevelCache.getHits2());
+		System.out.println("L2 misses:     " + threeLevelCache.getMisses2());
+		System.out.println("L3 hits:       " + threeLevelCache.getHits3());
+		System.out.println("L3 misses:     " + threeLevelCache.getMisses3());
+		System.out.println(String.format("Total hit ratio: %.4f", threeLevelCache.get_TotalhitRatio(addresses)));
+		System.out.println("Cycles:        " + threeLevelCache.getCycles());
 		System.out.println("----------------------------------\n");
 	}
 }
