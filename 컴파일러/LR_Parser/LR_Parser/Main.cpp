@@ -7,11 +7,8 @@
 #include <chrono>
 
 #include "parser.c"
-//#include "notOptimizedRDParser.h"
-// #include "OptimizedRDParser.h"
+
 void icg_error(int n);
-
-
 
 #define FILE_LEN 30
 
@@ -45,6 +42,7 @@ void main(int argc, char* argv[])
 	printf("   * source file name: %s\n", filename);
 
 	err = fopen_s(&sourceFile, filename, "r");
+	
 	if (err != 0)
 	{
 		icg_error(2);
