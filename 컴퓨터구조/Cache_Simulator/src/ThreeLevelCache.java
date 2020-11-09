@@ -20,6 +20,7 @@ public class ThreeLevelCache {
     String tag2, array2[];
 
     /** L3 cache variables*/
+    /** 업그레이드를 위해 추가된 부분*/
     int offsetLength3, indexLength3, tagLength3, miss3 =0, hit3=0, index3;
     double hit_ratio3;
     String tag3, array3[];
@@ -215,6 +216,7 @@ public class ThreeLevelCache {
         hit_ratio2 = Math.round(hit_ratio2*100)/100.0;
     }
 
+    /** 업그레이드를 위해 추가된 부분 */
     public void contentChecker3(String address){
 
         index3 = getIndex3(address);

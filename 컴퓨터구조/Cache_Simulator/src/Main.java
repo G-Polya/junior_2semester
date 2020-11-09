@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) {
@@ -16,7 +15,7 @@ public class Main {
 		
 		ArrayList<String> addresses = new ArrayList<String>();  // this will store all addresses read from the file
 
-		SingleL1Cache tempL1Cache = new SingleL1Cache(16,16); // This is just a dummy cache so i can be able to use the method in the single cache class
+		SingleLevelCache tempL1Cache = new SingleLevelCache(16,16); // This is just a dummy cache so i can be able to use the method in the single cache class
 
 		BufferedReader file = null;
 		
@@ -40,7 +39,7 @@ public class Main {
 		
 		System.out.println(fileName + " conatins " + addresses.size() + " instructions.");
 
-		SingleL1Cache OneLevelCache = new SingleL1Cache(l1NumberOfBlocks, l1BytesPerBlock);	// Creating a new single cache object with giving blocks and block size
+		SingleLevelCache OneLevelCache = new SingleLevelCache(l1NumberOfBlocks, l1BytesPerBlock);	// Creating a new single cache object with giving blocks and block size
 		OneLevelCache.contentChecker1(addresses);				// Calling the method that checks for content in the cache
 		System.out.println("One level cache");
 		System.out.println("L1 hits:       " +	OneLevelCache.getHits());
@@ -60,6 +59,7 @@ public class Main {
 		System.out.println("Cycles:        " + TwoLevelCache.getCycles());
 		System.out.println("----------------------------------\n");
 
+		// ------------------------------------------- 업그레이드한 부분 ------------------------------------------- 
 		ThreeLevelCache ThreeLevelCache = new  ThreeLevelCache(l1NumberOfBlocks, l1BytesPerBlock,l2NumberOfBlocks, l2BytesPerBlock,l3NumberOfBlocks,l3NumberOfBlocks);	// Creating a new single cache object with giving blocks and block sizes
 		ThreeLevelCache.contentChecker1(addresses);	// Calling the method that checks for content in the cache
 		System.out.println("Three level cache");

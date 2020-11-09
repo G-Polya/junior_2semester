@@ -1,14 +1,14 @@
 import java.math.BigInteger;
 import java.util.*;
 
-public class SingleL1Cache {
+public class SingleLevelCache {
 
 	int offsetLength, indexLength, tagLength, miss =0, hit=0, index, cycles;
 	double hit_ratio1;
 	String tag, array[];
 	
 	/** Constructor that will initialize the length of offset, index and tag*/
-	public SingleL1Cache (int numberOfBlocks, int bytesPerBlock){ 
+	public SingleLevelCache(int numberOfBlocks, int bytesPerBlock){
 		
 		this.indexLength = (Integer.toBinaryString(numberOfBlocks-1)).length();
 		this.offsetLength = (Integer.toBinaryString(bytesPerBlock-1)).length();

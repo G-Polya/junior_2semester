@@ -94,13 +94,16 @@ public class TwoLevelCache {
 	public int getHits1(){
 		return hit1;
 	}
-	public double get_hitRatio_L1() { return hit_ratio1; }
-
-	public int getHits2(){
+	
+	public int getHits2(){ 
 		return hit2;
 	}
-	public double get_hitRatio_L2() { return hit_ratio2; }
 
+	// hit_ratio를 계산하는 메소드 추가
+	public double get_hitRatio_L1() { return hit_ratio1; }
+	public double get_hitRatio_L2() { return hit_ratio2; }
+	
+	// 전체 hit ratio 계산메소드 추가
 	public double get_TotalhitRatio(ArrayList<String> addresses)
 	{
 		total_hitRatio = (double)(hit1+hit2) / (addresses.size()) ;
@@ -108,6 +111,7 @@ public class TwoLevelCache {
 	}
 
 	/** Return number of cycles*/
+	// access time 계산 부분 수정. 
 	public int getCycles(){
 		cycles = hit1 + (int)((1-hit_ratio1) * (hit2 + (int)(1-hit_ratio2)*1000));
 		return cycles;
