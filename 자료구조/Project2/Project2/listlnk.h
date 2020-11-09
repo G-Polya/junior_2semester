@@ -29,6 +29,7 @@ private:
 	// Data members
 	DT dataItem;      // List data item
 	ListNode* next;   // Pointer to the next list node
+	List<DT>* friendList;
 
 	friend class List<DT>;
 };
@@ -39,9 +40,6 @@ template < class DT >
 class List
 {
 public:
-
-	
-
 	// Constructor
 	List(int ignored = 0);
 
@@ -80,6 +78,15 @@ public:
 	void insertBefore(const DT& newElement) // Insert before cursor
 		throw (bad_alloc);
 
+
+	bool retrieve(const DT& data);
+
+	void nowFriend(const DT& data1, const DT& data2);
+
+	void breakFriend(const DT& data1, const DT& data2);
+	void printFriends(const DT& data);
+
+	bool friendCheck(const DT& data1, const DT& data2);
 	
 	bool hasNext();
 	

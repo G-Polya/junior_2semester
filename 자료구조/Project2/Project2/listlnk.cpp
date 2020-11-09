@@ -278,30 +278,23 @@ template<class DT>
 void List<DT>::showStructure() const
 {
 	
-	// cout<<"Loc: " << getCursorloc() << endl;
-	if (isEmpty())
+	int count = 1;
+	ListNode<DT>* temp = head;
+	cout << "               Member List" << endl;
+	cout << "-------------------------------------------" << endl;
+	if (isEmpty() != 1) 
 	{
-		cout << "Empty List" << endl;
-	}
-	else
-	{
-		for (ListNode<DT>* iter = head; iter != NULL; iter = iter->next)
-			cout << iter->dataItem << " ";
-
-
-		cout << endl;
-
-		for (auto iter = head; iter != cursor->next; iter = iter->next)
+		while (temp != 0) 
 		{
-			if (iter != cursor)
-				cout << "  ";
-			else if (iter == cursor)
-				cout << "^";
+			cout << " " << count++ << ". " << temp->dataItem << endl;
+			temp = temp->next;
 		}
-		cout << endl;
-
-
 	}
+	else 
+	{
+		cout << "  Empty" << endl;
+	}
+	cout << "-------------------------------------------" << endl;
 
 }
 
@@ -309,12 +302,15 @@ void List<DT>::showStructure() const
 
 //use in-lab
 template<class DT>
-void List<DT>::insertBefore(const DT& newElement) {
-    if (cursor == head) {
+void List<DT>::insertBefore(const DT& newElement)
+{
+    if (cursor == head)
+	{
         ListNode<DT>* node = new ListNode<DT>(newElement, head);
         head = node; cursor = node;
     }
-    else {
+    else 
+	{
 		gotoPrior();
 		
         insert(newElement);
@@ -357,11 +353,17 @@ void List<DT>::nowFriend(const DT& data1, const DT& data2)
 	}
 	else if (retrieve(data1) && retrieve(data2))
 	{
-		retrieve(data1);						// data1을 찾고 그쪽으로 커서이동
-		cursor->friendList->insert(data2);		// data2를 data1의 친구로 추가
-		retrieve(data2);
-		cursor->friendList->insert(data1);		// 같은걸 data2쪽에서 data1에 대해서 수행
-		cout << data1 << " is a friend with " << data2 << endl;
+		if (friendCheck(data1, data2))
+			cout << "They are already friends" << endl;
+		else
+		{
+			retrieve(data1);						// data1을 찾고 그쪽으로 커서이동
+			cursor->friendList->insert(data2);		// data2를 data1의 친구로 추가
+			retrieve(data2);
+			cursor->friendList->insert(data1);		// 같은걸 data2쪽에서 data1에 대해서 수행
+			cout << data1 << " become a friend with " << data2<<" now" << endl;
+		}
+		
 	}
 }
 
@@ -380,13 +382,19 @@ void List<DT>::breakFriend(const DT& data1, const DT& data2)
 	}
 	else if (retrieve(data1) && retrieve(data2))
 	{
-		retrieve(data1);						// data1을 찾고 그쪽으로 커서이동
-		cursor->friendList->retrieve(data2);	// data1의 친구목록에서 data2을 선택
-		cursor->friendList->remove();			// data2를 data1의 친구에서 삭제
-		retrieve(data2);
-		cursor->friendList->retrieve(data1);
-		cursor->friendList->remove();			// 같은걸 data2쪽에서 data1에 대해서 수행
-		cout << data1 << " break up with " << data2 << endl;
+		if(!friendCheck(data1,data2))
+			cout << "They have not been friends before" << endl;
+		else
+		{
+			retrieve(data1);						// data1을 찾고 그쪽으로 커서이동
+			cursor->friendList->retrieve(data2);	// data1의 친구목록에서 data2을 선택
+			cursor->friendList->remove();			// data2를 data1의 친구에서 삭제
+			retrieve(data2);
+			cursor->friendList->retrieve(data1);
+			cursor->friendList->remove();			// 같은걸 data2쪽에서 data1에 대해서 수행
+			cout << data1 << " break up with " << data2 << endl;
+		}
+		
 	}
 }
 
@@ -404,12 +412,12 @@ void List<DT>::printFriends(const DT& data)
 }
 
 template<class DT>
-void List<DT>::friendCheck(const DT& data1, const DT& data2)
+bool List<DT>::friendCheck(const DT& data1, const DT& data2)
 {
 	ListNode<DT>* person;
 	
 	if (data1 == data2)
-		return;
+		return false;
 
 	if (!retrieve(data1) || !retrieve(data2))
 	{
@@ -422,8 +430,15 @@ void List<DT>::friendCheck(const DT& data1, const DT& data2)
 	{
 		person = cursor;
 		if (person->friendList->retrieve(data2))
+		{
 			cout << "Yes. They are friends" << endl;
+			return true;
+		}
 		else
+		{
 			cout << "No. They are not friends" << endl;
+			return false;
+		}
+			
 	}
 }
