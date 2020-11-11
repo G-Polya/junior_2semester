@@ -383,7 +383,7 @@ void List<DT>::breakFriend(const DT& data1, const DT& data2)
 	else if (retrieve(data1) && retrieve(data2))
 	{
 		if(!friendCheck(data1,data2))
-			cout << "They have not been friends before" << endl;
+			cout << "They have not been friends before." << endl;
 		else
 		{
 			retrieve(data1);						// data1을 찾고 그쪽으로 커서이동
@@ -392,7 +392,7 @@ void List<DT>::breakFriend(const DT& data1, const DT& data2)
 			retrieve(data2);
 			cursor->friendList->retrieve(data1);
 			cursor->friendList->remove();			// 같은걸 data2쪽에서 data1에 대해서 수행
-			cout << data1 << " break up with " << data2 << endl;
+			cout << data1 << " break up with " << data2 << " now."<<endl;
 		}
 		
 	}

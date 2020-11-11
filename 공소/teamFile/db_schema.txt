@@ -21,3 +21,11 @@ CREATE TABLE BOARD(
     CONTENT VARCHAR(1000),
     WDATE DATE
 );
+
+insert into mdl_groups(id, courseid, idnumber, name, description, descriptionformat, enrolmentkey, picture, hidepicture, timecreated, timemodified)
+(
+    1,
+    1,
+    "1",
+    "group1"
+);

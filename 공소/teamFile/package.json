@@ -11,5 +11,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "mariadb": "^2.5.1"
+  },
+  "devDependencies": {
+    "mocha-jsdom": "^2.0.0"
   }
 }
