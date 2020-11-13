@@ -18,6 +18,9 @@
     <ClCompile Include="bstree.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="database.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
     <ClCompile Include="getdbrec.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>

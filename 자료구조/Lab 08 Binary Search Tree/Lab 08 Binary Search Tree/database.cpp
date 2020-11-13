@@ -22,7 +22,7 @@ using namespace std;
 
 const int nameLength = 11;   // Maximum number of characters in
                                   //   a name
-const long bytesPerRecord = 38;   // Number of bytes used to store
+const long bytesPerRecord = 37;   // Number of bytes used to store
                                   //   each record in the accounts
                                   //   database file
 
@@ -57,61 +57,65 @@ struct IndexEntry
 
 //--------------------------------------------------------------------
 
-void main()
+int main(void)
 {
-    ifstream acctFile("accounts.dat");   // Accounts database file
-    AccountRecord acctRec;                // Account record
+	ifstream acctFile("accounts.dat");   // Accounts database file
 	if (!acctFile.is_open())
-		cout << "File open Error" << endl;
-
-    BSTree<IndexEntry, int> index;         // Database index
-    IndexEntry entry;                     // Index entry
-    int searchID;                         // User input account ID
-    long recNum;                          // Record number
+		cout << "File is Not Open!" << endl;
+	AccountRecord acctRec;                // Account record
+	BSTree<IndexEntry, int> index;         // Database index
+	IndexEntry entry;                     // Index entry
+	int searchID;                         // User input account ID
+	long recNum;                          // Record number
 	int i = 0;
-    // iterate through the database records. for each record, read the
-    // account id and add the (account id, record number) pair to the
-    // index.
-	while (true)
+	// Iterate through the database records. For each record, read the
+	// account ID and add the (account ID, record number) pair to the
+	// index.
+	while (1)
 	{
+		// seekg() function.
 		acctFile.seekg(i * bytesPerRecord);
 
-		acctFile >> acctRec.acctID >> acctRec.firstName >> acctRec.lastName >> acctRec.balance;
+		// Read in the record.
+		acctFile >> acctRec.acctID >> acctRec.firstName
+			>> acctRec.lastName >> acctRec.balance;
 		if (acctFile.eof())
 			break;
 		entry.acctID = acctRec.acctID;
 		entry.recNum = i++;
+		//cout << entry.recNum << " : " << entry.acctID << " "<< endl;
 		index.insert(entry);
 	}
 
-    
-
-    // output the account ids in ascending order.
+	// Output the account IDs in ascending order.
 	index.writeKeys();
 
-    // clear the status flags for the database file.
-    acctFile.clear();
+	// Clear the status flags for the database file.
+	acctFile.clear();
 
-    // read an account id from the keyboard and output the
-    // corresponding record.
+	// Read an account ID from the keyboard and output the
+	// corresponding record.
 	while (true)
 	{
-		cout << "\nEnter account ID : ";
+		cout << endl << "Enter account ID : ";
 		cin >> searchID;
 		if (index.retrieve(searchID, entry))
 		{
 			recNum = entry.recNum;
-
+			// Move to the corresponding record in the database file using the
+			// seekg() function.
 			acctFile.seekg(recNum * bytesPerRecord);
 
-			acctFile >> acctRec.acctID >> acctRec.firstName >> acctRec.lastName >> acctRec.balance;
+			// Read in the record.
+			acctFile >> acctRec.acctID >> acctRec.firstName
+				>> acctRec.lastName >> acctRec.balance;
 
+			// Display the record.
 			cout << recNum << " : " << acctRec.acctID << " "
 				<< acctRec.firstName << " " << acctRec.lastName << " "
 				<< acctRec.balance << endl;
 		}
 		else
-			cout << "Cannot find" << endl;
+			cout << "Not found" << endl;
 	}
-
 }

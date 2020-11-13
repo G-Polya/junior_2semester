@@ -170,9 +170,7 @@ void BSTree<TE, KF>::writeKeysSub(BSTreeNode<TE, KF>* p) const
 template < class TE, class KF >
 void BSTree<TE, KF>::clear()
 {
-	if (isEmpty())
-		cout << "Tree is Empty" << endl;
-	else
+	if (!isEmpty())
 	{
 		clearSub(root);
 		root = NULL;

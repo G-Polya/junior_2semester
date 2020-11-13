@@ -124,7 +124,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="bstree.cpp" />
-    <ClCompile Include="getdbrec.cpp" />
+    <ClCompile Include="database.cpp" />
+    <ClCompile Include="getdbrec.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bstree.h" />
