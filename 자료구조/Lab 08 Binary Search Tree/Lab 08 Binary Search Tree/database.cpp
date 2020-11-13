@@ -57,65 +57,61 @@ struct IndexEntry
 
 //--------------------------------------------------------------------
 
-int main(void)
+int main()
 {
 	ifstream acctFile("accounts.dat");   // Accounts database file
-	if (!acctFile.is_open())
-		cout << "File is Not Open!" << endl;
 	AccountRecord acctRec;                // Account record
+	if (!acctFile.is_open())
+		cout << "File open Error" << endl;
+
 	BSTree<IndexEntry, int> index;         // Database index
 	IndexEntry entry;                     // Index entry
 	int searchID;                         // User input account ID
 	long recNum;                          // Record number
 	int i = 0;
-	// Iterate through the database records. For each record, read the
-	// account ID and add the (account ID, record number) pair to the
+	// iterate through the database records. for each record, read the
+	// account id and add the (account id, record number) pair to the
 	// index.
-	while (1)
+	while (true)
 	{
-		// seekg() function.
 		acctFile.seekg(i * bytesPerRecord);
 
-		// Read in the record.
-		acctFile >> acctRec.acctID >> acctRec.firstName
-			>> acctRec.lastName >> acctRec.balance;
+		acctFile >> acctRec.acctID >> acctRec.firstName >> acctRec.lastName >> acctRec.balance;
 		if (acctFile.eof())
 			break;
 		entry.acctID = acctRec.acctID;
 		entry.recNum = i++;
-		//cout << entry.recNum << " : " << entry.acctID << " "<< endl;
 		index.insert(entry);
 	}
 
-	// Output the account IDs in ascending order.
+
+
+	// output the account ids in ascending order.
 	index.writeKeys();
 
-	// Clear the status flags for the database file.
+	// clear the status flags for the database file.
 	acctFile.clear();
 
-	// Read an account ID from the keyboard and output the
+	// read an account id from the keyboard and output the
 	// corresponding record.
 	while (true)
 	{
-		cout << endl << "Enter account ID : ";
+		cout << "\nEnter account ID : ";
 		cin >> searchID;
 		if (index.retrieve(searchID, entry))
 		{
 			recNum = entry.recNum;
-			// Move to the corresponding record in the database file using the
-			// seekg() function.
+
 			acctFile.seekg(recNum * bytesPerRecord);
 
-			// Read in the record.
-			acctFile >> acctRec.acctID >> acctRec.firstName
-				>> acctRec.lastName >> acctRec.balance;
+			acctFile >> acctRec.acctID >> acctRec.firstName >> acctRec.lastName >> acctRec.balance;
 
-			// Display the record.
 			cout << recNum << " : " << acctRec.acctID << " "
 				<< acctRec.firstName << " " << acctRec.lastName << " "
 				<< acctRec.balance << endl;
 		}
 		else
-			cout << "Not found" << endl;
+			cout << "Cannot find" << endl;
 	}
+
 }

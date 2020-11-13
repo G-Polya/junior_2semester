@@ -24,6 +24,9 @@
     <ClCompile Include="getdbrec.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="test11.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bstree.h">
