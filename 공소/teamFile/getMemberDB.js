@@ -9,19 +9,19 @@ const pool = mariadb.createPool({
     connectionLimit: 1 
 });
 
-function buildTable(data) {
-    let table = document.getElementById('table1');
+// function buildTable(data) {
+//     let table = document.getElementById('table1');
 
-    for(let i = 0; i < data.length; i++)
-    {
-        let row = `<tr>
-                    <td>${data[i].id}</td>
-                    <td>${data[i].firstname}</td>
-                    <td>${data[i].lastname}</td>
-                   <tr>}`
-        table.innerHTML += row;
-    }
-}
+//     for(let i = 0; i < data.length; i++)
+//     {
+//         let row = `<tr>
+//                     <td>${data[i].id}</td>
+//                     <td>${data[i].firstname}</td>
+//                     <td>${data[i].lastname}</td>
+//                    <tr>}`
+//         table.innerHTML += row;
+//     }
+// }
 
 pool.getConnection((err, conn) => {
   if (err) throw err;
