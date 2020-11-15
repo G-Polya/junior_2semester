@@ -35,17 +35,18 @@ enum tsymbol
 	/* 0          1            2         3            4          5     */
 	tand,      tlparen,     trparen,   tmul,    tmulAssign,    tplus,
 	/* 6          7            8         9           10         11     */
-	tinc,   taddAssign,      tcomma, tminus,        tdec, tsubAssign,
+	tinc,   taddAssign,      tcomma,   tminus,        tdec, tsubAssign,
 	/* 12         13          14        15           16         17     */
-	tdiv,   tdivAssign,  tsemicolon,  tless,      tlesse,    tassign,
+	tdiv,   tdivAssign,      tcolon, tsemicolon,    tless,    tlesse,
 	/* 18         19          20        21           22         23     */
-	tequal,     tgreat,   tgreate, tlbracket, trbracket, teof,
+	tassign,    tequal,      tgreat,   tgreate,    tlbracket, trbracket,
 	/* 24         25          26        27           28         29     */
-	//   ...........    word symbols ................................. //
+	teof,       tbreak,      tcase,    tconst,     tcontinue, tdefault,
 	/* 30         31          32        33           34         35     */
-	tconst,      telse,       tif,     tint,     treturn,     tvoid,
-	/* 36         37          38        39                             */
-	twhile, tlbrace, tor, trbrace
+	tdo,        telse,       tfor ,     tif,       tint,      treturn,
+	/* 36         37          38        39           40         41     */
+	tswitch,    tvoid,      twhile,   tlbrace,       tor,     trbrace,
+	/* 42         43          44        45           46         47     */
 };
 
 const char *tokenName[] = 
@@ -56,15 +57,16 @@ const char *tokenName[] =
 	/* 6          7           8         9         10         11        */
 	"++",       "+=",      ",",       "-",      "--",	    "-=",
 	/* 12         13         14        15         16         17        */
-	"/",        "/=",      ";",       "<",      "<=",       "=",
+	"/",        "/=",      ":",       ";",      "<",       "<=",
 	/* 18         19         20        21         22         23        */
-	"==",       ">",       ">=",      "[",      "]",        "eof",
+	"=",       "==",       ">",       ">=",      "[",        "]",
 	/* 24         25         26        27         28         29        */
-	//   ...........    word symbols ................................. //
+	"_|_",    "break",    "case",    "const", "continue", "default",
 	/* 30         31         32        33         34         35        */
-	"const",    "else",     "if",      "int",     "return",  "void",
-	/* 36         37         38        39                              */
-	"while",    "{",        "||",       "}"
+	"do" ,     "else",     "for",      "if",     "int",    "return",
+	/* 36         37         38        39         40         41        */
+	"switch",    "void", "while",     "{",        "||",        "}"
+	/* 42         43          44        45           46         47     */
 };
 
 const char *keyword[NO_KEYWORD] = 
