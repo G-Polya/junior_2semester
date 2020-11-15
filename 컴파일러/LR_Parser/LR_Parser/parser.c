@@ -377,7 +377,8 @@ void parser()
 	{
 		currentState = stateStack[sp];
 		entry = parsingTable[currentState][token.number];
-		if (entry >0) { //shift action
+		if (entry >0) 
+		{ //shift action
 			sp++;
 			if (sp > PS_SIZE) 
 			{
