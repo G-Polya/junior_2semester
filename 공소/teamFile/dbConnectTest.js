@@ -22,19 +22,3 @@ pool.getConnection((err, conn) => {
 
     conn.end(); //release to pool
 });
-// ```
-// CREATE TABLE fileLocation
-// ( 
-//     number int primary key, 
-//     directory varchar(30), 
-//     fileName varchar(30)
-// );
-
-
-// insert into fileLocation (number, directory, fileName) VALUE
-// (
-//     1,
-//     "C:\Users\wlska\Documents\junior_2semester\공소\teamFile",
-//     "testFile"
-// );
-// ```

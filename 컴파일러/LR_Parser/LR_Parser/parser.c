@@ -31,19 +31,19 @@ char filename[FNAME_SIZE];
 enum tsymbol 
 {
 	tnull = -1,
-	tnot, tnotequ, tremainder, tremAssign, tident, tnumber,
+	tnot,      tnotequ,    tremainder, tremAssign,  tident,  tnumber,
 	/* 0          1            2         3            4          5     */
-	tand, tlparen, trparen, tmul, tmulAssign, tplus,
+	tand,      tlparen,     trparen,   tmul,    tmulAssign,    tplus,
 	/* 6          7            8         9           10         11     */
-	tinc, taddAssign, tcomma, tminus, tdec, tsubAssign,
+	tinc,   taddAssign,      tcomma, tminus,        tdec, tsubAssign,
 	/* 12         13          14        15           16         17     */
-	tdiv, tdivAssign, tsemicolon, tless, tlesse, tassign,
+	tdiv,   tdivAssign,  tsemicolon,  tless,      tlesse,    tassign,
 	/* 18         19          20        21           22         23     */
-	tequal, tgreat, tgreate, tlbracket, trbracket, teof,
+	tequal,     tgreat,   tgreate, tlbracket, trbracket, teof,
 	/* 24         25          26        27           28         29     */
 	//   ...........    word symbols ................................. //
 	/* 30         31          32        33           34         35     */
-	tconst, telse, tif, tint, treturn, tvoid,
+	tconst,      telse,       tif,     tint,     treturn,     tvoid,
 	/* 36         37          38        39                             */
 	twhile, tlbrace, tor, trbrace
 };
@@ -361,7 +361,8 @@ int hexValue(char ch)
 
 
 // parser part
-void parser() {
+void parser()
+{
 	extern int parsingTable[NO_STATES][NO_SYMBOLS + 1];
 	extern int leftSymbol[NO_RULES + 1], rightLength[NO_RULES + 1];
 	int entry, ruleNumber, lhs;
@@ -378,7 +379,7 @@ void parser() {
 			sp++;
 			if (sp > PS_SIZE) 
 			{
-				printf("ciritical compiler error: parsing statck overflow");
+				printf("critical compiler error: parsing statck overflow");
 				exit(1);
 			}
 			symbolStack[sp] = token.number;
@@ -388,7 +389,8 @@ void parser() {
 		else if (entry < 0)
 		{ //reduce action
 			ruleNumber = -entry;
-			if (ruleNumber == GOAL_RULE) { //accept action
+			if (ruleNumber == GOAL_RULE)
+			{ //accept action
 				if (errcnt == 0) printf(" *** valid source ***\n");
 				else printf(" *** error in source : %d\n", errcnt);
 				return;
