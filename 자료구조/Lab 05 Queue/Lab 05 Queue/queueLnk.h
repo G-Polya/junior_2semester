@@ -18,6 +18,8 @@ private:
     // Constructor
 	QueueNode(const DT& nodeData, QueueNode* nextPtr);
 
+	QueueNode()
+	{}
     // Data members
     DT dataItem;         // Queue data item
     QueueNode* next;     // Pointer to the next element
@@ -31,7 +33,6 @@ template < class DT >
 class Queue
 {
 public:
-
     // Constructor
     Queue(int ignored = 0);
 

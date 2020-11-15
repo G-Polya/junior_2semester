@@ -10,6 +10,7 @@ QueueNode<DT>::QueueNode(const DT& nodeData, QueueNode* nextPtr)
 	next = nextPtr;
 }
 
+
 template <class DT>
 Queue<DT>::Queue(int ignored)
 {
@@ -28,22 +29,22 @@ Queue<DT>::~Queue()
 template<class DT>
 void Queue<DT>::enqueue(const DT& newData)        // Enqueue data element
 {
-	QueueNode<DT>* newNode = NULL;
 	if (isFull())
 		cout << "Queue is Full" << endl;
 	else
 	{
-		newNode = new QueueNode<DT>(newData, NULL);
+		QueueNode<DT>* newNode = new QueueNode<DT>(newData, NULL);
 
-		if (isEmpty())
+		if (isEmpty())		// 비어있으면 front, rear 모두 newNode를 가리키게 함
 		{
 			front = newNode;
 			rear = newNode;
 		}
 		else
 		{
-			rear->next = newNode;
-			rear = newNode;
+			
+			rear->next = newNode; // 비어있지 않으면 rear의 다음이 newNode를 가리키게 하고
+			rear = newNode;       // rear의 위치를 newNode로 이동(다음으로 이동)
 		}
 		newNode = NULL;
 		
@@ -53,25 +54,23 @@ void Queue<DT>::enqueue(const DT& newData)        // Enqueue data element
 template<class DT>
 DT Queue<DT>::dequeue()                             // Dequeue data element
 {
-	QueueNode<DT>* cursor = NULL;
-	DT data;
 	if (isEmpty())
 		cout << "Queue is Empty" << endl;
 	else
 	{
-		cursor = front;
-		data = front->dataItem;
+		QueueNode<DT>* temp = front;  // 삭제될 노드를 가리키는 temp
+		DT data = temp->dataItem;
 
-		if (front == rear)
+		if (front == rear)			// queue에 원소가 1개(front) 남음 
 		{
 			front = NULL;
 			rear = NULL;
 		}
 		else
-			front = front->next;
+			front = front->next;		// 다음으로 front 위치 이동
 		
-		delete cursor;
-		cursor = NULL;
+		delete temp;		// 노드 삭제
+		temp = NULL;
 
 		return data;
 	}
@@ -93,18 +92,25 @@ bool Queue<DT>::isEmpty() const                    // Queue is empty
 template<class DT>
 bool Queue<DT>::isFull() const                     // Queue is full
 {
-	return false;
+	QueueNode<DT>* ptr = new QueueNode<DT>();
+	if (ptr == NULL)
+		return true;
+	else
+	{
+		delete ptr;
+		return false;
+	}
 }
 
 template<class DT>
 void Queue<DT>::showStructure() const
 {
-	QueueNode<DT>* cursor;
+	
 	if (isEmpty())
 		cout << "Empty Queue" << endl;
 	else
 	{
-		for (cursor = front; cursor != NULL; cursor = cursor->next)
+		for (auto cursor = front; cursor != NULL; cursor = cursor->next)
 			cout<< cursor->dataItem << "\t";
 		
 		cout << endl;
@@ -114,12 +120,11 @@ void Queue<DT>::showStructure() const
 template<class DT>
 void Queue<DT>::putFront(const DT& newDataItem) //Lab 2
 {
-	QueueNode<DT>* newNode = NULL;
 	if (isFull())
 		cout << "Queue is Full" << endl;
 	else
 	{
-		newNode = new QueueNode<DT>(newDataItem, NULL);
+		QueueNode<DT>* newNode = new QueueNode<DT>(newDataItem, NULL);
 		if (isEmpty())
 		{
 			front = newNode;
@@ -127,8 +132,8 @@ void Queue<DT>::putFront(const DT& newDataItem) //Lab 2
 		}
 		else
 		{
-			newNode->next = front;
-			front = newNode;
+			newNode->next = front;	// newNode의 다음을 현재의 front로 두고
+			front = newNode;		// front위치를 newNode로 옮김
 		}
 	}
 }
@@ -136,31 +141,30 @@ void Queue<DT>::putFront(const DT& newDataItem) //Lab 2
 template <class DT>
 DT Queue<DT>::getRear()
 {
-	QueueNode<DT>* temp = NULL;
-	QueueNode<DT>* prior = NULL;
 	DT data;
 
 	if (isEmpty())
 		cout << "Queue is Empty" << endl;
 	else
 	{
-		temp = rear;
-		data = rear->dataItem;
+		QueueNode<DT>* temp = rear; // 삭제될 노드를 가리키는 temp
+		data = temp->dataItem;
 
-		if (front == rear)
+		if (front == rear)		// queue에 노드하나만 남았으면
 		{
 			front = NULL;
 			rear = NULL;
 		}
 		else
 		{
-			prior = front;
+			QueueNode<DT>* prior = front;
 
 			while (prior->next != rear)
-				prior = prior->next;
+				prior = prior->next;		// prior는 rear 바로 직전 노드가 된다. 
 
-			rear = prior;
+			rear = prior;			// rear 위치를 바로 직전 노드로 이동
 			rear->next = NULL;
+			prior = NULL;
 		}
 
 		delete temp;

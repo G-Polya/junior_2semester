@@ -1,0 +1,54 @@
+Project2#testcase
+
+P Sam
+P Liza
+P Mark
+P Amy
+
+F Liza Nonperson
+F Liza Amy
+F Liza Mark
+F Amy Sam
+
+L Liza
+L Amy
+
+U Liza Amy
+L Amy
+
+Q Liza Mark
+
+X 
+********************************
+
+채점 기준은 아래와 같습니다.
+
+P Sam
+P Liza
+P Mark
+P Amy            ->P동작오류 -8
+
+F Liza Nonperson ->동작시 감점 -5
+F Liza Amy
+F Liza Mark
+F Amy Sam
+
+L Liza          ->L 동작에러 -5
+출력->Amy Mark
+
+L Amy 
+출력->Liza Sam
+
+U Liza Amy      
+L Amy           ->U 동작에러 -5
+출력->Sam
+
+Q Liza Mark     ->Q 동작에러 -5
+->Yes
+
+X               ->미동작시 -2
+
+컴파일오류 -15
+프로그램 실행도중 에러로 인한 종료 -8
+
+프로그램 동작 미작성 -2
