@@ -1,0 +1,109 @@
+Enter the number of priority levels : 2
+Enter the length of time to run the simulator : 10
+
+Current minute = 0
+No task was added this time
+
+
+Empty heap
+
+Current minute = 1
+Adding 2 tasks
+
+
+size = 2
+0       1       2       3       4       5       6       7       8       9
+1       0
+
+ 1\
+         0
+
+Current minute = 2
+Task Dequeued
+This task's priority: 1
+This task was arrived at 1, and waited for 1 minutes.
+Adding 2 tasks
+
+
+size = 3
+0       1       2       3       4       5       6       7       8       9
+1       0       0
+
+         0
+ 1<
+         0
+
+Current minute = 3
+Task Dequeued
+This task's priority: 1
+This task was arrived at 2, and waited for 1 minutes.
+No task was added this time
+
+
+size = 2
+0       1       2       3       4       5       6       7       8       9
+0       0
+
+ 0\
+         0
+
+Current minute = 4
+Task Dequeued
+This task's priority: 0
+This task was arrived at 1, and waited for 3 minutes.
+Adding 1 task
+
+
+size = 2
+0       1       2       3       4       5       6       7       8       9
+0       0
+
+ 0\
+         0
+
+Current minute = 5
+Task Dequeued
+This task's priority: 0
+This task was arrived at 2, and waited for 3 minutes.
+No task was added this time
+
+
+size = 1
+0       1       2       3       4       5       6       7       8       9
+0
+
+ 0
+
+Current minute = 6
+Task Dequeued
+This task's priority: 0
+This task was arrived at 4, and waited for 2 minutes.
+No task was added this time
+
+
+Empty heap
+
+Current minute = 7
+No task was added this time
+
+
+Empty heap
+
+Current minute = 8
+No task was added this time
+
+
+Empty heap
+
+Current minute = 9
+Adding 2 tasks
+
+
+size = 2
+0       1       2       3       4       5       6       7       8       9
+1       0
+
+ 1\
+         0
+Longest wait for any low-priority(0) task : 3
+Longest wait for any hight-priority(1) task : 1

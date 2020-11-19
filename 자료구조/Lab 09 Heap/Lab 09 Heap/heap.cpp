@@ -66,6 +66,7 @@ DT Heap<DT>::removeMax()
 	{
 		DT result;
 		result.setPty(0);
+		cout << "Heap is Empty" << endl;
 		return result;
 	}
 	else
@@ -78,6 +79,7 @@ DT Heap<DT>::removeMax()
 		int btm = size - 1;
 
 		ReheapDown(root, btm);
+		return result;
 	}
 }
 template<class DT>

@@ -1,0 +1,339 @@
+
+Enter the number of priority levels : 2
+Enter the length of time to run the simulator : 30
+
+Current minute = 0
+No task was added this time
+
+
+Empty heap
+
+Current minute = 1
+Adding 2 tasks
+
+
+size = 2
+0       1       2       3       4       5       6       7       8       9
+1       0
+
+ 1\
+         0
+
+Current minute = 2
+Task Dequeued
+This task's priority: 1
+This task was arrived at 1, and waited for 1 minutes.
+Adding 2 tasks
+
+
+size = 3
+0       1       2       3       4       5       6       7       8       9
+1       0       0
+
+         0
+ 1<
+         0
+
+Current minute = 3
+Task Dequeued
+This task's priority: 1
+This task was arrived at 2, and waited for 1 minutes.
+No task was added this time
+
+
+size = 2
+0       1       2       3       4       5       6       7       8       9
+0       0
+
+ 0\
+         0
+
+Current minute = 4
+Task Dequeued
+This task's priority: 0
+This task was arrived at 1, and waited for 3 minutes.
+Adding 1 task
+
+
+size = 2
+0       1       2       3       4       5       6       7       8       9
+0       0
+
+ 0\
+         0
+
+Current minute = 5
+Task Dequeued
+This task's priority: 0
+This task was arrived at 2, and waited for 3 minutes.
+No task was added this time
+
+
+size = 1
+0       1       2       3       4       5       6       7       8       9
+0
+
+ 0
+
+Current minute = 6
+Task Dequeued
+This task's priority: 0
+This task was arrived at 4, and waited for 2 minutes.
+No task was added this time
+
+
+Empty heap
+
+Current minute = 7
+No task was added this time
+
+
+Empty heap
+
+Current minute = 8
+No task was added this time
+
+
+Empty heap
+
+Current minute = 9
+Adding 2 tasks
+
+
+size = 2
+0       1       2       3       4       5       6       7       8       9
+1       0
+
+ 1\
+         0
+
+Current minute = 10
+Task Dequeued
+This task's priority: 1
+This task was arrived at 9, and waited for 1 minutes.
+Adding 1 task
+
+
+size = 2
+0       1       2       3       4       5       6       7       8       9
+0       0
+
+ 0\
+         0
+
+Current minute = 11
+Task Dequeued
+This task's priority: 0
+This task was arrived at 9, and waited for 2 minutes.
+No task was added this time
+
+
+size = 1
+0       1       2       3       4       5       6       7       8       9
+0
+
+ 0
+
+Current minute = 12
+Task Dequeued
+This task's priority: 0
+This task was arrived at 10, and waited for 2 minutes.
+No task was added this time
+
+
+Empty heap
+
+Current minute = 13
+No task was added this time
+
+
+Empty heap
+
+Current minute = 14
+Adding 1 task
+
+
+size = 1
+0       1       2       3       4       5       6       7       8       9
+1
+
+ 1
+
+Current minute = 15
+Task Dequeued
+This task's priority: 1
+This task was arrived at 14, and waited for 1 minutes.
+Adding 1 task
+
+
+size = 1
+0       1       2       3       4       5       6       7       8       9
+1
+
+ 1
+
+Current minute = 16
+Task Dequeued
+This task's priority: 1
+This task was arrived at 15, and waited for 1 minutes.
+No task was added this time
+
+
+Empty heap
+
+Current minute = 17
+No task was added this time
+
+
+Empty heap
+
+Current minute = 18
+Adding 2 tasks
+
+
+size = 2
+0       1       2       3       4       5       6       7       8       9
+1       0
+
+ 1\
+         0
+
+Current minute = 19
+Task Dequeued
+This task's priority: 1
+This task was arrived at 18, and waited for 1 minutes.
+Adding 2 tasks
+
+
+size = 3
+0       1       2       3       4       5       6       7       8       9
+1       0       1
+
+         1
+ 1<
+         0
+
+Current minute = 20
+Task Dequeued
+This task's priority: 1
+This task was arrived at 19, and waited for 1 minutes.
+No task was added this time
+
+
+size = 2
+0       1       2       3       4       5       6       7       8       9
+1       0
+
+ 1\
+         0
+
+Current minute = 21
+Task Dequeued
+This task's priority: 1
+This task was arrived at 19, and waited for 2 minutes.
+No task was added this time
+
+
+size = 1
+0       1       2       3       4       5       6       7       8       9
+0
+
+ 0
+
+Current minute = 22
+Task Dequeued
+This task's priority: 0
+This task was arrived at 18, and waited for 4 minutes.
+Adding 2 tasks
+
+
+size = 2
+0       1       2       3       4       5       6       7       8       9
+0       0
+
+ 0\
+         0
+
+Current minute = 23
+Task Dequeued
+This task's priority: 0
+This task was arrived at 22, and waited for 1 minutes.
+No task was added this time
+
+
+size = 1
+0       1       2       3       4       5       6       7       8       9
+0
+
+ 0
+
+Current minute = 24
+Task Dequeued
+This task's priority: 0
+This task was arrived at 22, and waited for 2 minutes.
+No task was added this time
+
+
+Empty heap
+
+Current minute = 25
+No task was added this time
+
+
+Empty heap
+
+Current minute = 26
+Adding 2 tasks
+
+
+size = 2
+0       1       2       3       4       5       6       7       8       9
+1       0
+
+ 1\
+         0
+
+Current minute = 27
+Task Dequeued
+This task's priority: 1
+This task was arrived at 26, and waited for 1 minutes.
+Adding 2 tasks
+
+
+size = 3
+0       1       2       3       4       5       6       7       8       9
+1       0       0
+
+         0
+ 1<
+         0
+
+Current minute = 28
+Task Dequeued
+This task's priority: 1
+This task was arrived at 27, and waited for 1 minutes.
+No task was added this time
+
+
+size = 2
+0       1       2       3       4       5       6       7       8       9
+0       0
+
+ 0\
+         0
+
+Current minute = 29
+Task Dequeued
+This task's priority: 0
+This task was arrived at 26, and waited for 3 minutes.
+Adding 1 task
+
+
+size = 2
+0       1       2       3       4       5       6       7       8       9
+1       0
+
+ 1\
+         0
+Longest wait for any low-priority(0) task : 4
+Longest wait for any hight-priority(1) task : 2

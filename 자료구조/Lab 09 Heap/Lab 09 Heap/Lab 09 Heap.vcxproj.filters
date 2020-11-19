@@ -15,16 +15,25 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="testb.cpp">
+    <ClCompile Include="heap.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="heap.cpp">
+    <ClCompile Include="ossim.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ptyqueue.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="testb.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ptyqueue.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
     <ClInclude Include="heap.h">
-      <Filter>소스 파일</Filter>
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

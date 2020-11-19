@@ -41,7 +41,9 @@ class Heap
 
     // Recursive partner of the showStructure() function
     void showSubtree ( int index, int level ) const;
-	
+	void ReheapUp(int root, int btm);
+	void ReheapDown(int root, int btm);
+
     // Data members
     int maxSize,   // Maximum number of elements in the heap
         size;      // Actual number of elements in the heap
