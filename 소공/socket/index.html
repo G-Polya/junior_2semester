@@ -1,30 +1,36 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>signinPage</title>
-  </head>
-  <body>
-    로그인 페이지입니다!
-    <br><br><br>
-
-    ID : <input type="text" placeholder="ID를 입력하세요" id="userid"><br> <!--value=""로 넣으면 값이 직접 입력되는거다. 누르면 지워지는게 아님. -->
-    비밀번호 : <input type="password" placeholder="비밀번호" id="userpw">
-    <input type="button" value="로그인" id="signinButton">
-    <input type="button" value="회원 가입" onclick="location.href='register.html'">
-
-
-  </body>
-
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Socket.io Chat Example</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <h3>Socket.io Chat Example</h3>
+    <form class="form-inline">
+      <div class="form-group">
+        <label for="msgForm">ID: </label>
+        <input type="text" class="form-control" id="msgForm">
+        <label for="msgForm">Password: </label>
+        <input type="text" class="form-control" id="pwForm">
+      </div>
+      <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+    <div id="chatLogs"></div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
   <script>
-     $(function(){
+  $(function(){
     // socket.io 서버에 접속한다
     var socket = io();
 
     // 서버로 자신의 정보를 전송한다.
     socket.emit("login", {
       // name: "ungmo2",
-      userid: document.querySelector('#userid').textContent
+      name: makeRandomName(),
+      userid: "ungmo2@gmail.com"
     });
 
     // 서버로부터의 메시지가 수신되면
@@ -56,8 +62,6 @@
       return name;
     }
   });
-  
-
-
   </script>
-
+</body>
+</html>

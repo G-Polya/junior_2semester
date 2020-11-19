@@ -6,7 +6,8 @@ CREATE TABLE ACCOUNT
 	userNum               INT  NOT NULL ,
 	isManager             BOOLEAN  NOT NULL, 
 
-    primary key (userId, userNum)
+    primary key (userId, userPw),
+	unique(userNum)
 );
 
 CREATE TABLE FINANCE
@@ -77,5 +78,14 @@ CREATE TABLE REVIEW
     constraint reviewConstraint foreign key(userId, userNum) references HISTORY(userId, userNum)
 );
 
+
+INSERT INTO account (userId, name, userPw, userNum,isManager) VALUES
+(
+	"tollea1234",
+	"Kim",
+	"1234",
+	1,
+	1
+);
 
 
