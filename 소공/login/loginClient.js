@@ -1,7 +1,7 @@
 var objPeople = [
 	{ // Object @ 0 index
-		username: "sam",
-		password: "codify"
+		username: "tollea1234",
+		password: "skyss123"
 	},
 	{ // Object @ 1 index
 		username: "matt",
@@ -25,10 +25,15 @@ function getInfo() {
 		if(username == objPeople[i].username && password == objPeople[i].password) {
 			console.log(username + " is logged in!!!")
             // stop the function if this is found to be true
-            const success = document.createElement('label');
-            success.textContent = username + " is logged in!!"
-            document.getElementById("login").appendChild(success);
-            return
+            const login_msg = document.createElement("button");
+            login_msg.textContent = username + " is logged in!! Click this for next page"
+			login_msg.addEventListener("click", (e)=>{
+				window.location.href="next.html"
+			})
+			
+			document.getElementById("login").appendChild(login_msg);
+			
+			
 		}
 	}
 	console.log("incorrect username or password")

@@ -60,18 +60,31 @@ document.getElementById("btnJoin").addEventListener("click", (e)=>{
 
     const name = document.getElementById("name").value
 
-    if(flag)
-    {
-        if(pw1 == pw2){
-            const newUser = {Id:id, password:pw1}
-            objPeople.push(newUser)
-            const successMsg = document.createElement('label')
-            successMsg.textContent = "회원가입 성공"
-            document.getElementById('btn_area').appendChild(successMsg)
-            
+    const successMsg = document.getElementById("successMsg")
+    if(id != "" && pw1 != "" && pw2!=""){
+        if(flag){
+            if(pw1 == pw2){
+                const newUser = {Id:id, password:pw1}
+                objPeople.push(newUser)
+                
+                successMsg.innerHTML= "회원가입 성공"
+                const back_btn = document.createElement("button");
+                back_btn.textContent="로그인 페이지로"
+                back_btn.addEventListener("click", (e)=>{
+                    window.location.href="login.html"
+                })
 
-            
-            // 디비에 저장...
+                document.getElementById("successMsg").appendChild(back_btn)
+
+                // 디비에 저장...
+            }else {
+                successMsg.innerHTML= "비밀번호가 같지 않습니다."
+            }
+        } else {
+            successMsg.innerHTML= "ID가 중복됩니다"
         }
+    } else{
+        successMsg.innerHTML= "빈칸을 채워주십시오"
     }
+   
 })

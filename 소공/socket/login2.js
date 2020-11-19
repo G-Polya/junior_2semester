@@ -45,30 +45,7 @@ var server = http.createServer(app).listen(app.get('port'))
 
 app.get('/', function(req,res){
 
-    var _url = req.url;
-    var queryData = url.parse(_url, true).query;
-    var pathname = url.parse(_url,true).pathname;
-    if(pathname==="/")
-    {
-        var html = template.HTML()
-        res.writeHead(200)
-        res.end(html)
-    } else if(pathname==="/socket") {
-        var html = template.HTML();
-        var body="";
-        req.on("data", function(data){
-            body = body+data;
-        })
-    }
-
-    req.on("end", function(){
-        var post = qs.parse(body);
-        var userid = post.userid
-        var userpw = post.userpw
-    
-        console.log(userid)
-    })
-
+ 
 
     // function getInfo() {
     //     var username = 
@@ -89,6 +66,44 @@ app.get('/', function(req,res){
     // }
 
     var title="Login";
+    var template = ` 
+    <!DOCTYPE html>
+    <html>
+    <head>	
+        <meta charset="UTF-8">
+        <title>JavaScript Simple Login System</title>
+        <link rel="shortcut icon" href="favicon.ico">
+    </head>
+    <body>
+    로그인 페이지입니다!
+    <br><br><br>
+    
+    
+        <div class="login__container">
+            <div id="login">
+                <form>
+                    ID: <input type="text" id="username" placeholder="Choose Username" name="userid">
+                    
+                    <br>
+                    비밀번호: <input type="text" id="password" placeholer="Choose Password" name="userpw">
+                    <button type="button" value="로그인" id="login_btn">로그인</button>
+                    <button type="button" value="회원가입" id="register_btn">회원가입</button>
+                   
+                </form>
+            </div>
+            
+        </div>
+        
+    
+        <script>
+        $()
+    
+        </script>
+    </body>
+    </html>
+    `;
+    res.writeHead(200)
+    res.end(template)
 
 
 
