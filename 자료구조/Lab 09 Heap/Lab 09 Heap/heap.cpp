@@ -56,22 +56,6 @@ void Heap<DT>::insert(const DT& newElement)
 	}
 }
 
-template<class DT>
-void Heap<DT>::ReheapUp(int root, int btm)
-{
-	int parent;
-	if (btm > root)
-	{
-		parent = (btm - 1) / 2;
-		if (dataItems[parent].pty() < dataItems[btm].pty())
-		{
-			DT temp = dataItems[parent];
-			dataItems[parent] = dataItems[btm];
-			dataItems[btm] = temp;
-			ReheapUp(root, parent);
-		}
-	}
-}
 
 template < class DT >
 DT Heap<DT>::removeMax()
@@ -89,14 +73,33 @@ DT Heap<DT>::removeMax()
 		size--;
 
 		int parent = 0;
-		int 
+		int child = parent * 2 + 1;		// 초기 max는 left로 설정
+
+		while (child < size)
+		{
+			if (child + 1 < size)
+				if (dataItems[child].pty() < dataItems[child + 1].pty())	// left가 right보다 작다면 max를 right로 설정
+					child++;
+
+			if (dataItems[parent].pty() < dataItems[child].pty())
+			{
+				DT temp = dataItems[parent];
+				dataItems[child] = dataItems[parent];
+				dataItems[parent] = temp;
+				parent = child;
+				child = parent * 2 + 1;
+			}
+			else
+				break;
+		}
+		return result;
 	}
 }
 
 template < class DT >
 void Heap<DT>::clear()
 {
-
+	size = 0;
 }
 
 //--------------------------------------------------------------------
