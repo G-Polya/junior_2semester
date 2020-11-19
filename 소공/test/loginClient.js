@@ -16,20 +16,25 @@ var objPeople = [
 
 
 
-function getInfo() {
-	var username = document.getElementById('username').value
-	var password = document.getElementById('password').value
+function sendInfo() {
+	let result = document.querySelector('.result')
+	let username = document.querySelector('#username')
+	let password = document.querySelector('#password')
 
-	for(var i = 0; i < objPeople.length; i++) {
-		// check is user input matches username and password of a current index of the objPeople array
-		if(username == objPeople[i].username && password == objPeople[i].password) {
-			console.log(username + " is logged in!!!")
-            // stop the function if this is found to be true
-            const success = document.createElement('label');
-            success.textContent = username + " is logged in!!"
-            document.getElementById("login").appendChild(success);
-            return
+	let xhr = new XMLHttpRequest()
+	let url = "registerServer.js"
+
+	xhr.open("POST", url, true)
+
+	xhr.setRequestHeader("Content-Type", "application/json")
+
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState === 4 && xhr.status === 200){
+			result.innerHTML = this.responseText;
 		}
 	}
-	console.log("incorrect username or password")
+
+	var data = JSON.stringify({"username":username.nodeValue, "password":password.value})
+
+	xhr.send(data);
 }
