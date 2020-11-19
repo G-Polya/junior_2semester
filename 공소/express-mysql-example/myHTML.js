@@ -101,18 +101,37 @@ app.get('/download/:id', function (req, res) {
     let filepath = './upload/' + rfilename;
     res.download(filepath);
 });
-
-var db=[];
+var groupName=[];
+var firstnames=[];
+var lastnames=[];
 
 var server = http.createServer(app).listen(app.get('port'), function () {
-    connection.query('SELECT firstname from mdl_user', (error, rows) => {
+    connection.query('SELECT name from mdl_groups', (error, rows) => {
         if (error) throw error;
         for (var i in rows){
-            db.push(rows[i].firstname);
+            groupName.push(rows[i].name);
         }
       });
- });
+    
+    connection.query(`select mdl_user.firstname, mdl_user.lastname 
+                    from mdl_user
+                    inner join mdl_groups_members on mdl_user.id=mdl_groups_members.userid;`, (error, rows) =>{
+                        if(error) throw error;
+                        for(var i in rows){
+                            firstnames.push(rows[i].firstname)
+                            lastnames.push(rows[i].lastname)
+                        }
+                    })
+      
+    }
+);
 
+ function showMembers(firstnames) {
+    const member_template = ``;
+    for(var i in firstnames.length){
+        
+    }
+ }
 
 
 
@@ -232,7 +251,7 @@ app.get('/', function (req, res) {
         <div class="middle-right">
     
           <div class="middle-right-1">
-            <label> ${db[0]}</label>
+            <label> ${groupName[0]}</label>
           </div>
     
         </div>
