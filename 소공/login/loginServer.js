@@ -1,53 +1,65 @@
-const mysql      = require('mysql');
-const dbconfig   = require('./config/database.js');
-const connection = mysql.createConnection(dbconfig);
-const express = require('express')
-const app = express()
-const http = require('http')
-
+var app = require('express')();
 app.set('port', 3100);
-const server = http.createServer(app).listen(app.get('port'))
+var server = require('http').createServer(app);
+// http server를 socket.io server로 upgrade한다
+var io = require('socket.io')(server);
 
+// localhost:3000으로 서버에 접속하면 클라이언트로 index.html을 전송한다
+app.get('/', function(req, res) {
+  res.sendFile(__dirname + '/index.html');
+});
 
-let sequenceNumberByClient = new Map();
+// connection event handler
+// connection이 수립되면 event handler function의 인자로 socket인 들어온다
+io.on('connection', function(socket) {
 
-server.on("connection", (socket)=>{
-    console.info(`Client connected [id=${socket.id}]`);
-    sequenceNumberByClient.set(socket,1);
+  // 접속한 클라이언트의 정보가 수신되면
+  socket.on('login', function(data) {
+    console.log('Client logged-in:\n name:' + data.name + '\n userid: ' + data.userid);
 
-    socket.on("disconnect", ()=>{
-        sequenceNumberByClient.delete(socket);
-        console.info(`Client gone [id=${socekt.id}]`)
-    })
-})
+    // socket에 클라이언트 정보를 저장한다
+    socket.name = data.name;
+    socket.userid = data.userid;
 
-setInterval(() =>{
-    for(const [client, sequenceNumber] of sequenceNumberByClient.entries()){
-        client.emit("seq-num", sequenceNumber);
-        sequenceNumberByClient.set(client, sequenceNumber+1);
-    }
-},1000);
+    // 접속된 모든 클라이언트에게 메시지를 전송한다
+    io.emit('login', data.name );
+  });
 
+  // 클라이언트로부터의 메시지가 수신되면
+  socket.on('chat', function(data) {
+    console.log('Message from %s: %s', socket.name, data.msg);
 
+    var msg = {
+      from: {
+        name: socket.name,
+        userid: socket.userid
+      },
+      msg: data.msg
+    };
 
-// const mariadb = require('mariadb/callback');
-// const pool = mariadb.createPool({
-//     host:'localhost',
-//     user:'root',
-//     password:'',
-//     database : 'nodejs_test',
-//     connectionLimit:1
-// });
+    // 메시지를 전송한 클라이언트를 제외한 모든 클라이언트에게 메시지를 전송한다
+    socket.broadcast.emit('chat', msg);
 
-// pool.getConnection((err, conn) => {
-//     if (err) throw err;
-  
-//       console.log("connected ! connection id is " + conn.threadId);
-      
-//       let idQuery = conn.query("select * from account", (err, result)=>{
-//           if(err) throw err;
-          
-//       });
-  
-//       conn.end(); //release to pool
-//   });
+    // 메시지를 전송한 클라이언트에게만 메시지를 전송한다
+    // socket.emit('s2c chat', msg);
+
+    // 접속된 모든 클라이언트에게 메시지를 전송한다
+    // io.emit('s2c chat', msg);
+
+    // 특정 클라이언트에게만 메시지를 전송한다
+    // io.to(id).emit('s2c chat', data);
+  });
+
+  // force client disconnect from server
+  socket.on('forceDisconnect', function() {
+    socket.disconnect();
+  })
+
+  socket.on('disconnect', function() {
+    console.log('user disconnected: ' + socket.name);
+  });
+});
+
+server.listen(app.get('port'), function() {
+  console.log('Socket IO server listening on port 3100');
+});

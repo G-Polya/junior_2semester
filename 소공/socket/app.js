@@ -1,7 +1,4 @@
-
 var app = require('express')();
-
-
 var server = require('http').createServer(app);
 // http server를 socket.io server로 upgrade한다
 var io = require('socket.io')(server);
@@ -14,6 +11,12 @@ app.get('/', function(req, res) {
 // connection event handler
 // connection이 수립되면 event handler function의 인자로 socket인 들어온다
 io.on('connection', function(socket) {
+  
+    socket.on('connects', (data) =>{
+        socket.name = data.id;
+        socket.userid = data.pw;
+    })
+
 
   // 접속한 클라이언트의 정보가 수신되면
   socket.on('login', function(data) {
@@ -29,14 +32,14 @@ io.on('connection', function(socket) {
 
   // 클라이언트로부터의 메시지가 수신되면
   socket.on('chat', function(data) {
-    console.log('Message from %s: %s', socket.name, data.msg);
+   // console.log('Message from %s: %s, %s');
 
     var msg = {
       from: {
         name: socket.name,
         userid: socket.userid
       },
-      msg: data.msg
+      id: data.id
     };
 
     // 메시지를 전송한 클라이언트를 제외한 모든 클라이언트에게 메시지를 전송한다

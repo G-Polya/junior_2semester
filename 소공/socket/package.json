@@ -2,7 +2,7 @@
   "name": "socketio-chat",
   "version": "1.0.0",
   "scripts": {
-    "start": "node app"
+    "start": "node login2"
   },
   "dependencies": {
     "express": "4.14.0",
