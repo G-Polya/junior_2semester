@@ -32,7 +32,7 @@ io.on('connection', function(socket) {
 
   // 클라이언트로부터의 메시지가 수신되면
   socket.on('chat', function(data) {
-   // console.log('Message from %s: %s, %s');
+    console.log('Message from %s: %s, %s');
 
     var msg = {
       from: {
