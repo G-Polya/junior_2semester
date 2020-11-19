@@ -37,22 +37,8 @@ void Heap<DT>::insert(const DT& newElement)
 	else
 	{
 		dataItems[size] = newElement;
-		
-		int btm = size;
-		int parent = (btm - 1) / 2;
-
-		while (btm > 0)
-		{
-			parent = (btm - 1) / 2;
-			if (dataItems[parent].pty() < dataItems[btm].pty())
-			{
-				DT temp = dataItems[parent];
-				dataItems[parent] = dataItems[btm];
-				dataItems[btm] = temp;
-			}
-			btm = (btm - 1) / 2;
-		}
 		size++;
+		ReheapUp(0, size - 1);
 	}
 }
 
@@ -88,15 +74,45 @@ DT Heap<DT>::removeMax()
 		dataItems[0] = dataItems[size - 1];
 		size--;
 
-		int parent = 0;
-		int 
+		int root = 0;
+		int btm = size - 1;
+
+		ReheapDown(root, btm);
+	}
+}
+template<class DT>
+void Heap<DT>::ReheapDown(int root, int btm)
+{
+	int maxChild, rightChild, leftChild;
+
+	leftChild = 2 * root + 1;
+	rightChild = 2 * root + 2;
+
+	if (leftChild <= btm)
+	{
+		if (leftChild == btm)
+			maxChild = leftChild;
+		else
+		{
+			if (dataItems[leftChild].pty() <= dataItems[rightChild].pty())
+				maxChild = rightChild;
+			else
+				maxChild = leftChild;
+		}
+
+		if (dataItems[root].pty() < dataItems[maxChild].pty())
+		{
+			DT temp = dataItems[maxChild];
+			dataItems[maxChild] = dataItems[root];
+			dataItems[root] = temp;
+		}
 	}
 }
 
 template < class DT >
 void Heap<DT>::clear()
 {
-
+	size = 0;
 }
 
 //--------------------------------------------------------------------
@@ -104,19 +120,13 @@ void Heap<DT>::clear()
 template < class DT >
 bool Heap<DT>::isEmpty() const
 {
-	if (size == 0)
-		return true;
-	else
-		return false;
+	return (size == 0);
 }
 
 template < class DT >
 bool Heap<DT>::isFull() const
 {
-	if (size == maxSize)
-		return true;
-	else
-		return false;
+	return (size == maxSize);
 }
 
 //--------------------------------------------------------------------
