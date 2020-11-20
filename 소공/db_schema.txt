@@ -6,7 +6,7 @@ CREATE TABLE ACCOUNT
 	userNum               INT  NOT NULL ,
 	isManager             BOOLEAN  NOT NULL, 
 
-    primary key (userId, userPw),
+    primary key (userId, userNum),
 	unique(userNum)
 );
 
@@ -89,3 +89,18 @@ INSERT INTO account (userId, name, userPw, userNum,isManager) VALUES
 );
 
 
+create table board
+(
+	ID 		 VARCHAR(20),
+	title	 VARCHAR(20),
+	content  VARCHAR(20),
+	wdate    INT
+);
+
+insert into board values
+(
+	"kim",
+	"HeeSu",
+	"hello",
+	10
+);

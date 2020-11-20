@@ -45,7 +45,9 @@ var server = http.createServer(app).listen(app.get('port'))
 
 app.get('/', function(req,res){
 
- 
+    
+    
+
 
     // function getInfo() {
     //     var username = 
