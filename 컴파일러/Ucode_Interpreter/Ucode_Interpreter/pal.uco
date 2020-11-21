@@ -49,7 +49,8 @@ $$2 nop
            lod            2     1
            call       write
 $$3 nop       
-           ret       
+           ret     
+           end  
            bgn            0
            ldp       
            call       main

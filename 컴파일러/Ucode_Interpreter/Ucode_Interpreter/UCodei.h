@@ -37,7 +37,7 @@ extern const char* opcodeName[NO_OPCODES];
 extern int      executable[NO_OPCODES];
 extern int      opcodeCycle[NO_OPCODES];
 extern       int dynamicCnt[NO_OPCODES];
-extern       int      staticCnt[NO_OPCODES];
+extern       int staticCnt[NO_OPCODES];
 
 extern Instruction instrBuf[MAXINSTR];
 extern ifstream inputFile;

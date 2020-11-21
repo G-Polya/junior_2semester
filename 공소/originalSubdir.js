@@ -232,13 +232,4 @@ app.get('/', function (req, res) {
 
 var db=[];
 
-var server = http.createServer(app).listen(app.get('port'), function () {
-    connection.query('SELECT firstname from mdl_user', (error, rows) => {
-        if (error) throw error;
-        for (var i in rows){
-            db.push(rows[i].firstname);
-        }
-      });
- });
-
 

@@ -20,26 +20,26 @@ var groupName=[];
 var firstnames=[];
 var lastnames=[];
 
-// var server = http.createServer(app).listen(app.get('port'), function () {
-//     connection.query('SELECT name from mdl_groups', (error, rows) => {
-//         if (error) throw error;
-//         for (var i in rows){
-//             groupName.push(rows[i].name);
-//         }
-//       });
+var server = http.createServer(app).listen(app.get('port'), function () {
+    connection.query('SELECT name from mdl_groups', (error, rows) => {
+        if (error) throw error;
+        for (var i in rows){
+            groupName.push(rows[i].name);
+        }
+      });
     
-//     connection.query(`select mdl_user.firstname, mdl_user.lastname 
-//                     from mdl_user
-//                     inner join mdl_groups_members on mdl_user.id=mdl_groups_members.userid;`, (error, rows) =>{
-//                         if(error) throw error;
-//                         for(var i in rows){
-//                             firstnames.push(rows[i].firstname)
-//                             lastnames.push(rows[i].lastname)
-//                         }
-//                     })
+    connection.query(`select mdl_user.firstname, mdl_user.lastname 
+                    from mdl_user
+                    inner join mdl_groups_members on mdl_user.id=mdl_groups_members.userid;`, (error, rows) =>{
+                        if(error) throw error;
+                        for(var i in rows){
+                            firstnames.push(rows[i].firstname)
+                            lastnames.push(rows[i].lastname)
+                        }
+                    })
       
-//     }
-// );
+    }
+);
 
 
 

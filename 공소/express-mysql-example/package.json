@@ -2,9 +2,9 @@
   "name": "express-mysql-example",
   "version": "0.0.1",
   "description": "",
-  "main": "subdir.js",
+  "main": "Silex2.js",
   "scripts": {
-    "start": "node subdir"
+    "start": "node Silex2"
   },
   "dependencies": {
     "express": "^4.17.1",

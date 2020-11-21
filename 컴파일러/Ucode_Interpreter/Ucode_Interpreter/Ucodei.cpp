@@ -52,6 +52,7 @@ ofstream outputFile;
 Instruction instrBuf[MAXINSTR];
 
 void main(int argc, char* argv[])
+//void main()
 {
 	Assemble sourceProgram;
 	Interpret binaryProgram;
@@ -64,9 +65,9 @@ void main(int argc, char* argv[])
 	outputFile.open(argv[2], ios::out);
 	//// if (!outputFile) errmsg("cannot open output file", argv[2]);
 	
-	//inputFile.open("bubble.uco", ios::in);
+	//inputFile.open("pal.uco", ios::in);
 
-	//outputFile.open("bubbleTest.txt", ios::out);
+	//outputFile.open("palTest.txt", ios::out);
 
 	sourceProgram.assemble();
 	binaryProgram.execute(sourceProgram.startAddr);
