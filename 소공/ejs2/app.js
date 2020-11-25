@@ -115,11 +115,11 @@ app.get('/login', function(req,res) {
     res.render('login.ejs');
 })
 
-app.get('/loginFunc',function (req, res) {
+app.get('/loginFunc', function (req, res) {
     let flag = false;
    // console.log(req)
     console.log(req.body)
-    res.render('login.ejs')
+    // res.render('login.ejs')
     if(flag){
         res.redirect("/next");
     }
