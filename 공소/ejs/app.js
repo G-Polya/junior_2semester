@@ -20,10 +20,12 @@ app.get('/', function(req,res){
 
 
 app.get('/team', function(req,res){
-    const sql = `select mdl_user.firstname, mdl_user.lastname 
-                 from mdl_user
-                 inner join mdl_groups_members on mdl_user.id=mdl_groups_members.userid
-                 where mdl_groups_members.groupid=1;`
+    let sql = `select mdl_groups.name,groupid, firstname, lastname
+               from mdl_groups_members, mdl_user,mdl_groups
+               where mdl_groups_members.userid = mdl_user.id and 
+                     mdl_groups_members.groupid=1 and 
+                     mdl_groups_members.groupid = mdl_groups.id;
+    `
     const names = []
     //const lastNames = []
     conn.query(sql, function(err, rows, fields){
@@ -32,10 +34,21 @@ app.get('/team', function(req,res){
             rows.forEach((element)=>{
                 names.push(element.firstname+element.lastname)
             })
-            //console.log(names)
-            res.render('team.ejs', {memberName:names})
+            console.log(rows[0].name)
+            res.render('team.ejs', {memberName:names,groupName:rows[0].name})
         }
     })
+
+
+})
+
+
+app.post('/store', function(req, res){
+    let temp = req.body;
+    console.log(temp.memo);
+    req.body.memo = temp.memo
+    console.log(req.body.memo)
+
 })
 
 app.listen(3200, ()=>console.log('Sever is running on port 3200...'))
