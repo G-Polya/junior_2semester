@@ -14,26 +14,22 @@
 
             <!-- content-->
             <div id="content">
-                <form action="/loginFunc" method="get"></form>
+                <form action="/registerFunc" method="get">
                     <div>
-                        <form action="/duplicateFunc" method="">
-                            <h3 class="join_title">
-                                <label for="id">아이디</label>
-                            </h3>
-                            <span id="box int_id">
-                                
-                                
+                        <h3 class="join_title">
+                            <label for="id">아이디</label>
+                        </h3>
+                        <span id="box int_id">
+                            <!-- <form action="/duplicateFunc" method="post"> -->
                                 <input type="text" name="id" class="int" maxlength="20">
-                                <div id="btn_area">
-                                    <button type="submit" value="중복확인" id="id_check">중복확인</button>
-                                    <label> <%=duplicateMsg%></label>
-                                </div>
-                            </span>
-                            <span class="error_next_box"></span>
-                        </form>
+                                <!-- <button type="submit" value="중복확인" id="id_check" formaction="/duplicateFunc" formenctype="post">중복확인</button> -->
+                                <label> <%=duplicateMsg%></label>
+                            <!-- </form> -->
+                        </span>
+                        <span class="error_next_box"></span>
                     </div>
 
-                      <!-- PW1 -->
+                <!-- PW1 -->
                     <div>
                         <h3 class="join_title"><label for="pswd1">비밀번호</label></h3>
                         <span class="box int_pass">
@@ -44,7 +40,7 @@
                         <span class="error_next_box"></span>
                     </div>
 
-                       <!-- PW2 -->
+                    <!-- PW2 -->
                     <div>
                         <h3 class="join_title"><label for="pswd2">비밀번호 재확인</label></h3>
                         <span class="box int_pass_check">
@@ -63,18 +59,24 @@
                         <span class="error_next_box"></span>
                     </div>
 
-                      <!-- BIRTH -->
+                    <!-- BIRTH -->
+                
+
+
+                    <!-- JOIN BTN-->
                     <div id="btn_area">
-                        <button type="submit" value="중복확인" id="id_check">가입하기</button>
-                        <label> <%=duplicateMsg%></label>
+                        <button type="submit" id="btnJoin">
+                            <span>가입하기</span>
+                        </button>
+                        <label id="successMsg"></label>
                     </div>
 
-
-                     <!-- JOIN BTN-->
-               
-                                    
                 </form>
-                <!-- ID -->         
+                <!-- ID -->
+               
+
+                
+
             </div> 
             <!-- content-->
 

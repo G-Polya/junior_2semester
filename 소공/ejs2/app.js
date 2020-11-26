@@ -42,6 +42,15 @@ app.post('/gotoRegister', function(req,res){
     res.redirect("/registerPage");
 })
 
+app.get('/registerFunc', function(req, res){
+    let _url = req.url
+    const queryData = url.parse(_url, true).query
+    let inputId = queryData.id
+    let inputPw = queryData.pw
+
+    console.log(inputId)
+})
+
 const idCheck = (id, people) => {
     for(var i = 0; i<people.length; i++){
         if(id == people[i].Id){
@@ -55,7 +64,7 @@ const idCheck = (id, people) => {
 
 
 
-app.get('/duplicateFunc', function(req, res){
+app.post('/duplicateFunc', function(req, res){
 
     const userInfo = []
 
