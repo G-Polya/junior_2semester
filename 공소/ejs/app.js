@@ -18,15 +18,12 @@ app.get('/', function(req,res){
     res.send("root")
 })
 
-app.get('/work', function(req,res){
-    res.render('work.ejs')
-})
-
 
 app.get('/team', function(req,res){
     const sql = `select mdl_user.firstname, mdl_user.lastname 
                  from mdl_user
-                 inner join mdl_groups_members on mdl_user.id=mdl_groups_members.userid;`
+                 inner join mdl_groups_members on mdl_user.id=mdl_groups_members.userid
+                 where mdl_groups_members.groupid=1;`
     const names = []
     //const lastNames = []
     conn.query(sql, function(err, rows, fields){
