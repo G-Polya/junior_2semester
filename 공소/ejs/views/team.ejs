@@ -466,7 +466,7 @@
       <% for(i = 0; i < memberName.length; i++) { %>  
       <div class="silex-element-content">
         <form action='/store' method='post'>
-          <textarea name="memo" style="width: 312px; height: 33.7px;">comment 입력</textarea>
+          <textarea name="memo" style="width: 312px; height: 33.7px;"><%=comment %></textarea>
           <!-- <input type="reset" value="재입력" style="float: right;"> -->
           <button type='submit'>저장</button>
         </form>

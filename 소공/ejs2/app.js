@@ -4,6 +4,7 @@ var app = express();
 var db_config = require(__dirname + '/config/database.js');
 var conn = db_config.init();
 var bodyParser = require('body-parser');
+var url = require("url")
 
 db_config.connect(conn);
 
@@ -31,14 +32,14 @@ app.get('/list', function (req, res) {
         else res.render('list.ejs', {list : rows});
     });
 });
-app.get('/register', function (req, res) {
+app.get('/registerPage', function (req, res) {
     let duplicateMsg=""
     res.render('register.ejs',{duplicateMsg:""})
 });
 
 
 app.post('/gotoRegister', function(req,res){
-    res.redirect("/register");
+    res.redirect("/registerPage");
 })
 
 const idCheck = (id, people) => {
@@ -52,7 +53,9 @@ const idCheck = (id, people) => {
     }
 }
 
-app.post('/duplicateFunc', function(req, res){
+
+
+app.get('/duplicateFunc', function(req, res){
 
     const userInfo = []
 
@@ -68,11 +71,16 @@ app.post('/duplicateFunc', function(req, res){
     }
     let duplicateMsg =""
 
-    const sql = "SELECT userid, userPw from account";
-    const body = req.body
-    const inputId = body.id
-    console.log(inputId)
-    
+    let sql = "SELECT userid, userPw from account";
+    // const body = req.body
+    // const inputId = body.id
+    // console.log(inputId)
+    let _url = req.url
+    const queryData = url.parse(_url, true).query
+    let inputId = queryData.id
+    let inputPw = queryData.pw
+
+
     conn.query(sql, function(err, rows, fields){
         if(err) throw err
         for(var i = 0; i < rows.length; i++){   
@@ -92,7 +100,6 @@ app.post('/duplicateFunc', function(req, res){
             if(flag){
                 res.render('register.ejs', {duplicateMsg:"중복되는 ID입니다."})
             } else {
-                body.id = inputId
                 res.render('register.ejs', {duplicateMsg:"사용해도 좋은 ID입니다"})
             }  
         }
@@ -107,23 +114,60 @@ app.post('/duplicateFunc', function(req, res){
  
 // });
 
+
+
 app.get('/next', function(req,res){
     res.render("next.ejs")
 })
 
 app.get('/login', function(req,res) {
-    res.render('login.ejs');
+    let loginMsg="hello"
+    res.render('login.ejs', {loginMsg:loginMsg});
 })
 
 app.get('/loginFunc', function (req, res) {
-    let flag = false;
-   // console.log(req)
-    console.log(req.body)
-    // res.render('login.ejs')
-    if(flag){
-        res.redirect("/next");
+  let _url = req.url
+  const queryData = url.parse(_url, true).query
+  let inputId = queryData.id
+  let inputPw = queryData.pw
+
+  const userInfo = []
+
+  const authenticate = function(userInfo, inputId, inputPw) {
+    for(var i = 0 ;i < userInfo.length; i++){
+        if(userInfo[i].userid === inputId && userInfo[i].userPw === inputPw){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
-  
+  }
+
+  const sql = "SELECT userid, userPw from account";
+  conn.query(sql, function(err, rows, fields){
+    if(err) throw err
+    else{
+        for(var i = 0; i < rows.length; i++){   
+            userInfo.push( {userid:rows[i].userid, userPw: rows[i].userPw})
+        }
+
+        const flag = authenticate(userInfo, inputId, inputPw)
+
+        if(inputId === "") {
+            res.render('login.ejs', {loginMsg:""})
+        } else {
+            if(flag){
+                res.render('login.ejs', {loginMsg:"로그인성공"})
+            } else {
+                res.render('login.ejs', {loginMsg:"등록되지 않은 ID 또는 PW입니다"})
+            }  
+        }
+
+    }
+    
+  })
+
 });
 
 app.listen(3100, () => console.log('Server is running on port 3100...'));
