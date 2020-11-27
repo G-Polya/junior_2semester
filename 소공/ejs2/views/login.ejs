@@ -1,20 +1,55 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>글쓰기</title>
+        <title>로그인</title>
+        <style type="text/css">
+            #title{
+                background-color: white;
+                position: absolute;
+                margin-bottom: 15px;
+                left:800px;
+                top : 50px
+            }
+
+            #id_container{
+                position: absolute;
+                left:800px;
+                top:100px
+            }
+            
+            #login_container{
+                position:absolute;
+                left : 800px;
+                top:150px
+            }
+
+            #register_container{
+                position:absolute;
+                left : 800px;
+                top:180px
+            }
+
+
+        </style>
     </head>
     <body>
         <div>
             <form action='/loginFunc' method='post'>
-            <h2>게시글 작성</h2>
-             ID : <input type='text' name='id' id="userid"><br>
-             PW : <input type='text' name='pw' id="userpw"><br>
-            
-                <button type="submit" value="로그인">로그인</button> 
+            <h2 id="title">로그인</h2>
+            <div id="id_container">
+                ID : <input type='text' name='id' id="userid"><br>
+                PW : <input type='text' name='pw' id="userpw"><br>
+            </div>
+            <div id="login_container">
+                <button type="submit" value="로그인" ">로그인</button> 
                 <label><%=loginMsg%></label>        
+            </div>
+                
             </form>
             <form action='/gotoRegister' method='post'>
-                <button type="submit" value="회원가입" >회원가입</button>
+                <div id="register_container">
+                    <button type="submit" value="회원가입" >회원가입</button>
+                </div>
             </form>
         </div>
         
