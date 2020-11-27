@@ -135,7 +135,7 @@ app.get('/next', function(req,res){
 
 app.get('/login', function(req,res) {
     let loginMsg=""
-    res.render('login.ejs', {loginMsg:loginMsg});
+    res.render('login.ejs', {loginMsg:loginMsg, loginFlag:false});
 })
 
 app.get('/loginFunc', function (req, res) {
@@ -170,11 +170,7 @@ app.get('/loginFunc', function (req, res) {
         if(inputId === "") {
             res.render('login.ejs', {loginMsg:""})
         } else {
-            if(flag){
-                res.render('login.ejs', {loginMsg:"로그인성공"})
-            } else {
-                res.render('login.ejs', {loginMsg:"등록되지 않은 ID 또는 PW입니다"})
-            }  
+            res.render('login.ejs',{loginMsg:""})
         }
 
     }
