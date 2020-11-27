@@ -46,9 +46,9 @@ app.get('/registerFunc', function(req, res){
     let _url = req.url
     const queryData = url.parse(_url, true).query
     let inputId = queryData.id
-    let inputPw = queryData.pw
+    let inputPw = queryData.pswd1
 
-    console.log(inputId)
+    console.log(inputId,inputPw)
 })
 
 const idCheck = (id, people) => {
