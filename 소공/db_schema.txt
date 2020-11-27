@@ -104,3 +104,5 @@ insert into board values
 	"hello",
 	10
 );
+
+insert into ACCOUNT(userId, userPw, name) values (?, ?, ?)

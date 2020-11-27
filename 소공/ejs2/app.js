@@ -4,7 +4,7 @@ var app = express();
 var db_config = require(__dirname + '/config/database.js');
 var conn = db_config.init();
 var bodyParser = require('body-parser');
-
+var url = require("url")
 db_config.connect(conn);
 
 app.set('views', __dirname + '/views');
@@ -52,7 +52,7 @@ const idCheck = (id, people) => {
     }
 }
 
-app.post('/duplicateFunc', function(req, res){
+app.get('/duplicateFunc', function(req, res){
 
     const userInfo = []
 
@@ -68,11 +68,17 @@ app.post('/duplicateFunc', function(req, res){
     }
     let duplicateMsg =""
 
-    const sql = "SELECT userid, userPw from account";
-    const body = req.body
-    const inputId = body.id
-    console.log(inputId)
+    let sql = "SELECT userid, userPw from account";
+    // const body = req.body
+    // const inputId = body.id
+    // const inputPw = body.pw
+    // console.log(inputId)
     
+    let _url = req.url;
+    let queryData = url.parse(_url, true).query
+    let inputId = queryData.id
+    console.log(inputId)
+
     conn.query(sql, function(err, rows, fields){
         if(err) throw err
         for(var i = 0; i < rows.length; i++){   
@@ -96,9 +102,12 @@ app.post('/duplicateFunc', function(req, res){
                 res.render('register.ejs', {duplicateMsg:"사용해도 좋은 ID입니다"})
             }  
         }
-        
-            
     })
+
+    sql = `insert into ACCOUNT(userId, userPw, name) values (?, ?, ?)`
+
+    // conn.query(sql,[inputId,inputPw])
+
 
 })
 
