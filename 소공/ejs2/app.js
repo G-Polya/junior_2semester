@@ -5,7 +5,10 @@ var db_config = require(__dirname + '/config/database.js');
 var conn = db_config.init();
 var bodyParser = require('body-parser');
 var url = require("url")
+<<<<<<< HEAD
 
+=======
+>>>>>>> duplicate
 db_config.connect(conn);
 
 app.set('views', __dirname + '/views');
@@ -62,9 +65,7 @@ const idCheck = (id, people) => {
     }
 }
 
-
-
-app.post('/duplicateFunc', function(req, res){
+app.get('/duplicateFunc', function(req, res){
 
     const userInfo = []
 
@@ -83,11 +84,15 @@ app.post('/duplicateFunc', function(req, res){
     let sql = "SELECT userid, userPw from account";
     // const body = req.body
     // const inputId = body.id
+    // const inputPw = body.pw
     // console.log(inputId)
-    let _url = req.url
-    const queryData = url.parse(_url, true).query
+    
+    let _url = req.url;
+    let queryData = url.parse(_url, true).query
     let inputId = queryData.id
-    let inputPw = queryData.pw
+    let inputPw = queryData.pswd1
+    let inputName = queryData.name
+    console.log(inputId,inputPw,inputName)
 
 
     conn.query(sql, function(err, rows, fields){
@@ -112,9 +117,12 @@ app.post('/duplicateFunc', function(req, res){
                 res.render('register.ejs', {duplicateMsg:"사용해도 좋은 ID입니다"})
             }  
         }
-        
-            
     })
+
+    sql = `insert into ACCOUNT(userId, userPw, name, isManager) values (?, ?, ?)`
+
+     //conn.query(sql,[inputId,inputPw])
+
 
 })
 

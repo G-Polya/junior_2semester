@@ -15,13 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="exprtree.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="logitree.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="test12.cpp">
+    <ClCompile Include="bstree.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="fallingLeaves.cpp">
@@ -32,11 +26,8 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="exprtree.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="logitree.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="bstree.h">
+      <Filter>소스 파일</Filter>
     </ClInclude>
     <ClInclude Include="bstree.h">
       <Filter>헤더 파일</Filter>
