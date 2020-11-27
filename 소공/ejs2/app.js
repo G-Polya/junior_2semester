@@ -5,10 +5,6 @@ var db_config = require(__dirname + '/config/database.js');
 var conn = db_config.init();
 var bodyParser = require('body-parser');
 var url = require("url")
-<<<<<<< HEAD
-
-=======
->>>>>>> duplicate
 db_config.connect(conn);
 
 app.set('views', __dirname + '/views');
@@ -138,7 +134,7 @@ app.get('/next', function(req,res){
 })
 
 app.get('/login', function(req,res) {
-    let loginMsg="hello"
+    let loginMsg=""
     res.render('login.ejs', {loginMsg:loginMsg});
 })
 
