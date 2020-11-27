@@ -77,7 +77,10 @@ app.get('/duplicateFunc', function(req, res){
     let _url = req.url;
     let queryData = url.parse(_url, true).query
     let inputId = queryData.id
-    console.log(inputId)
+    let inputPw = queryData.pswd1
+    let inputName = queryData.name
+    console.log(inputId,inputPw,inputName)
+
 
     conn.query(sql, function(err, rows, fields){
         if(err) throw err
@@ -98,15 +101,14 @@ app.get('/duplicateFunc', function(req, res){
             if(flag){
                 res.render('register.ejs', {duplicateMsg:"중복되는 ID입니다."})
             } else {
-           
                 res.render('register.ejs', {duplicateMsg:"사용해도 좋은 ID입니다"})
             }  
         }
     })
 
-    sql = `insert into ACCOUNT(userId, userPw, name) values (?, ?, ?)`
+    sql = `insert into ACCOUNT(userId, userPw, name, isManager) values (?, ?, ?)`
 
-    // conn.query(sql,[inputId,inputPw])
+     //conn.query(sql,[inputId,inputPw])
 
 
 })
