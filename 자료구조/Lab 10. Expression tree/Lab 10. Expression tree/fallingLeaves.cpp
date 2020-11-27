@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include "bstree.cpp"
+#include <cstring>
+
 //#include "exprtree.h"    //pre-lab
 //#include "logitree.h"  //in-lab1
 
@@ -23,53 +25,89 @@ private:
 	char keyField;
 };
 
-// remove '\n'
-string removeLF(string str)
-{
-	while (true)
-	{
-		int loc = str.find('\n');
-		string sub = str.substr(loc + 1, str.length() - 1);
-		if (sub.length() == 0)
-			break;
+//// remove '\n'
+//string removeLF(string str)
+//{
+//	while (true)
+//	{
+//		int loc = str.find('\n');
+//		string sub = str.substr(loc + 1, str.length() - 1);
+//		if (sub.length() == 0)
+//			break;
+//
+//		//cout << sub.length() << endl;
+//		//cout << loc << endl;
+//		str = str.substr(0, loc) + sub;
+//		//cout << str << endl;
+//	}
+//	
+//	return str;
+//}
 
-		//cout << sub.length() << endl;
-		//cout << loc << endl;
-		str = str.substr(0, loc) + sub;
-		//cout << str << endl;
+bool hasEnd(string str)
+{
+	for (int i = 0; i < str.length(); i++)
+	{
+		if (str[i] == '$')
+			return true;
+		
 	}
-	
-	return str;
 }
+
+template<class TE, class KF>
+void preOrderAll(BSTree<TE,KF>& testTree, string result)
+{
+	TestData testData;
+	for (int i = result.length() - 1; i >= 0; i--)
+	{
+		testData.setKey(result[i]);
+		testTree.insert(testData);
+	}
+
+	cout << "Ãâ·Â: ";
+	testTree.preOrder();
+	cout << endl;
+}
+
 
 void main()
 {
-	
-
-	BSTree<TestData, char> testTree;
-	TestData testData;
-	string str;
-	getline(cin, str, '*');
-	str = removeLF(str);
-
-	
-	
-	for (int i = str.length()-1; i >=0; i--)
+	while (true)
 	{
-		testData.setKey(str[i]);
-		testTree.insert(testData);
-	}
-	
+		BSTree<TestData, char> testTree;
+		string str;
+		string result = "";
 
+		do
+		{
+			cin >> str;
+			result += str;
+		} while ((str != "$") && (str != "*"));
 
-	//testTree.showStructure();
+		bool endFlag = hasEnd(str);
+		
+		if (endFlag == 1)
+		{
+			int loc = result.find('$');
+			result = result.substr(0, loc) + result.substr(loc + 1, result.length() - 1);
+			
 
-	testTree.preOrder();
-	cout << endl;
-	
+			
+			preOrderAll(testTree, result);
 
+			cout << endl;
+			break;
+		}
+		else
+		{
+			
+			int loc = result.find('*');
+			result = result.substr(0, loc) + result.substr(loc + 1, result.length() - 1);
+			
+			preOrderAll(testTree, result);
 
+			testTree.clear();
+		}
 
-
-	
+	}	
 }
