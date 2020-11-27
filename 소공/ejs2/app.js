@@ -138,24 +138,20 @@ app.get('/login', function(req,res) {
     res.render('login.ejs', {loginMsg:loginMsg});
 })
 
-app.get('/loginFunc', function (req, res) {
-  let _url = req.url
-  const queryData = url.parse(_url, true).query
-  let inputId = queryData.id
-  let inputPw = queryData.pw
+app.post('/loginFunc', function (req, res) {
+//   let _url = req.url
+//   const queryData = url.parse(_url, true).query
+//   let inputId = queryData.id
+//   let inputPw = queryData.pw
+
+  const body = req.body
+  const inputId = body.id
+  const inputPw = body.pw
+//  console.log(inputId,inputPw)
 
   const userInfo = []
 
-  const authenticate = function(userInfo, inputId, inputPw) {
-    for(var i = 0 ;i < userInfo.length; i++){
-        if(userInfo[i].userid === inputId && userInfo[i].userPw === inputPw){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-  }
+  
 
   const sql = "SELECT userid, userPw from account";
   conn.query(sql, function(err, rows, fields){
@@ -164,14 +160,19 @@ app.get('/loginFunc', function (req, res) {
         for(var i = 0; i < rows.length; i++){   
             userInfo.push( {userid:rows[i].userid, userPw: rows[i].userPw})
         }
-
-        const flag = authenticate(userInfo, inputId, inputPw)
+        //console.log(userInfo)
+        
+        let flag = userInfo.some(function(element){
+            if(element.userid === inputId && element.userPw === inputPw){
+                return true;
+            }
+        })
 
         if(inputId === "") {
             res.render('login.ejs', {loginMsg:""})
         } else {
             if(flag){
-                res.render('login.ejs', {loginMsg:"로그인성공"})
+                res.redirect('/next')
             } else {
                 res.render('login.ejs', {loginMsg:"등록되지 않은 ID 또는 PW입니다"})
             }  
