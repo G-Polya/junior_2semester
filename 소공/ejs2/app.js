@@ -98,7 +98,7 @@ app.get('/duplicateFunc', function(req, res){
             if(flag){
                 res.render('register.ejs', {duplicateMsg:"중복되는 ID입니다."})
             } else {
-                body.id = inputId
+           
                 res.render('register.ejs', {duplicateMsg:"사용해도 좋은 ID입니다"})
             }  
         }
