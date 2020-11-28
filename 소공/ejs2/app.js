@@ -34,10 +34,7 @@ app.use(session({
 }))
 
 app.get('/', function (req, res) {
-    const body = req.body
-    const inputId = body.id
-    console.log(body)
-
+    
     res.send("root")
     //res.render('login.ejs');
 });
@@ -51,15 +48,6 @@ app.get('/registerPage', function (req, res) {
 
 app.post('/gotoRegister', function(req,res){
     res.redirect("/registerPage");
-})
-
-app.get('/registerFunc', function(req, res){
-    let _url = req.url
-    const queryData = url.parse(_url, true).query
-    let inputId = queryData.id
-    let inputPw = queryData.pswd1
-
-    console.log(inputId,inputPw)
 })
 
 

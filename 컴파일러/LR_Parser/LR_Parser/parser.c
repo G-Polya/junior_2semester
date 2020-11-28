@@ -10,7 +10,7 @@
 
 
 //scanner function
-int superLetter(char ch); int superLetterOrDigit(char ch); void lexicalError(int n); struct tokenType scanner();
+int superLetter(char ch); int superLetterOrDigit(char ch); void lexicalError(int n); 
 
 //parser function
 void semantic(int); void printToken(struct tokenType token); void dumpStack(); void errorRecovery(); void parser();
@@ -25,6 +25,15 @@ int getNumber(char firstCharacter);
 int hexValue(char ch);
 FILE *sourceFile;
 char filename[FNAME_SIZE];
+struct tokenType
+{
+	int number;
+	union
+	{
+		char id[ID_LENGTH];
+		int num;
+	} value;
+};
 
 
 // scanner part
@@ -79,15 +88,7 @@ enum tsymbol tnum[NO_KEYWORD] =
 	tconst,    telse,     tif,     tint,     treturn,   tvoid,     twhile
 };
 
-struct tokenType
-{
-	int number;
-	union 
-	{
-		char id[ID_LENGTH];
-		int num;
-	} value;
-};
+
 
 struct tokenType scanner()
 {
