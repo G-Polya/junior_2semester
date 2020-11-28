@@ -10,13 +10,13 @@ var session=require('express-session')
 var mySqlStore= require('express-mysql-session')(session)
 let router = express.Router();
 
-// var options = {
-//     host : 'localhost',
-//     port:3306,
-//     user:'root',
-//     password:'',
-//     database:'clerkfree'
-// }
+var options = {
+    host : 'localhost',
+    port:3306,
+    user:'root',
+    password:'',
+    database:'clerkfree'
+}
 
 var sessionStore = new mySqlStore(options)
 
