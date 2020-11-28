@@ -42,7 +42,7 @@ app.get('/', function(req,res){
 
 let comment="comment 입력하세요"
 
-app.get('/team', function(req,res){
+app.get('/teamPage', function(req,res){
     let sql = `select mdl_groups.name,groupid, firstname, lastname
                from mdl_groups_members, mdl_user,mdl_groups
                where mdl_groups_members.userid = mdl_user.id and 
@@ -59,11 +59,8 @@ app.get('/team', function(req,res){
                 names.push(element.firstname+element.lastname)
             })
             console.log(rows[0].name)
-  
-            req.session.isLogined = true
-            req.session.save(function(){
-                res.render('team.ejs', {memberName:names,groupName:rows[0].name,comment:comment})
-            })
+            
+            res.render('teamPage.ejs', {memberName:names,groupName:rows[0].name,comment:comment})
             
         }
     })
@@ -73,9 +70,38 @@ app.get('/team', function(req,res){
 
 
 
-app.post('/store', function(req, res){
-    const body = req.body
-    comment = body.memo
+app.get('/home', function(req, res){
+    res.render('home.ejs')
 })
 
-app.listen(3200, ()=>console.log('Sever is running on port 3200...'))
+
+
+app.get('/profilePage', function(req, res){
+    res.render('profilePage.ejs')
+})
+
+app.get('/workList', function(req, res){
+      let sql = `select mdl_groups.name,groupid, firstname, lastname
+               from mdl_groups_members, mdl_user,mdl_groups
+               where mdl_groups_members.userid = mdl_user.id and 
+                     mdl_groups_members.groupid=1 and 
+                     mdl_groups_members.groupid = mdl_groups.id;
+    `
+
+    const names = []    
+    //const lastNames = []
+    conn.query(sql, function(err, rows, fields){
+        if(err) console.log('query is not excuted. select fail...\n'+err)
+        else {
+            rows.forEach((element)=>{
+                names.push(element.firstname+element.lastname)
+            })
+            console.log(rows[0].name)
+  
+            res.render('workList.ejs', {memberName:names,groupName:rows[0].name,comment:comment})
+            
+        }
+    })
+})
+
+app.listen(3300, ()=>console.log('Sever is running on port 3300...'))
