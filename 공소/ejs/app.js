@@ -3,7 +3,28 @@ const app = express()
 const db_config = require(__dirname+'/config/database.js')
 const conn = db_config.init()
 const bodyParser = require('body-parser')
-const e = require('express')
+var session=require('express-session')
+var mySqlStore= require('express-mysql-session')(session)
+let router = express.Router();
+
+var options = {
+    host : 'localhost',
+    port:3306,
+    user:'root',
+    password:'',
+    database:'moodle'
+}
+
+var sessionStore = new mySqlStore(options)
+
+app.use(session({
+    secret : "kim",
+    resave:false,
+    saveUninitialized : true,
+    store : sessionStore
+}))
+
+
 
 db_config.connect(conn);
 
@@ -38,11 +59,15 @@ app.get('/team', function(req,res){
                 names.push(element.firstname+element.lastname)
             })
             console.log(rows[0].name)
-            res.render('team.ejs', {memberName:names,groupName:rows[0].name,comment:comment})
+  
+            req.session.isLogined = true
+            req.session.save(function(){
+                res.render('team.ejs', {memberName:names,groupName:rows[0].name,comment:comment})
+            })
+            
         }
     })
-
-
+  
 
 })
 
