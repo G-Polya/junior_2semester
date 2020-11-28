@@ -19,12 +19,13 @@ CREATE TABLE FINANCE
 
 CREATE TABLE HISTORY
 (
-   userId                VARCHAR(20)  NOT NULL ,
-   userNum               INT  NOT NULL ,
-   historyNum    INT NOT NULL,
-   date                  DATE  NULL ,
+	hisoryNum			  int auto_increment,
+	userId                VARCHAR(20)  NOT NULL ,
+	userNum               INT  NOT NULL ,
+	date                  DATE  NULL ,
 
-    primary key(userId, userNum, historyNum),
+    primary key(userId, userNum,historyNum),
+	unique(historyNum),
     constraint idConstraint foreign key(userId, userNum) references ACCOUNT(userId, userNum) on delete cascade
 );
 
@@ -91,4 +92,11 @@ INSERT INTO account (userId, name, userPw, userNum,isManager) VALUES
 
 
 
-insert into ACCOUNT(userId, userPw, name) values (?, ?, ?)
+insert into ACCOUNT(userId, name, userPw, isManager) VALUES
+(
+	"skyss123",
+	"Leel",
+	"125",
+)
+
+delete from account;
