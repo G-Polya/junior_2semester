@@ -124,7 +124,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Parser.c" />
     <ClCompile Include="sdt.c" />
   </ItemGroup>
   <ItemGroup>

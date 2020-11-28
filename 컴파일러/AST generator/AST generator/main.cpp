@@ -62,7 +62,9 @@ void main(int argc, char* argv[])
 
 	Node *root = parser();
 	printf("\n === start of SDTs\n");
-	astFile = fopen("perfect.ast", "w");
+	printf("*.ast파일 이름 입력: ");
+	scanf("%s", filename);
+	astFile = fopen(filename, "w");
 	printTree(root, 0);
 
 
