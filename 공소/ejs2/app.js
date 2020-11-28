@@ -53,7 +53,8 @@ app.get('/', function(req,res){
             console.log(rows[0].name)
             
             req.session.isLogined=true
-            req.session.memberLength = names.length
+            req.session.names = names
+            req.session.groupName = rows[0].name
             req.session.save(function(){
                 res.redirect('/home')
             })
@@ -63,32 +64,9 @@ app.get('/', function(req,res){
 })
 
 
-let comment="comment 입력하세요"
 
 app.get('/teamPage', function(req,res){
-    let sql = `select mdl_groups.name,groupid, firstname, lastname
-               from mdl_groups_members, mdl_user,mdl_groups
-               where mdl_groups_members.userid = mdl_user.id and 
-                     mdl_groups_members.groupid=1 and 
-                     mdl_groups_members.groupid = mdl_groups.id;
-    `
-
-    const names = []    
-    //const lastNames = []
-    conn.query(sql, function(err, rows, fields){
-        if(err) console.log('query is not excuted. select fail...\n'+err)
-        else {
-            rows.forEach((element)=>{
-                names.push(element.firstname+element.lastname)
-            })
-            console.log(rows[0].name)
-  
-            res.render('teamPage.ejs', {memberName:names,groupName:rows[0].name,comment:comment})
-            
-        }
-    })
-  
-
+    res.render('teamPage.ejs', {memberName:req.session.names, groupName:req.session.groupName})
 })
 
 
@@ -104,28 +82,9 @@ app.get('/profilePage', function(req, res){
     res.render('profilePage.ejs')
 })
 
+let comment = "hello"
 app.get('/workList', function(req, res){
-      let sql = `select mdl_groups.name,groupid, firstname, lastname
-               from mdl_groups_members, mdl_user,mdl_groups
-               where mdl_groups_members.userid = mdl_user.id and 
-                     mdl_groups_members.groupid=1 and 
-                     mdl_groups_members.groupid = mdl_groups.id;
-    `
-
-    const names = []    
-    //const lastNames = []
-    conn.query(sql, function(err, rows, fields){
-        if(err) console.log('query is not excuted. select fail...\n'+err)
-        else {
-            rows.forEach((element)=>{
-                names.push(element.firstname+element.lastname)
-            })
-            console.log(rows[0].name)
-  
-            res.render('teamPage.ejs', {memberName:names,groupName:rows[0].name,comment:comment})
-            
-        }
-    })
+    res.render('workList.ejs', {memberName:req.session.names, groupName:req.session.groupName,comment:comment})      
 })
 
 app.listen(3300, ()=>console.log('Sever is running on port 3300...'))
