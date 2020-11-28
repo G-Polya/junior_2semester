@@ -35,8 +35,31 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}))
 
 app.get('/', function(req,res){
-    //const body = req.body
-    res.send("root")
+      let sql = `select mdl_groups.name,groupid, firstname, lastname
+               from mdl_groups_members, mdl_user,mdl_groups
+               where mdl_groups_members.userid = mdl_user.id and 
+                     mdl_groups_members.groupid=1 and 
+                     mdl_groups_members.groupid = mdl_groups.id;
+    `
+
+    const names = []    
+    //const lastNames = []
+    conn.query(sql, function(err, rows, fields){
+        if(err) console.log('query is not excuted. select fail...\n'+err)
+        else {
+            rows.forEach((element)=>{
+                names.push(element.firstname+element.lastname)
+            })
+            console.log(rows[0].name)
+            
+            req.session.isLogined=true
+            req.session.memberLength = names.length
+            req.session.save(function(){
+                res.redirect('/home')
+            })
+        }
+    })
+    
 })
 
 
@@ -59,7 +82,7 @@ app.get('/teamPage', function(req,res){
                 names.push(element.firstname+element.lastname)
             })
             console.log(rows[0].name)
-            
+  
             res.render('teamPage.ejs', {memberName:names,groupName:rows[0].name,comment:comment})
             
         }
@@ -71,6 +94,7 @@ app.get('/teamPage', function(req,res){
 
 
 app.get('/home', function(req, res){
+    console.log(req.session.isLogined)
     res.render('home.ejs')
 })
 
@@ -98,7 +122,7 @@ app.get('/workList', function(req, res){
             })
             console.log(rows[0].name)
   
-            res.render('workList.ejs', {memberName:names,groupName:rows[0].name,comment:comment})
+            res.render('teamPage.ejs', {memberName:names,groupName:rows[0].name,comment:comment})
             
         }
     })
