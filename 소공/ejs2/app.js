@@ -3,12 +3,20 @@ var express = require('express');
 var app = express();
 var db_config = require(__dirname + '/config/database.js');
 var conn = db_config.init();
+const mysql = require("sync-mysql")
+
 var bodyParser = require('body-parser');
 var url = require("url")
 db_config.connect(conn);
 var session=require('express-session')
 var mySqlStore= require('express-mysql-session')(session)
 let router = express.Router();
+const connection = new mysql({
+    host:"localhost",
+    user:"root",
+    password:"",
+    database:"clerkfree"
+})
 
 var options = {
     host : 'localhost',
