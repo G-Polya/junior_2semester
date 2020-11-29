@@ -14,20 +14,12 @@ var express = require('express');
 var app = express();
 var db_config = require(__dirname + '/config/database.js');
 var conn = db_config.init();
-const mysql = require("sync-mysql")
-
 var bodyParser = require('body-parser');
 var url = require("url")
 db_config.connect(conn);
 var session=require('express-session')
 var mySqlStore= require('express-mysql-session')(session)
 let router = express.Router();
-const connection = new mysql({
-    host:"localhost",
-    user:"root",
-    password:"",
-    database:"clerkfree"
-})
 
 var options = {
     host : 'localhost',
@@ -52,7 +44,7 @@ app.use(session({
     store : sessionStore
 }))
 
-// ------------------------------------------------------- 
+// ------------------------류신영------------------------------- 
 
 
 app.get("/order", (req, res) => {
@@ -127,7 +119,7 @@ app.get("/purchase", (req, res) => {
 
 
 
-// ------------------------------------------------------- 
+// ---------------------------김희수 ---------------------------- 
 app.get('/', function (req, res) {
     
     res.send("root")
@@ -201,10 +193,6 @@ app.get('/duplicateFunc', function(req, res){
 
 })
 
-// app.get('/order', function(req,res){
-//     console.log(req.session.isLogined)
-//     res.render("order.ejs")
-// })
 
 app.get('/review', function(req,res){
     console.log(req.session.isLogined)
