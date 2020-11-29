@@ -111,6 +111,7 @@ app.get("/purchase", (req, res) => {
           total: totaljs2,
         });
 
+  
     }
 
    
