@@ -1,3 +1,3 @@
-select id
+select id, shortname
 from mdl_course
 where sortorder!=1;
