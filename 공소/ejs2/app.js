@@ -60,7 +60,26 @@ app.get('/teamPage', function(req,res){
     res.render('teamPage.ejs', {memberName:req.session.names, groupName:req.session.groupName,course:req.session.course})
 })
 
-app.get('/selected', function(req, res){
+
+for(var i = 0; i<5;i++){
+    app.get(`/course${i}`, function(req, res){
+        let _url = req.url
+        console.log(_url)
+    
+    
+        console.log(req.session.isLogined)
+        console.log(req.session.course)
+        res.render('course0.ejs',{course:req.session.course})
+    })
+
+}
+
+
+
+
+
+app.get('/home', function(req, res){
+    
     let course = req.session.course
     function getFiles(course) {
         let files_ = []
@@ -78,27 +97,6 @@ app.get('/selected', function(req, res){
     res.end(html)
 
 
-    
-})
-
-
-
-app.get('/0', function(req, res){
-    console.log(req.session.isLogined)
-    console.log(req.session.course)
-    res.render('course0.ejs',{course:req.session.course})
-})
-
-
-app.get('/course1', function(req, res){
-    console.log(req.session.isLogined)
-    console.log(req.session.course)
-    res.render('course1.ejs',{course:req.session.course})
-})
-
-app.get('/home', function(req, res){
-    
-    res.render('home.ejs', {course:req.session.course})
 })
 
 

@@ -127,11 +127,11 @@
       <!-- 왼쪽 항목 -->
       <div data-silex-type="container-element" class="editable-style container-element silex-id-1604643193909-2 hide-on-mobile" data-silex-id="silex-id-1604643193909-2" style="">
         
-        <div data-silex-type="text-element" class="editable-style text-element silex-id-1605169710227-28 page-main paged-element style-all-style1" data-silex-id="silex-id-1605169710227-28" style="">
+      <div data-silex-type="text-element" class="editable-style text-element silex-id-1605169710227-28 page-main paged-element style-all-style1" data-silex-id="silex-id-1605169710227-28" style="">
           <select name="course" onchange="location=this.value;">
             <option value="select-course" > 강좌를 선택하세요 </option>
             <% for(var i = 0 ; i < course.length; i++ ) { %> 
-              <option value="course<%=i+1%>"><%= course[i].shortname %> </option>
+              <option value="course<%=i%>"><%= course[i].shortname %> </option>
             <% } %>
           </select>
         </div>
