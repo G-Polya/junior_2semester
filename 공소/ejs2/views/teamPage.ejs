@@ -106,6 +106,8 @@
   .silex-id-1606368660810-3 {width: 25px; height: 25px; position: absolute; top: 15px; left: 35px;}
   .silex-id-1606368666667-4 {width: 25px; height: 25px; position: absolute; top: 15px; left: 35px;}
   .silex-id-1606368704888-5 {width: 25px; height: 25px; position: absolute; top: 15px; left: 35px;}@media only screen and (max-width: 480px) {}
+
+  .silex-id-1605169710227-28 {width: 200px; min-height: 70px; position: absolute; top: 250px; left: 45px; background-color: transparent;}
   </style>
   
  
@@ -124,6 +126,15 @@
     
       <!-- 왼쪽 항목 -->
       <div data-silex-type="container-element" class="editable-style container-element silex-id-1604643193909-2 hide-on-mobile" data-silex-id="silex-id-1604643193909-2" style="">
+
+        <div data-silex-type="text-element" class="editable-style text-element silex-id-1605169710227-28 page-main paged-element style-all-style1" data-silex-id="silex-id-1605169710227-28" style="">
+          <select name="course" onchange="location=this.value;">
+            <option value="select-course" > 강좌를 선택하세요 </option>
+            <% for(var i = 0 ; i < course.length; i++ ) { %> 
+              <option value="course<%=i%>"><%= course[i].shortname %> </option>
+            <% } %>
+          </select>
+        </div>
         
         <div data-silex-type="image-element" class="editable-style image-element silex-id-1605169710227-23 page-main paged-element style-all-style1" data-silex-id="silex-id-1605169710227-23" style="" data-silex-href="#!page-main">
           <img src="logo.637cfd18.jpg">

@@ -3,11 +3,17 @@ CREATE TABLE ACCOUNT
 	userId                VARCHAR(20)  NOT NULL ,
 	name                  VARCHAR(20)  NULL ,
 	userPw                VARCHAR(20)  NOT NULL ,
+<<<<<<< HEAD
 	userNum               INT  NOT NULL ,
 	isManager             BOOLEAN  NOT NULL, 
+=======
+	userNum               INT  NOT NULL auto_increment,
+	
+>>>>>>> master
 
     primary key (userId, userNum)
 );
+
 
 CREATE TABLE FINANCE
 (
@@ -78,15 +84,19 @@ CREATE TABLE REVIEW
     constraint reviewConstraint foreign key(userId, userNum, historyNum) references HISTORY(userId, userNum, historyNum) on delete cascade
 );
 
+<<<<<<< HEAD
 INSERT INTO account (userId, name, userPw, userNum,isManager) VALUES
+=======
+INSERT INTO account (userId, name, userPw, userNum) VALUES
+>>>>>>> master
 (
 	"tollea1234",
 	"Kim",
 	"1234",
-	1,
 	1
 );
 
+<<<<<<< HEAD
 select item_num
 from ORDER_ITEM_Detail, (
 	select cartNum
@@ -104,3 +114,26 @@ from item, (select distinct itemNum, A.date, A.totalPrice
 			from order_item_detail, (select cartNum, date, totalPrice from history, cart where history.userid=cart.userid) as A
 			where order_item_detail.cartNum = A.cartNum) as B
 where item.itemNum = B.itemNum;
+=======
+
+CREATE TABLE Manager
+(
+	managerId                VARCHAR(20)  NOT NULL ,
+	name              		 VARCHAR(20)  NULL ,
+	managerPw                VARCHAR(20)  NOT NULL ,
+	managerNum               INT  NOT NULL auto_increment,
+
+    primary key (managerId, managerNum),
+	unique(managerNum)
+);
+
+
+
+
+INSERT INTO Manager (managerId, name, managerPw) VALUES
+(
+	"skyss123",
+	"Lee",
+	"qwer"
+)
+>>>>>>> master
