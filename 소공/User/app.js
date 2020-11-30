@@ -43,6 +43,8 @@ app.use(session({
     saveUninitialized : true,
     store : sessionStore
 }))
+
+
 // -----------------------김선우-------------------------------
 app.get('/review', function (req, res) {
     let result = connection.query(`SELECT R.userId, R.content, R.rate
@@ -294,7 +296,7 @@ app.post('/loginFunc', function (req, res) {
             if(flag){
                 req.session.userid = inputId
                 req.session.userPw = inputPw
-                req.session.isLogined = true
+                req.session.isLogined = flag
 
                 req.session.save(function(){
                     res.redirect('/main')

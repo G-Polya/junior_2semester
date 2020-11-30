@@ -243,7 +243,7 @@ app.post('/loginFunc', function (req, res) {
             if(flag){
                 req.session.managerid = inputId
                 req.session.managerPw = inputPw
-                req.session.isLogined = true
+                req.session.isLogined = flag
 
                 console.log(inputId, inputPw)
                 req.session.save(function(){

@@ -7,6 +7,10 @@ var session=require('express-session')
 var mySqlStore= require('express-mysql-session')(session)
 let router = express.Router();
 
+var template3 = require("./template3.js")
+
+var url = require("url")
+
 var options = {
     host : 'localhost',
     port:3306,
@@ -42,6 +46,7 @@ app.get('/', function(req,res){
         if(err) console.log('query is not excuted. select fail...\n'+err)
         else {
             req.session.course = rows
+            req.session.isLogined=true
             req.session.save(function(){
                 res.render('home.ejs', {course:rows})
             })
@@ -55,11 +60,41 @@ app.get('/teamPage', function(req,res){
     res.render('teamPage.ejs', {memberName:req.session.names, groupName:req.session.groupName,course:req.session.course})
 })
 
-app.get('/selectedCourse', function(req, res){
-    console.log(req.session.isLogined)
-    res.render('selectedCourse.ejs',{course:req.session.course})
+app.get('/selected', function(req, res){
+    let course = req.session.course
+    function getFiles(course) {
+        let files_ = []
+        for(var i = 0; i < course.length;i++) {
+            files_.push(`<option value=course${i}> ${course[i].shortname} </option>`)
+        }
+        
+        files_ = files_.join("")
+        return files_
+    }
+
+    let tt = getFiles(course)
+    let html = template3.HTML(tt)
+    res.writeHead(200)
+    res.end(html)
+
+
+    
 })
 
+
+
+app.get('/0', function(req, res){
+    console.log(req.session.isLogined)
+    console.log(req.session.course)
+    res.render('course0.ejs',{course:req.session.course})
+})
+
+
+app.get('/course1', function(req, res){
+    console.log(req.session.isLogined)
+    console.log(req.session.course)
+    res.render('course1.ejs',{course:req.session.course})
+})
 
 app.get('/home', function(req, res){
     
