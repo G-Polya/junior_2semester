@@ -60,54 +60,59 @@ app.get('/teamPage', function(req,res){
     res.render('teamPage.ejs', {memberName:req.session.names, groupName:req.session.groupName,course:req.session.course})
 })
 
-
-for(var i = 0; i<5;i++){
-    app.get(`/course${i}`, function(req, res){
-        let _url = req.url
-        console.log(_url)
-    
-    
-        console.log(req.session.isLogined)
-        console.log(req.session.course)
-        res.render('course0.ejs',{course:req.session.course})
-    })
-
-}
-
-
-
-
+app.get('/main', function(req, res){
+    console.log(req.session.course)
+    res.render('main.ejs', {course:req.session.course})
+})
 
 app.get('/home', function(req, res){
-    
-    let course = req.session.course
-    function getFiles(course) {
-        let files_ = []
-        for(var i = 0; i < course.length;i++) {
-            files_.push(`<option value=course${i}> ${course[i].shortname} </option>`)
-        }
-        
-        files_ = files_.join("")
-        return files_
-    }
-
-    let tt = getFiles(course)
-    let html = template3.HTML(tt)
-    res.writeHead(200)
-    res.end(html)
-
-
+    console.log(req.session.course)
+    res.render('home.ejs', {course:req.session.course})
 })
+
+// app.get('/home', function(req, res){
+    
+//     course = req.session.course
+//     function getFiles(course) {
+//         let files_ = []
+//         for(var i = 0; i < course.length;i++) {
+//             files_.push(`<option value=course${i}> ${course[i].shortname} </option>`)
+//         }
+        
+//         files_ = files_.join("")
+//         return files_
+//     }
+
+//     let tt = getFiles(course)
+//     let html = template3.HTML(tt)
+//     res.writeHead(200)
+//     res.end(html)
+
+
+// })
 
 
 
 app.get('/profilePage', function(req, res){
-    res.render('profilePage.ejs')
+    res.render('profilePage.ejs',{course:req.session.course})
 })
 
 let comment = "hello"
 app.get('/workList', function(req, res){
     res.render('workList.ejs', {memberName:req.session.names, groupName:req.session.groupName,comment:comment,course:req.session.course})      
 })
+
+
+for(var i = 0; i< 5; i++){
+    app.get(`/course${i}`, function(req, res){
+        let _url = req.url
+        
+    
+    
+        console.log(req.session.isLogined)
+        console.log(req.session.course)
+        res.render('course.ejs',{course:req.session.course})
+    })
+}
 
 app.listen(3300, ()=>console.log('Sever is running on port 3300...'))

@@ -153,42 +153,13 @@ module.exports = {
                 </div>
         
                 
-                <div data-silex-type="container-element" class="editable-style container-element silex-id-1605169710227-25 page-main paged-element" data-silex-id="silex-id-1605169710227-25" style="">
-                  <div data-silex-type="text-element" class="editable-style text-element silex-id-1605169710227-26 page-main paged-element" data-silex-id="silex-id-1605169710227-26" style="">
-                    <div class="silex-element-content normal">
-                      <p><b><a href="/teamPage" title="공동문서 작업" linktype="LinkTypePage" class="">공동 문서 작업</a></b></p>
-                      <span class="_wysihtml-temp-caret-fix" style="position: absolute; display: block; min-width: 1px; z-index: 99999;">﻿</span>
-                    </div>
-                  </div>
-                  <div data-silex-type="image-element" class="editable-style image-element silex-id-1605169710227-27 page-main paged-element" data-silex-id="silex-id-1605169710227-27" style="">
-                    <img src="group%20icon.png">
-                  </div>
-                </div>
+              
         
-                <div data-silex-type="text-element" class="editable-style text-element silex-id-1606365461296-11 page-main paged-element" data-silex-id="silex-id-1606365461296-11" style="">
-                  <div class="silex-element-content normal">
-                    <p><b>- <a href="/teamPage" linktype="LinkTypePage" class="">Group 정보</a></b></p>
-                  </div>
-                </div>
+                
         
-                <div data-silex-type="text-element" class="editable-style text-element silex-id-1606365466562-13 page-main paged-element" data-silex-id="silex-id-1606365466562-13" style="">
-                  <div class="silex-element-content normal">
-                    <p><b>-&nbsp;<a href="/workList" title="공동문서 작업" linktype="LinkTypePage" class="page-link-active">작업 L</a>
-                      <a href="/workList" linktype="LinkTypePage" class="page-link-active">ist</a></b></p>
-                  </div>
-                </div>
+               
         
-        
-                <div data-silex-type="container-element" class="editable-style container-element silex-id-1605169710227-20 page-main paged-element" data-silex-id="silex-id-1605169710227-20" style="">
-                  <div data-silex-type="text-element" class="editable-style text-element silex-id-1605169710227-22 page-main paged-element" data-silex-id="silex-id-1605169710227-22" style="">
-                    <div class="silex-element-content normal">
-                      <p><b><a href="/profilePage" class="">프로필</a></b></p>
-                    </div>
-                  </div>
-                  <div data-silex-type="image-element" class="editable-style image-element silex-id-1606368660810-3 page-main paged-element" data-silex-id="silex-id-1606368660810-3" style="">
-                    <img src="icon-profile-user.png">
-                  </div>
-                </div>
+               
         
                 
           
