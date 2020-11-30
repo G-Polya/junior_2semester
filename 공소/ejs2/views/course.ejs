@@ -122,6 +122,10 @@
   <style class="silex-prodotype-style" type="text/css" data-style-id="style-all-style1">
   .style-all-style1.text-element >.silex-element-content {font-family: 'Roboto', sans-serif; color: #ffffff; -webkit-transition: all 1s ease; -moz-transition: all 1s ease; -o-transition: all 1s ease; transition: all 1s ease;}
   </style>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+  
 </head>
   <body data-silex-id="body-initial" class="body-initial all-style enable-mobile prevent-resizable prevent-selectable editable-style silex-runtime" data-silex-type="container-element" style="" data-new-gr-c-s-loaded="14.984.0">
     <div data-silex-type="container-element" class="container-element editable-style silex-id-1474394621033-3 section-element prevent-resizable hide-on-mobile" data-silex-id="silex-id-1474394621033-3" style="">
@@ -132,6 +136,7 @@
           <div data-silex-type="text-element" class="editable-style text-element silex-id-1605173129472-2 page-main paged-element" data-silex-id="silex-id-1605173129472-2">
             <div class="silex-element-content normal">
               <h2> <%= course[0].shortname %></h2>
+              
             </div>
           </div>
 
@@ -145,11 +150,12 @@
       <div data-silex-type="container-element" class="editable-style container-element silex-id-1604643193909-2 hide-on-mobile" data-silex-id="silex-id-1604643193909-2" style="">
         
         <div data-silex-type="text-element" class="editable-style text-element silex-id-1605169710227-28 page-main paged-element style-all-style1" data-silex-id="silex-id-1605169710227-28" style="">
-          <select name="course" onchange="location=this.value;">
+          <select class ="course_select" name="course">
             <option value="select-course" > 강좌를 선택하세요 </option>
-            <% for(var i = 0 ; i < course.length; i++ ) { %> 
-              <option value="course<%=i%>"><%= course[i].shortname %> </option>
-            <% } %>
+            
+            <option value="course0"><%= course[0].shortname %> </option>
+            <option value="course1"><%= course[1].shortname %> </option>
+         
           </select>
         </div>
         

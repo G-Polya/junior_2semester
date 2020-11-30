@@ -8,6 +8,7 @@ var mySqlStore= require('express-mysql-session')(session)
 let router = express.Router();
 
 var template3 = require("./template3.js")
+var template4 = require("./template4.js")
 
 var url = require("url")
 
@@ -73,20 +74,20 @@ app.get('/home', function(req, res){
 // app.get('/home', function(req, res){
     
 //     course = req.session.course
-//     function getFiles(course) {
-//         let files_ = []
-//         for(var i = 0; i < course.length;i++) {
-//             files_.push(`<option value=course${i}> ${course[i].shortname} </option>`)
-//         }
+    // function getFiles(course) {
+    //     let files_ = []
+    //     for(var i = 0; i < course.length;i++) {
+    //         files_.push(`<option value=course${i}> ${course[i].shortname} </option>`)
+    //     }
         
-//         files_ = files_.join("")
-//         return files_
-//     }
+    //     files_ = files_.join("")
+    //     return files_
+    // }
 
-//     let tt = getFiles(course)
-//     let html = template3.HTML(tt)
-//     res.writeHead(200)
-//     res.end(html)
+    // let tt = getFiles(course)
+    // let html = template3.HTML(tt)
+    // res.writeHead(200)
+    // res.end(html)
 
 
 // })
@@ -102,17 +103,58 @@ app.get('/workList', function(req, res){
     res.render('workList.ejs', {memberName:req.session.names, groupName:req.session.groupName,comment:comment,course:req.session.course})      
 })
 
+app.get('/main/', function(req,res){
+    console.log("test")
+})
 
-for(var i = 0; i< 5; i++){
+for(let i = 0; i < 3; i++){
     app.get(`/course${i}`, function(req, res){
         let _url = req.url
+        let course = req.session.course
+        
+        function getTitle(course) {
+            let files_ = []
+            files_.push(`<h1> ${course[i].shortname} <h1>`)
+            
+            
+            files_ = files_.join("")
+            return files_
+        }
+    
+        let tt = getTitle(course)
+        
+        
+        function getSelect(course) {
+            let files_ = []
+            for(var j = 0; j < course.length;j++) {
+                files_.push(`<option value=course${j}> ${course[j].shortname} </option>`)
+            }
+            
+            files_ = files_.join("")
+            return files_
+        }
+        let ts = getSelect(course)
+        let html = template4.HTML(tt,ts)
+        res.writeHead(200)
+        res.end(html)
+    })
+    
+    
+
+}
+
+
+
+// for(var i = 0; i< 5; i++){
+//     app.get(`/course${i}`, function(req, res){
+//         let _url = req.url
         
     
     
-        console.log(req.session.isLogined)
-        console.log(req.session.course)
-        res.render('course.ejs',{course:req.session.course})
-    })
-}
+//         console.log(req.session.isLogined)
+//         console.log(req.session.course)
+//         res.render('course.ejs',{course:req.session.course})
+//     })
+// }
 
 app.listen(3300, ()=>console.log('Sever is running on port 3300...'))
