@@ -35,45 +35,35 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}))
 
 app.get('/', function(req,res){
-      let sql = `select mdl_groups.name,groupid, firstname, lastname
-               from mdl_groups_members, mdl_user,mdl_groups
-               where mdl_groups_members.userid = mdl_user.id and 
-                     mdl_groups_members.groupid=1 and 
-                     mdl_groups_members.groupid = mdl_groups.id;
-    `
-
-    const names = []    
-    //const lastNames = []
+    let sql = `select id, shortname 
+               from mdl_course
+               where sortorder != 1;`
     conn.query(sql, function(err, rows, fields){
         if(err) console.log('query is not excuted. select fail...\n'+err)
         else {
-            rows.forEach((element)=>{
-                names.push(element.firstname+element.lastname)
-            })
-            console.log(rows[0].name)
-            
-            req.session.isLogined=true
-            req.session.names = names
-            req.session.groupName = rows[0].name
+            req.session.course = rows
             req.session.save(function(){
-                res.redirect('/home')
+                res.render('home.ejs', {course:rows})
             })
         }
     })
-    
 })
 
 
 
 app.get('/teamPage', function(req,res){
-    res.render('teamPage.ejs', {memberName:req.session.names, groupName:req.session.groupName})
+    res.render('teamPage.ejs', {memberName:req.session.names, groupName:req.session.groupName,course:req.session.course})
+})
+
+app.get('/selectedCourse', function(req, res){
+    console.log(req.session.isLogined)
+    res.render('selectedCourse.ejs',{course:req.session.course})
 })
 
 
-
 app.get('/home', function(req, res){
-    console.log(req.session.isLogined)
-    res.render('home.ejs')
+    
+    res.render('home.ejs', {course:req.session.course})
 })
 
 
@@ -84,7 +74,7 @@ app.get('/profilePage', function(req, res){
 
 let comment = "hello"
 app.get('/workList', function(req, res){
-    res.render('workList.ejs', {memberName:req.session.names, groupName:req.session.groupName,comment:comment})      
+    res.render('workList.ejs', {memberName:req.session.names, groupName:req.session.groupName,comment:comment,course:req.session.course})      
 })
 
 app.listen(3300, ()=>console.log('Sever is running on port 3300...'))

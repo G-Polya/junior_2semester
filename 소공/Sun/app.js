@@ -36,11 +36,11 @@ app.get('/', function (req, res) {
 
 app.get('/viewHistory', function (req, res) {
     let result = connection.query(`SELECT DISTINCT H.date, R.content, C.totalPrice, I.name
-    FROM HISTORY AS H, REVIEW AS R, CART AS C, ORDER_ITEM_DETAIL AS O, ITEM AS I
-    WHERE H.historyNum = R.historyNum
-    AND H.userNum = C.userNum
-    AND O.cartNum = C.cartNum
-    AND I.itemNum = O.itemNum`);
+                                   FROM HISTORY AS H, REVIEW AS R, CART AS C, ORDER_ITEM_DETAIL AS O, ITEM AS I
+                                   WHERE H.historyNum = R.historyNum
+                                   AND H.userNum = C.userNum
+                                   AND O.cartNum = C.cartNum
+                                   AND I.itemNum = O.itemNum`);                                   
     //세션정보에 userNum 넘어오면 WHERE문에 A.userNum = H.userNum 추가
     let end = result.length;
     let datejs = [];
