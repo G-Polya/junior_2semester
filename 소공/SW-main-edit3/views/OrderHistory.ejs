@@ -28,10 +28,13 @@
                 margin-bottom:10px;
             }
             #history-date1{
-                float:left;
+                float:middle;
             }
             #history-review1{
                 float:right;
+            }
+            #resid{
+                float:left;
             }
             #second{
                 margin-bottom:10px;
@@ -40,15 +43,11 @@
     </head>
     <body>
         <div id = "ManagerMenu-title" style = "height:150px; background-color:rgb(175, 248, 238)">
-            <div id = "OrderHistory-title1"><button onClick="location.href='Main.html'">프로필사진(홈으로)</button> </div>
+            <div id = "OrderHistory-title1"><button onClick="location.href='Main'">프로필사진(홈으로)</button> </div>
             <div id = "OrderHistory-title2">welcome!<br>User 홍길동</div>
         </div>
         <div id = "OrderHistory-history"><br><br>
-            <form action="/writeReview" method="get">
-                <div id ="ask-review"><b>&nbsp;write your Rivew for this restaurant</b>
-                    <button id="review-button">Write Review</button><br>
-                </div>
-            </form>
+            
             <b>Your Past Order</b><br>
             <% var bo = 'false'; %>
             <!--리뷰데이터 테이블 조회 후 넣는것들-->
@@ -56,20 +55,19 @@
                 <% if(bo == 'true') {bo = 'false'; continue;}%>
             <div id = "review1">
                 <div id = "first">
+                    <div id="resid">
+                        <%=resid[i]%>
+                    </div> 
+                        
                     <div id = "history-date1">
-                        <%=date[i] %>
+                        <%=date[i]%>
                     </div>
                     <div id = "history-review1">
                         <%=content[i] %>
-                    </div><br>
+                    </div>
+                    <br>
                 </div>
-                <div id ="second">
-                    <%=name[i] %>
-                    <% if(i+1 < length && (date[i] == date[i+1])) { %>
-                        <%=name[i+1] %>
-                        <% bo = 'true'; %>
-                    <% }%>
-                </div>
+                
                 Total : <%=totalprice[i] %> won
             </div><br>
             <% } %>
