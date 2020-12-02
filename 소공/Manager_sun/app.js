@@ -1,4 +1,7 @@
 const express = require('express');
+var moment = require('moment');
+require('moment-timezone');
+moment.tz.setDefault("Asia/Seoul");
 const app = express();
 const db_config = require(__dirname + '/config/database.js');
 const conn = db_config.init();
@@ -36,7 +39,7 @@ var options = {
     port:3306,
     user:'root',
     password:'',
-    database:'clerkfree'
+    database:'swteam'
 }
 
 var sessionStore = new mySqlStore(options)
@@ -54,7 +57,6 @@ app.use(session({
 //매니저 메뉴 페이지
 app.get('/manager_menu', function (req, res) {
     res.render('manager_menu.ejs');
-    //res.send('ROOT');
 });
 
 //시작 페이지
@@ -78,6 +80,40 @@ app.get('/review_confirm',function(req,res){
         if(err) console.log('query is not excuted. select fail...\n' + err);
         else res.render('review_confirm.ejs', {review : rows});
     });
+});
+
+//공지확인
+app.get('/notification',function(req,res){
+    let sql = 'SELECT * FROM NOTIFICATION';    
+    conn.query(sql, function (err, rows, fields) {
+        if(err) console.log('query is not excuted. select fail...\n' + err);
+        else res.render('notification.ejs', {notification : rows});
+    });
+});
+
+app.get('/write_notification', function (req, res) {
+    res.render('write_notification.ejs');
+});
+//공지작성
+app.post('/post_noti',function(req,res){
+    let _url = req.url;
+    let queryData = url.parse(_url, true).query;
+    var title = req.body.title;
+    var content = req.body.content;
+    var date = moment().format('YYYY-MM-DD HH:mm:ss');
+    console.log(title, content, date);
+    try{
+        let result = connection.query(
+          `INSERT INTO NOTIFICATION(title, content, date) VALUES (?,?,?)`,
+          [title,content,date]
+        );
+        console.log('Insert Notification Suceess!');
+      }
+      catch(exception){
+        console.log('오류 발생');
+        console.log(exception);
+      }
+    res.render('manager_menu.ejs');
 });
 
 //매출량 페이지 sale
