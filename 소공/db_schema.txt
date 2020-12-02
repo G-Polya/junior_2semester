@@ -3,7 +3,8 @@ CREATE TABLE ACCOUNT
 	userId                VARCHAR(20)  NOT NULL ,
 	name                  VARCHAR(20)  NULL ,
 	userPw                VARCHAR(20)  NOT NULL ,
-	userNum               INT  NOT NULL
+	userNum               INT  NOT NULL ,
+	isManager             BOOLEAN  NOT NULL, 
 
     primary key (userId, userNum)
 );
@@ -41,26 +42,13 @@ CREATE TABLE CART
 CREATE TABLE ITEM
 (
 	name                  VARCHAR(20)  NOT NULL ,
-	price                 INT  NOT NULL ,
-	itemNum               INT  NOT NULL ,
+	price                 INT  NOT NULL
 
     primary key(itemNum)
 );
 
-CREATE TABLE ORDER_ITEM_Detail
-(
-	cartNum              INT  NOT NULL ,
-	itemNum              INT  NOT NULL ,
-	count                INT  NOT NULL ,
 
-    primary key(cartNum, itemNum),
-    constraint cartConstraint foreign key (cartNum) references CART(cartNum),
-    constraint itemConstraint foreign key(itemNum) references ITEM(itemNum)
-);
 
-alter table CART
-add constraint itemNumConstraint 
-foreign key(itemNum) references ORDER_ITEM_Detail(itemNum);
 
 
 CREATE TABLE REVIEW
@@ -76,9 +64,6 @@ CREATE TABLE REVIEW
     primary key(reviewNum, userId, userNum, historyNum),
     constraint reviewConstraint foreign key(userId, userNum, historyNum) references HISTORY(userId, userNum, historyNum) on delete cascade
 );
-
-CREATE TABLE 
-
 
 CREATE TABLE NOTIFICATION
 (
