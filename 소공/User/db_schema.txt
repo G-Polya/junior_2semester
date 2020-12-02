@@ -3,8 +3,7 @@ CREATE TABLE ACCOUNT
 	userId                VARCHAR(20)  NOT NULL ,
 	name                  VARCHAR(20)  NULL ,
 	userPw                VARCHAR(20)  NOT NULL ,
-	userNum               INT  NOT NULL ,
-	isManager             BOOLEAN  NOT NULL, 
+	userNum               INT  NOT NULL
 
     primary key (userId, userNum)
 );
@@ -77,6 +76,9 @@ CREATE TABLE REVIEW
     primary key(reviewNum, userId, userNum, historyNum),
     constraint reviewConstraint foreign key(userId, userNum, historyNum) references HISTORY(userId, userNum, historyNum) on delete cascade
 );
+
+CREATE TABLE 
+
 
 CREATE TABLE NOTIFICATION
 (
