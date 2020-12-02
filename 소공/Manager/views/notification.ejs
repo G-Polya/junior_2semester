@@ -17,16 +17,18 @@
                 <th>글 번호</th>
                 <th>제목</th>
                 <th>내용</th>
+                <th>Edit</th>
             </tr>
         </thead>
         <tbody>
             <% for(i = 0; i < notification.length; i++) { %>
-            <tr>
-                <td><%=notification[i].notiNum%></td>
-                <td><%=notification[i].title%></td>
-                <td><%=notification[i].content %></td>
-            </tr>
-            <% } %>
+                <tr>
+                    <td><%=i+1%></td>
+                    <td><%=notification[i].title%></td>
+                    <td><%=notification[i].content %></td>
+                    <td><a href='/delete_noti/<%=notification[i].notiNum %>'>Delete</a></td>
+                </tr>
+                <% } %>
         </tbody>
     </table>
     <button class="w3-button w3-black w3-border" onClick="location.href='manager_menu'">BACK</button>

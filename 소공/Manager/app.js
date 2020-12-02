@@ -77,7 +77,7 @@ app.get('/edit_menu',function(req,res){
 
 //리뷰확인 페이지 review_confirm
 app.get('/review_confirm',function(req,res){
-    let sql = 'SELECT * FROM REVIEW';    
+    let sql = 'SELECT * FROM TEMP_REVIEW';    
     conn.query(sql, function (err, rows, fields) {
         if(err) console.log('query is not excuted. select fail...\n' + err);
         else res.render('review_confirm.ejs', {review : rows});
@@ -103,6 +103,7 @@ app.post('/post_noti',function(req,res){
     let queryData = url.parse(_url, true).query;
     var title = req.body.title;
     var content = req.body.content;
+     
     var date = moment().format('YYYY-MM-DD HH:mm:ss');
     console.log(title, content, date);
     try{
@@ -116,8 +117,21 @@ app.post('/post_noti',function(req,res){
         console.log('오류 발생');
         console.log(exception);
       }
-    res.render('manager_menu.ejs',{name:req.session.name});
+      let sql = 'SELECT * FROM NOTIFICATION'; 
+      conn.query(sql, function (err, rows, fields) {
+          if(err) console.log('query is not excuted. select fail...\n' + err);
+          else res.render('notification.ejs', {notification : rows});
+      });
 });
+
+
+//공지삭제
+app.get('/delete_noti/:notiNum', function(req,res){
+    conn.query('delete from NOTIFICATION where notiNum=?', [req.params.notiNum], function() {
+        res.redirect('/notification');
+        });   
+});
+
 
 //매출량 페이지 sale
 app.get('/sale',function(req,res){
@@ -309,6 +323,14 @@ app.post('/loginFunc', function (req, res) {
   
   });
 
+
+//로그아웃
+app.get("/logout", function (req, res) {
+    req.session.destroy(function () {
+      req.session;
+    });
+    res.redirect("/login");
+  });
 
 
 //이미지 경로
