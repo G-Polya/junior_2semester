@@ -107,41 +107,40 @@ app.get('/main/', function(req,res){
     console.log("test")
 })
 
-for(let i = 0; i < 3; i++){
-    app.get(`/course${i}`, function(req, res){
-        let _url = req.url
-        let course = req.session.course
-        
-        function getTitle(course) {
-            let files_ = []
-            files_.push(`<h1> ${course[i].shortname} <h1>`)
-            
-            
-            files_ = files_.join("")
-            return files_
-        }
-    
-        let tt = getTitle(course)
-        
-        
-        function getSelect(course) {
-            let files_ = []
-            for(var j = 0; j < course.length;j++) {
-                files_.push(`<option value=course${j}> ${course[j].shortname} </option>`)
-            }
-            
-            files_ = files_.join("")
-            return files_
-        }
-        let ts = getSelect(course)
-        let html = template4.HTML(tt,ts)
-        res.writeHead(200)
-        res.end(html)
-    })
-    
-    
+app.get(`/`)
 
-}
+
+// app.get(`/course${i}`, function(req, res){
+//     let _url = req.url
+//     let course = req.session.course
+    
+//     function getTitle(course) {
+//         let files_ = []
+//         files_.push(`<h1> ${course[i].shortname} <h1>`)
+        
+        
+//         files_ = files_.join("")
+//         return files_
+//     }
+
+//     let tt = getTitle(course)
+    
+    
+//     function getSelect(course) {
+//         let files_ = []
+//         for(var j = 0; j < course.length;j++) {
+//             files_.push(`<option value=course${j}> ${course[j].shortname} </option>`)
+//         }
+        
+//         files_ = files_.join("")
+//         return files_
+//     }
+//     let ts = getSelect(course)
+//     let html = template4.HTML(tt,ts)
+//     res.writeHead(200)
+//     res.end(html)
+// })
+
 
 
 
