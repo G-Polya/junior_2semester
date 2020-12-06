@@ -116,7 +116,39 @@ app.get('/teamPage', function(req,res){
 // })
 
 app.get('/main', function(req, res){
-    console.log(req.session.course)
+    let dbCourseId = req.session.course[req.session.courseId].id
+    console.log(dbCourseId)
+    let sql = `select mdl_groups.name, groupid, firstname, lastname, mdl_user.id, mdl_groups_members.to_do_list
+               from mdl_groups_members, mdl_user,mdl_groups
+               where mdl_groups_members.userid = mdl_user.id and 
+               mdl_groups_members.groupid=1 and 
+               mdl_groups_members.groupid = ${dbCourseId};`;
+
+    const names = []
+    let group_user=[]
+    var to_do_list = []
+
+    conn.query(sql, function(err, rows, fields){
+        if (err) console.log("query is not excuted. select fail...\n" + err);
+        else{
+            rows.forEach((element)=>{
+                names.push(element.firstname+element.lastname)
+                to_do_list.push(element.to_do_list)
+                group_user.push(element.groupid+"_"+element.id)
+            })
+
+            console.log(to_do_list)
+            req.session.isLogined = true;
+            req.session.names = names;
+            req.session.groupName = rows[0].name;
+            req.session.to_do_list = to_do_list;
+            req.session.group_user = group_user;
+            req.session.save(function(){
+                res.render('main.ejs')
+            })
+        }
+    })
+
     res.render('main.ejs', {course:req.session.course})
 })
 
