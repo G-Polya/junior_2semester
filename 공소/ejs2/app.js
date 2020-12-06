@@ -137,15 +137,16 @@ app.get('/main', function(req, res){
                 group_user.push(element.groupid+"_"+element.id)
             })
 
-            console.log(to_do_list)
-            req.session.isLogined = true;
-            req.session.names = names;
-            req.session.groupName = rows[0].name;
-            req.session.to_do_list = to_do_list;
-            req.session.group_user = group_user;
-            req.session.save(function(){
-                res.render('main.ejs')
-            })
+            console.log(rows)
+            // console.log(to_do_list)
+            // req.session.isLogined = true;
+            // req.session.names = names;
+            // req.session.groupName = rows[0].name;
+            // req.session.to_do_list = to_do_list;
+            // req.session.group_user = group_user;
+            // req.session.save(function(){
+            //     res.render('course.ejs', {course:req.session.course})
+            // })
         }
     })
 
