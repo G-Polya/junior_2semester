@@ -43,11 +43,11 @@ app.get('/', function(req,res){
 let comment="comment 입력하세요"
 
 app.get('/team', function(req,res){
-    let sql = `select mdl_groups.name,groupid, firstname, lastname
+    let sql = `;select mdl_groups.name,groupid, firstname, lastname
                from mdl_groups_members, mdl_user,mdl_groups
                where mdl_groups_members.userid = mdl_user.id and 
                      mdl_groups_members.groupid=1 and 
-                     mdl_groups_members.groupid = mdl_groups.id;
+                     mdl_groups_members.groupid = mdl_groups.id
     `
 
     const names = []    

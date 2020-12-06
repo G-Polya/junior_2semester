@@ -45,9 +45,9 @@ app.get('/', function(req,res){
     conn.query(sql, function(err, rows, fields){
         if(err) console.log('query is not excuted. select fail...\n'+err)
         else {
-            req.session.course = rows
-            req.session.isLogined=true
-            req.session.save(function(){
+                req.session.course = rows
+                req.session.isLogined=true
+                req.session.save(function(){
                 res.render('home.ejs', {course:rows})
             })
         }
@@ -56,8 +56,31 @@ app.get('/', function(req,res){
 
 
 
-app.get('/teamPage', function(req,res){
-    res.render('teamPage.ejs', {memberName:req.session.names, groupName:req.session.groupName,course:req.session.course})
+app.get('/:course/teamPage', function(req,res){
+    let sql = `select mdl_groups.name,groupid, firstname, lastname
+               from mdl_groups_members, mdl_user,mdl_groups
+               where mdl_groups_members.userid = mdl_user.id and 
+               mdl_groups_members.groupid=1 and 
+               mdl_groups_members.groupid = mdl_groups.id`
+
+    const names = []    
+    //const lastNames = []
+    conn.query(sql, function(err, rows, fields){
+        if(err) console.log('query is not excuted. select fail...\n'+err)
+        else {
+            rows.forEach((element)=>{
+                names.push(element.firstname+element.lastname)
+            })
+            console.log(rows[0].name)
+  
+            req.session.isLogined = true
+            req.session.save(function(){
+                res.render('teamPage.ejs', {memberName:names,groupName:rows[0].name,comment:comment})
+            })
+            
+        }
+    })
+    //res.render('teamPage.ejs', {memberName:req.session.names, groupName:req.session.groupName,course:req.session.course})
 })
 
 app.get('/selected', function(req, res){
@@ -83,18 +106,27 @@ app.get('/selected', function(req, res){
 
 
 
-app.get('/0', function(req, res){
-    console.log(req.session.isLogined)
-    console.log(req.session.course)
+app.get('/:course', function(req, res){
+    //console.log(req.session.isLogined)
+   // console.log(req.session.course)
+
+    let _url = req.url;
+    let queryData = url.parse(_url,true).query;
+    if(Object.keys(queryData).length > 0){
+        console.log(queryData.course)
+    }
+
+
     res.render('course0.ejs',{course:req.session.course})
 })
 
 
-app.get('/course1', function(req, res){
-    console.log(req.session.isLogined)
-    console.log(req.session.course)
-    res.render('course1.ejs',{course:req.session.course})
-})
+// app.get('/course1', function(req, res){
+//     console.log(req.session.isLogined)
+//     console.log(req.session.course)
+//     res.render('course1.ejs',{course:req.session.course})
+//     res.render('course1.ejs',{course:req.session.course})
+// })
 
 app.get('/home', function(req, res){
     
