@@ -131,7 +131,7 @@
           <select name="course" onchange="location=this.value;">
             <option value="select-course" > 강좌를 선택하세요 </option>
             <% for(var i = 0 ; i < course.length; i++ ) { %> 
-              <option value="course<%=i+1%>"><%= course[i].shortname %> </option>
+              <option value="course?id=<%=i%>"><%= course[i].shortname %> </option>
             <% } %>
           </select>
         </div>
@@ -146,7 +146,7 @@
 
         <div data-silex-type="text-element" class="editable-style text-element silex-id-1605169710227-24 page-main paged-element style-all-style1" data-silex-id="silex-id-1605169710227-24" style="">
           <div class="silex-element-content normal">
-            <h1><b><a href="/home" linktype="LinkTypePage" class="">PLASS DGU</a></b><br></h1>
+            <h1><b><a href="/main" linktype="LinkTypePage" class="">PLASS DGU</a></b><br></h1>
             <span class="_wysihtml-temp-caret-fix" style="position: absolute; display: block; min-width: 1px; z-index: 99999;">﻿</span>
           </div>
         </div>

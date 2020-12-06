@@ -1,11 +1,12 @@
+
 module.exports = {
-    HTML : function( tt) {
+    HTML : function(tt ,ts) {
         return `<!DOCTYPE html>
         <html>
         <head>
-          <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
           <meta name="generator" content="Silex v2.2.11">
+          <meta charset="UTF-8">
           <!-- End of generator meta tag -->
           <script type="text/javascript" src="https://editor.silex.me/static/2.11/jquery.js" data-silex-static=""></script>
           <script type="text/javascript" src="https://editor.silex.me/static/2.11/jquery-ui.js" data-silex-static="" data-silex-remove-publish=""></script>
@@ -18,9 +19,13 @@ module.exports = {
           <script type="text/javascript" class="silex-script"></script>
           <style class="silex-inline-styles" type="text/css">
           .body-initial {background-color: rgba(13,13,13,1); position: static;}
-          .silex-id-1478366444112-1 {background-color: rgba(13,13,13,1); position: static; margin-top: -1px; border-color: rgba(173,173,173,1);}.silex-id-1478366444112-0 {background-color: rgba(13,13,13,1); min-height: 658px; position: relative; margin-left: auto; margin-right: auto; border-color: rgba(158,158,158,1); display: block;}
+          .silex-id-1478366444112-1 {background-color: rgba(13,13,13,1); position: static; margin-top: -1px; border-color: rgba(173,173,173,1);}
+          .silex-id-1478366444112-0 {background-color: rgba(13,13,13,1); min-height: 658px; position: relative; margin-left: auto; margin-right: auto; border-color: rgba(158,158,158,1); display: block;}
           .silex-id-1474394621033-3 {position: static; margin-top: -1px; background-color: rgba(13,13,13,1); border-color: rgba(164,162,162,1); border-width: 0 0 2px 0; border-style: solid;}
           .silex-id-1474394621032-2 {background-color: rgba(13,13,13,1); min-height: 298px; position: relative; margin-left: auto; margin-right: auto; border-color: rgba(71,71,71,1);}
+          .silex-id-1474394621032-4 {background-color: rgba(13,13,13,1); min-height: 298px; position: relative; margin-left: auto; margin-right: auto; border-color: rgba(158,158,158,1); display: block;}
+        
+          
           .silex-id-1604381522345-1 {width: 135px; height: 125px; position: absolute; top: 50px; left: 60px;}
           .silex-id-1604381556411-2 {width: 170px; min-height: 80.3515625px; position: absolute; top: 180px; left: 45px; background-color: transparent;}
           .silex-id-1604643193909-2 {width: 270px; min-height: 1900px; background-color: rgba(38,38,39,1); position: absolute; top: 1px; left: 0px; display: block;}.silex-id-1604643380215-3 {width: 265px; min-height: 55px; background-color: transparent; position: absolute; top: 295px; left: 0px; border-width: 2px 0 0 0; border-style: solid; border-color: rgba(255,255,255,1);}
@@ -121,19 +126,36 @@ module.exports = {
           <style class="silex-prodotype-style" type="text/css" data-style-id="style-all-style1">
           .style-all-style1.text-element >.silex-element-content {font-family: 'Roboto', sans-serif; color: #ffffff; -webkit-transition: all 1s ease; -moz-transition: all 1s ease; -o-transition: all 1s ease; transition: all 1s ease;}
           </style>
+        
+          <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        
+          
         </head>
           <body data-silex-id="body-initial" class="body-initial all-style enable-mobile prevent-resizable prevent-selectable editable-style silex-runtime" data-silex-type="container-element" style="" data-new-gr-c-s-loaded="14.984.0">
             <div data-silex-type="container-element" class="container-element editable-style silex-id-1474394621033-3 section-element prevent-resizable hide-on-mobile" data-silex-id="silex-id-1474394621033-3" style="">
+              
               <div data-silex-type="container-element" class="editable-style silex-element-content silex-id-1474394621032-2 container-element website-width selected" data-silex-id="silex-id-1474394621032-2" style="">
+                
+                <div data-silex-type="container-element" class="editable-style silex-element-content silex-id-1474394621032-4 container-element website-width selected" data-silex-id="silex-id-1474394621032-4" style="">
+                  <div data-silex-type="text-element" class="editable-style text-element silex-id-1605173129472-2 page-main paged-element" data-silex-id="silex-id-1605173129472-2">
+                    <div class="silex-element-content normal">
+                      <h2> ${tt} </h2>
+                    </div>
+                  </div>
+        
+                </div>  
+                
+              
+              
               </div>
             
               <!-- 왼쪽 항목 -->
               <div data-silex-type="container-element" class="editable-style container-element silex-id-1604643193909-2 hide-on-mobile" data-silex-id="silex-id-1604643193909-2" style="">
                 
                 <div data-silex-type="text-element" class="editable-style text-element silex-id-1605169710227-28 page-main paged-element style-all-style1" data-silex-id="silex-id-1605169710227-28" style="">
-                  <select name="course" onchange="location=this.value;">
+                  <select name="course" onchange="location=this.value">
                     <option value="select-course" > 강좌를 선택하세요 </option>
-                    ${tt}
+                    ${ts}
                   </select>
                 </div>
                 
@@ -147,19 +169,48 @@ module.exports = {
         
                 <div data-silex-type="text-element" class="editable-style text-element silex-id-1605169710227-24 page-main paged-element style-all-style1" data-silex-id="silex-id-1605169710227-24" style="">
                   <div class="silex-element-content normal">
-                    <h1><b><a href="/home" linktype="LinkTypePage" class="">PLASS DGU</a></b><br></h1>
+                    <h1><b><a href="/main" linktype="LinkTypePage" class="">PLASS DGU</a></b><br></h1>
                     <span class="_wysihtml-temp-caret-fix" style="position: absolute; display: block; min-width: 1px; z-index: 99999;">﻿</span>
                   </div>
                 </div>
         
                 
-              
+                <div data-silex-type="container-element" class="editable-style container-element silex-id-1605169710227-25 page-main paged-element" data-silex-id="silex-id-1605169710227-25" style="">
+                  <div data-silex-type="text-element" class="editable-style text-element silex-id-1605169710227-26 page-main paged-element" data-silex-id="silex-id-1605169710227-26" style="">
+                    <div class="silex-element-content normal">
+                      <p><b><a href="/teamPage" title="공동문서 작업" linktype="LinkTypePage" class="">공동 문서 작업</a></b></p>
+                      <span class="_wysihtml-temp-caret-fix" style="position: absolute; display: block; min-width: 1px; z-index: 99999;">﻿</span>
+                    </div>
+                  </div>
+                  <div data-silex-type="image-element" class="editable-style image-element silex-id-1605169710227-27 page-main paged-element" data-silex-id="silex-id-1605169710227-27" style="">
+                    <img src="group%20icon.png">
+                  </div>
+                </div>
         
-                
+                <div data-silex-type="text-element" class="editable-style text-element silex-id-1606365461296-11 page-main paged-element" data-silex-id="silex-id-1606365461296-11" style="">
+                  <div class="silex-element-content normal">
+                    <p><b>- <a href="/teamPage" linktype="LinkTypePage" class="">Group 정보</a></b></p>
+                  </div>
+                </div>
         
-               
+                <div data-silex-type="text-element" class="editable-style text-element silex-id-1606365466562-13 page-main paged-element" data-silex-id="silex-id-1606365466562-13" style="">
+                  <div class="silex-element-content normal">
+                    <p><b>-&nbsp;<a href="/workList" title="공동문서 작업" linktype="LinkTypePage" class="page-link-active">작업 L</a>
+                      <a href="/workList" linktype="LinkTypePage" class="page-link-active">ist</a></b></p>
+                  </div>
+                </div>
         
-               
+        
+                <div data-silex-type="container-element" class="editable-style container-element silex-id-1605169710227-20 page-main paged-element" data-silex-id="silex-id-1605169710227-20" style="">
+                  <div data-silex-type="text-element" class="editable-style text-element silex-id-1605169710227-22 page-main paged-element" data-silex-id="silex-id-1605169710227-22" style="">
+                    <div class="silex-element-content normal">
+                      <p><b><a href="/profilePage" class="">프로필</a></b></p>
+                    </div>
+                  </div>
+                  <div data-silex-type="image-element" class="editable-style image-element silex-id-1606368660810-3 page-main paged-element" data-silex-id="silex-id-1606368660810-3" style="">
+                    <img src="icon-profile-user.png">
+                  </div>
+                </div>
         
                 
           
@@ -171,13 +222,10 @@ module.exports = {
             <div data-silex-type="container-element" class="editable-style section-element silex-id-1478366444112-1" data-silex-id="silex-id-1478366444112-1" title="" style="">
               <div data-silex-type="container-element" class="editable-style container-element silex-id-1478366444112-0 website-width" data-silex-id="silex-id-1478366444112-0" title="" style="">
                 <div data-silex-type="text-element" class="editable-style text-element silex-id-1605173129472-2 page-main paged-element" data-silex-id="silex-id-1605173129472-2">
-              <div class="silex-element-content normal"> 
-                <h2>안녕하세요, 방문을 환영합니다.</h2>
-              </div>
-            </div>
-        
-        
-        
+                  <div class="silex-element-content normal">
+                    <h2>안녕하세요, 방문을 환영합니다.</h2>
+                  </div>
+                </div>
               </div>
             </div>
            

@@ -1,3 +1,0 @@
-select mdl_user.firstname, mdl_user.lastname 
-from mdl_user
-inner join mdl_groups_members on mdl_user.id=mdl_groups_members.userid;
