@@ -109,6 +109,21 @@ app.get('/main/', function(req,res){
 
 app.get(`/`)
 
+app.get('/:course', function(req, res){
+    //console.log(req.session.isLogined)
+   // console.log(req.session.course)
+
+    let _url = req.url;
+    let queryData = url.parse(_url,true).query;
+    
+    // if(Object.keys(queryData).length > 0){
+    //     console.log(queryData.course)
+    // }
+
+
+    res.render('course.ejs',{course:req.session.course})
+})
+
 
 // app.get(`/course${i}`, function(req, res){
 //     let _url = req.url
