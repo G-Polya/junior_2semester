@@ -60,11 +60,11 @@
   .silex-id-1606317196527-5 {width: 116px; min-height: 53.2421875px; position: absolute; top: 0px; left: 80px;}
   .silex-id-1606317196527-6 {width: 26px; height: 31px; position: absolute; top: 10px; left: 35px;}
   .silex-id-1606318077720-19 {width: 689px; min-height: 53px; background-color: rgba(66,66,66,1); position: absolute; top: 24px; left: 213px;}
-  .silex-id-1606318304197-25 {width: 150px; min-height: 53px; background-color: rgba(210,208,208,1); position: absolute; top: 102px; left: 49px;}
-  .silex-id-1606318503383-27 {width: 150px; min-height: 53px; background-color: rgba(173,173,173,1); position: absolute; top: 24px; left: 49.59375px;}
+  .silex-id-1606318304197-25 {width: 99px; min-height: 53px; background-color: rgba(210,208,208,1); position: absolute; top: 102px; left: 49px;}
+  .silex-id-1606318503383-27 {width: 100px; min-height: 53px; background-color: rgba(173,173,173,1); position: absolute; top: 24px; left: 49.59375px;}
   .silex-id-1606318527883-29 {width: 99px; min-height: 53px; background-color: rgba(210,208,208,1); position: absolute; top: 177px; left: 49.8125px;}
   .silex-id-1606318528783-30 {width: 99px; min-height: 53px; background-color: rgba(210,208,208,1); position: absolute; top: 251px; left: 49.8125px;}
-  .silex-id-1606318644502-34 {width: 150px; min-height: 53px; background-color: rgba(210,208,208,1); position: absolute; top: 102px; left: 212.84375px;}
+  .silex-id-1606318644502-34 {width: 126px; min-height: 53px; background-color: rgba(210,208,208,1); position: absolute; top: 102px; left: 212.84375px;}
   .silex-id-1605156214985-34 {width: 195px; min-height: 45px; background-color: rgba(99,99,99,1); position: absolute; top: 102.73661804199219px; left: 537.3267822265625px;}
   .silex-id-1605156214985-33 {width: 195px; min-height: 45px; background-color: rgba(99,99,99,1); position: absolute; top: 102.73661804199219px; left: 337.3267822265625px;}
   .silex-id-1606318669855-36 {width: 521px; min-height: 75px; background-color: transparent; position: absolute; top: 102px; left: 377px;}
@@ -106,11 +106,9 @@
   .silex-id-1606368660810-3 {width: 25px; height: 25px; position: absolute; top: 15px; left: 35px;}
   .silex-id-1606368666667-4 {width: 25px; height: 25px; position: absolute; top: 15px; left: 35px;}
   .silex-id-1606368704888-5 {width: 25px; height: 25px; position: absolute; top: 15px; left: 35px;}@media only screen and (max-width: 480px) {}
-  
-  .silex-id-1605169710227-28 {width: 200px; min-height: 70px; position: absolute; top: 250px; left: 45px; background-color: transparent;}
-  
-  </style>
 
+  .silex-id-1605169710227-28 {width: 200px; min-height: 70px; position: absolute; top: 250px; left: 45px; background-color: transparent;}
+  </style>
   
  
 
@@ -128,11 +126,12 @@
     
       <!-- 왼쪽 항목 -->
       <div data-silex-type="container-element" class="editable-style container-element silex-id-1604643193909-2 hide-on-mobile" data-silex-id="silex-id-1604643193909-2" style="">
+
         <div data-silex-type="text-element" class="editable-style text-element silex-id-1605169710227-28 page-main paged-element style-all-style1" data-silex-id="silex-id-1605169710227-28" style="">
           <select name="course" onchange="location=this.value;">
             <option value="select-course" > 강좌를 선택하세요 </option>
             <% for(var i = 0 ; i < course.length; i++ ) { %> 
-              <option value="course?id=<%=i%>"><%= course[i].shortname %> </option>
+              <option value="course<%=i%>"><%= course[i].shortname %> </option>
             <% } %>
           </select>
         </div>
@@ -144,7 +143,7 @@
 
         <div data-silex-type="text-element" class="editable-style text-element silex-id-1605169710227-24 page-main paged-element style-all-style1" data-silex-id="silex-id-1605169710227-24" style="">
           <div class="silex-element-content normal">
-            <h1><b><a href="/home" linktype="LinkTypePage" class="">PLASS DGU</a></b><br></h1>
+            <h1><b><a href="/main" linktype="LinkTypePage" class="">PLASS DGU</a></b><br></h1>
             <span class="_wysihtml-temp-caret-fix" style="position: absolute; display: block; min-width: 1px; z-index: 99999;">﻿</span>
           </div>
         </div>
@@ -220,14 +219,14 @@
             </div>
             <% } %>
           </div>
-            
+          
           <div data-silex-type="html-element" class="editable-style html-element silex-id-1606318669855-36 page-list paged-element" data-silex-id="silex-id-1606318669855-36" style="">
             <% for(i = 0; i < memberName.length; i++) { %>  
             <div class="silex-element-content">
-              <form action='/store/<%=group_user[i] %>' method='post'>
-                <textarea name="memo" style="width: 454px; height: 40px;"><%=comment[i] %></textarea>
+              <form action='/store' method='post'>
+                <textarea name="memo" style="width: 312px; height: 33.7px;"><%=comment %></textarea>
                 <!-- <input type="reset" value="재입력" style="float: right;"> -->
-                <button type='submit' style="width: 55px; height: 45px;">저장</button>
+                <button type='submit'>저장</button>
               </form>
        
             </div>
