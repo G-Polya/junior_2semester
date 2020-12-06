@@ -58,39 +58,21 @@ app.get('/', function(req,res){
     })
 })
 
-// app.get('/teamPage', function(req,res){
-//     console.log(req.session.course[req.session.courseId])
-//     let dbCourseId = req.session.course[req.session.courseId].id
-//     let sql = `select mdl_groups.name,groupid, firstname, lastname
-//                from mdl_groups_members, mdl_user,mdl_groups
-//                where mdl_groups_members.userid = mdl_user.id and
-//                      mdl_groups_members.groupid=1 and
-//                      mdl_groups_members.groupid = mdl_groups.id and
-//                      mdl_groups.courseid=${dbCourseId};`
 
-//     const names = []    
-//     //const lastNames = []
-//     conn.query(sql, function(err, rows, fields){
-//         if(err) console.log('query is not excuted. select fail...\n'+err)
-//         else {
-//             rows.forEach((element)=>{
-//                 names.push(element.firstname+element.lastname)
-//             })
-//             console.log(rows[0].name)
-  
-//             req.session.isLogined = true
-//             req.session.save(function(){
-//                 res.render('teamPage.ejs', {memberName:names,groupName:rows[0].name,course:req.session.course})
-//             })
-            
-//         }
-//     })
-// })
+app.get('test',function(req, res){
+    const user = "tollea1235"       // 임시로 tollea1235, 무들에서 로그인정보(로그인ID)를 받아올것
+    
+    let sql =``
+})
 
 app.get('/teamPage', function(req, res){
+    const user = "tollea1235"       // 임시로 tollea1235, 무들에서 로그인정보(로그인ID)를 받아올것
+
+
+    
     let dbCourseId = req.session.course[req.session.courseId].id
     
-    let dbGroupid = 3
+    let dbGroupid = 3   // 무들에서 받아온 로그인정보로 현재 로그인한 사람이 속하는 group의 groupid를 도출해야함
     console.log(dbCourseId)
     let sql = `select distinct mdl_groups.name, groupid, firstname, lastname, mdl_user.id, mdl_groups_members.to_do_list,courseid
                from mdl_groups_members, mdl_user,mdl_groups
