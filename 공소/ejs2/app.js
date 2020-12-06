@@ -57,7 +57,7 @@ app.get('/', function(req,res){
 
 
 
-app.get('/teamPage', function(req,res){
+app.get('/course?:id/teamPage', function(req,res){
     res.render('teamPage.ejs', {memberName:req.session.names, groupName:req.session.groupName,course:req.session.course})
 })
 
@@ -109,19 +109,22 @@ app.get('/main/', function(req,res){
 
 app.get(`/`)
 
-app.get('/:course', function(req, res){
+app.get('/course?:id', function(req, res){
     //console.log(req.session.isLogined)
-   // console.log(req.session.course)
+    //console.log(req.session.course)
+
 
     let _url = req.url;
     let queryData = url.parse(_url,true).query;
+    //console.log(queryData)
+    if(Object.keys(queryData).length > 0){
+        console.log(queryData.id)
+        let myCourse = req.session.course[queryData.id]
+        res.render('course.ejs',{course:req.session.course, myCourse:myCourse})
+    }
+
+
     
-    // if(Object.keys(queryData).length > 0){
-    //     console.log(queryData.course)
-    // }
-
-
-    res.render('course.ejs',{course:req.session.course})
 })
 
 
