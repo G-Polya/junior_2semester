@@ -55,11 +55,65 @@ app.get('/', function(req,res){
     })
 })
 
+app.get('/teamPage', function(req,res){
+    console.log(req.session.course[req.session.courseId])
+    let dbCourseId = req.session.course[req.session.courseId].id
+    let sql = `select mdl_groups.name,groupid, firstname, lastname
+               from mdl_groups_members, mdl_user,mdl_groups
+               where mdl_groups_members.userid = mdl_user.id and
+                     mdl_groups_members.groupid=1 and
+                     mdl_groups_members.groupid = mdl_groups.id and
+                     mdl_groups.courseid=${dbCourseId};`
 
-
-app.get('/course?:id/teamPage', function(req,res){
-    res.render('teamPage.ejs', {memberName:req.session.names, groupName:req.session.groupName,course:req.session.course})
+    const names = []    
+    //const lastNames = []
+    conn.query(sql, function(err, rows, fields){
+        if(err) console.log('query is not excuted. select fail...\n'+err)
+        else {
+            rows.forEach((element)=>{
+                names.push(element.firstname+element.lastname)
+            })
+            console.log(rows[0].name)
+  
+            req.session.isLogined = true
+            req.session.save(function(){
+                res.render('teamPage.ejs', {memberName:names,groupName:rows[0].name,course:req.session.course})
+            })
+            
+        }
+    })
+    
+   
 })
+
+// app.get('/course?:id/teamPage', function(req,res){
+//     console.log(req.session.courseId)
+//     let sql = `select mdl_groups.name,groupid, firstname, lastname
+//                from mdl_groups_members, mdl_user,mdl_groups
+//                where mdl_groups_members.userid = mdl_user.id and 
+//                mdl_groups_members.groupid=1 and 
+//                mdl_groups_members.groupid = mdl_groups.id`
+
+//     const names = []    
+//     //const lastNames = []
+//     conn.query(sql, function(err, rows, fields){
+//         if(err) console.log('query is not excuted. select fail...\n'+err)
+//         else {
+//             rows.forEach((element)=>{
+//                 names.push(element.firstname+element.lastname)
+//             })
+//             console.log(rows[0].name)
+  
+//             req.session.isLogined = true
+//             req.session.save(function(){
+//                 res.render('teamPage.ejs', {memberName:names,groupName:rows[0].name,course:req.session.course})
+//             })
+            
+//         }
+//     })
+    
+   
+// })
 
 app.get('/main', function(req, res){
     console.log(req.session.course)
@@ -71,27 +125,6 @@ app.get('/home', function(req, res){
     res.render('home.ejs', {course:req.session.course})
 })
 
-// app.get('/home', function(req, res){
-    
-//     course = req.session.course
-    // function getFiles(course) {
-    //     let files_ = []
-    //     for(var i = 0; i < course.length;i++) {
-    //         files_.push(`<option value=course${i}> ${course[i].shortname} </option>`)
-    //     }
-        
-    //     files_ = files_.join("")
-    //     return files_
-    // }
-
-    // let tt = getFiles(course)
-    // let html = template3.HTML(tt)
-    // res.writeHead(200)
-    // res.end(html)
-
-
-// })
-
 
 
 app.get('/profilePage', function(req, res){
@@ -100,7 +133,35 @@ app.get('/profilePage', function(req, res){
 
 let comment = "hello"
 app.get('/workList', function(req, res){
-    res.render('workList.ejs', {memberName:req.session.names, groupName:req.session.groupName,comment:comment,course:req.session.course})      
+
+    console.log(req.session.course[req.session.courseId])
+    let dbCourseId = req.session.course[req.session.courseId].id
+    let sql = `select mdl_groups.name,groupid, firstname, lastname
+               from mdl_groups_members, mdl_user,mdl_groups
+               where mdl_groups_members.userid = mdl_user.id and
+                     mdl_groups_members.groupid=1 and
+                     mdl_groups_members.groupid = mdl_groups.id and
+                     mdl_groups.courseid=${dbCourseId};`
+
+    const names = []    
+    //const lastNames = []
+    conn.query(sql, function(err, rows, fields){
+        if(err) console.log('query is not excuted. select fail...\n'+err)
+        else {
+            rows.forEach((element)=>{
+                names.push(element.firstname+element.lastname)
+            })
+            console.log(rows[0].name)
+  
+            req.session.isLogined = true
+            req.session.save(function(){
+                res.render('teamPage.ejs', {memberName:names,groupName:rows[0].name,comment:comment, course:req.session.course})
+            })
+            
+        }
+    })
+
+   // res.render('workList.ejs', {memberName:req.session.names, groupName:req.session.groupName,comment:comment,course:req.session.course})      
 })
 
 app.get('/main/', function(req,res){
@@ -116,11 +177,14 @@ app.get('/course?:id', function(req, res){
 
     let _url = req.url;
     let queryData = url.parse(_url,true).query;
-    //console.log(queryData)
+    console.log(req.session.course)
     if(Object.keys(queryData).length > 0){
         console.log(queryData.id)
-        let myCourse = req.session.course[queryData.id]
-        res.render('course.ejs',{course:req.session.course, myCourse:myCourse})
+        console.log(req.session.course[queryData.id].id)
+        req.session.courseId = queryData.id
+        req.session.save(function(){
+            res.render('course.ejs',{course:req.session.course, courseId:queryData.id})
+        })
     }
 
 
@@ -128,50 +192,7 @@ app.get('/course?:id', function(req, res){
 })
 
 
-// app.get(`/course${i}`, function(req, res){
-//     let _url = req.url
-//     let course = req.session.course
-    
-//     function getTitle(course) {
-//         let files_ = []
-//         files_.push(`<h1> ${course[i].shortname} <h1>`)
-        
-        
-//         files_ = files_.join("")
-//         return files_
-//     }
-
-//     let tt = getTitle(course)
-    
-    
-//     function getSelect(course) {
-//         let files_ = []
-//         for(var j = 0; j < course.length;j++) {
-//             files_.push(`<option value=course${j}> ${course[j].shortname} </option>`)
-//         }
-        
-//         files_ = files_.join("")
-//         return files_
-//     }
-//     let ts = getSelect(course)
-//     let html = template4.HTML(tt,ts)
-//     res.writeHead(200)
-//     res.end(html)
-// })
 
 
-
-
-// for(var i = 0; i< 5; i++){
-//     app.get(`/course${i}`, function(req, res){
-//         let _url = req.url
-        
-    
-    
-//         console.log(req.session.isLogined)
-//         console.log(req.session.course)
-//         res.render('course.ejs',{course:req.session.course})
-//     })
-// }
 
 app.listen(3300, ()=>console.log('Sever is running on port 3300...'))
