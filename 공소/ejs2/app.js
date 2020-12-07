@@ -67,19 +67,44 @@ app.get('test',function(req, res){
 
 app.get('/teamPage', function(req, res){
     const user = "tollea1235"       // 임시로 tollea1235, 무들에서 로그인정보(로그인ID)를 받아올것
+    const userid = 3
+    let sql = `select courseid,id
+               from mdl_groups
+               where id in (select groupid
+                            from mdl_groups_members
+                            where userid=${userid});`
 
-
+    
+    const group_course = []
+    conn.query(sql, function(err, rows, fields) {
+        if (err) console.log("query is not excuted. select fail...\n" + err);
+        else{
+            rows.forEach((element)=>{
+                group_course.push({courseid : element.courseid, groupid : element.id})
+            })
+            //console.log(group_course)
+            let dbCourseId = req.session.course[req.session.courseId].id
+            const index = group_course.findIndex(function(element){
+                if(element.courseid === dbCourseId){
+                    return true
+                }
+            })
+            
+            let dbGroupid = group_course[index].groupid
+            console.log("dbGroupid : "+dbGroupid)
+        }
+    })
     
     let dbCourseId = req.session.course[req.session.courseId].id
     
-    let dbGroupid = 3   // 무들에서 받아온 로그인정보로 현재 로그인한 사람이 속하는 group의 groupid를 도출해야함
-    console.log(dbCourseId)
-    let sql = `select distinct mdl_groups.name, groupid, firstname, lastname, mdl_user.id, mdl_groups_members.to_do_list,courseid
-               from mdl_groups_members, mdl_user,mdl_groups
-               where mdl_groups_members.userid = mdl_user.id and
-                        mdl_groups_members.groupid=${dbGroupid} and           
-                        mdl_groups_members.groupid = mdl_groups.id and
-                        mdl_groups.courseid = ${dbCourseId};`
+    let dbGroupid = 1   // 무들에서 받아온 로그인정보로 현재 로그인한 사람이 속하는 group의 groupid를 도출해야함
+   // console.log(dbCourseId)
+    sql = `select distinct mdl_groups.name, groupid, firstname, lastname, mdl_user.id, mdl_groups_members.to_do_list,courseid
+           from mdl_groups_members, mdl_user,mdl_groups
+           where mdl_groups_members.userid = mdl_user.id and
+                 mdl_groups_members.groupid=${dbGroupid} and           
+                 mdl_groups_members.groupid = mdl_groups.id and
+                 mdl_groups.courseid = ${dbCourseId};`
 
 
     // course 2
@@ -105,8 +130,8 @@ app.get('/teamPage', function(req, res){
                 
             });
 
-            console.log(rows)
-            console.log(to_do_list)
+            //console.log(rows)
+            //console.log(to_do_list)
             req.session.names = names;
             let index = rows.findIndex((element)=> {
                 return element.groupid === dbGroupid
@@ -156,7 +181,7 @@ app.get('/workList', function(req, res){
     let dbCourseId = req.session.course[req.session.courseId].id
     console.log("req.session.courseId: "+req.session.courseId)
     console.log(dbCourseId)
-    let dbGroupid = 3
+    let dbGroupid = 1
     // dbGroupid는 로그인한 사람에 의해 정해지고
     // dbCourseId는 강좌에 의해 정해짐
     let sql = `select distinct mdl_groups.name, groupid, firstname, lastname, mdl_user.id, mdl_groups_members.to_do_list,courseid
