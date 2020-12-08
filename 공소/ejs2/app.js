@@ -67,106 +67,7 @@ app.get('/', function(req,res){
     })
 })
 
-// app.get('/teamPage', function(req,res){
-//     console.log(req.session.course[req.session.courseId])
-//     let dbCourseId = req.session.course[req.session.courseId].id
-//     let sql = `select mdl_groups.name,groupid, firstname, lastname
-//                from mdl_groups_members, mdl_user,mdl_groups
-//                where mdl_groups_members.userid = mdl_user.id and
-//                      mdl_groups_members.groupid=1 and
-//                      mdl_groups_members.groupid = mdl_groups.id and
-//                      mdl_groups.courseid=${dbCourseId};`
 
-//     const names = []    
-//     //const lastNames = []
-//     conn.query(sql, function(err, rows, fields){
-//         if(err) console.log('query is not excuted. select fail...\n'+err)
-//         else {
-//             rows.forEach((element)=>{
-//                 names.push(element.firstname+element.lastname)
-//             })
-//             console.log(rows[0].name)
-  
-//             req.session.isLogined = true
-//             req.session.save(function(){
-//                 res.render('teamPage.ejs', {memberName:names,groupName:rows[0].name,course:req.session.course})
-//             })
-            
-//         }
-//     })
-// })
-
-app.get('/teamPage', function(req, res){
-    let dbCourseId = req.session.course[req.session.courseId].id
-    
-    let dbGroupid = 3
-    console.log(dbCourseId)
-    let sql = `select distinct mdl_groups.name, groupid, firstname, lastname, mdl_user.id, mdl_groups_members.to_do_list,courseid
-               from mdl_groups_members, mdl_user,mdl_groups
-               where mdl_groups_members.userid = mdl_user.id and
-                        mdl_groups_members.groupid=${dbGroupid} and           
-                        mdl_groups_members.groupid = mdl_groups.id and
-                        mdl_groups.courseid = ${dbCourseId};`
-
-
-    // course 2
-    // let sql = `select distinct mdl_groups.name, groupid, firstname, lastname, mdl_user.id, mdl_groups_members.to_do_list
-    //            from mdl_groups_members, mdl_user,mdl_groups
-    //            where mdl_groups_members.userid = mdl_user.id and
-    //                     mdl_groups_members.groupid=3 and           
-    //                     mdl_groups_members.groupid = mdl_groups.id and
-    //                     mdl_groups.courseid = ${dbCourseId};`
-    const names = []
-    let group_user=[]
-    let to_do_list = []
-    conn.query(sql, function(err, rows, fields){
-        if (err) console.log("query is not excuted. select fail...\n" + err);
-        else{
-            rows.forEach((element) => {
-                if(element.courseid === dbCourseId){
-                    names.push(element.firstname + element.lastname);
-                    to_do_list.push(element.to_do_list);
-                    group_user.push(element.groupid + '_' + element.id);
-                    
-                }
-                
-            });
-
-            console.log(rows)
-            console.log(to_do_list)
-            req.session.names = names;
-            let index = rows.findIndex((element)=> {
-                return element.groupid === dbGroupid
-            })
-            req.session.groupName = rows[index].name;
-            req.session.to_do_list = to_do_list;
-            req.session.group_user = group_user;
-            req.session.save(function(){
-                res.render('teamPage.ejs', {memberName:names,groupName:rows[index].name,course:req.session.course})
-            })
-
-<<<<<<< HEAD
-        }
-    })
-})
-
-app.post("/store/:id", function (req, res) {
-    var group = req.params.id.split("_")[0];
-    var user = req.params.id.split("_")[1];
-    conn.query(
-      `Update mdl_groups_members set to_do_list = "${req.body.memo}"
-      where groupid=${group} and userid=${user}`,
-    );
-    res.writeHead(302, { Location: '/workList' });
-    res.end();
-  });
-  
-
-app.get('/main', function(req, res){
-    res.redirect('/')
-})
-
-=======
 
 app.get('/teamPage', function(req, res){
     const user = "tollea1235"       // 임시로 tollea1235, 무들에서 로그인정보(로그인ID)를 받아올것
@@ -203,7 +104,6 @@ app.get('/teamPage', function(req, res){
             } else {
                 let dbGroupid = group_course[courseIndex].groupid
                 console.log("dbGroupid : "+dbGroupid)
->>>>>>> select_box
 
                 sql = `select distinct mdl_groups.name, groupid, firstname, lastname, mdl_user.id, mdl_groups_members.to_do_list,courseid
                     from mdl_groups_members, mdl_user,mdl_groups
@@ -212,11 +112,6 @@ app.get('/teamPage', function(req, res){
                             mdl_groups_members.groupid = mdl_groups.id and
                             mdl_groups.courseid = ${dbCourseId};`
 
-<<<<<<< HEAD
-app.get('/home', function(req, res){
-    res.redirect('/')
-})
-=======
                 const names = []
                 let group_user=[]
                 let to_do_list = []
@@ -246,7 +141,6 @@ app.get('/home', function(req, res){
     
                     }
                 })
->>>>>>> select_box
 
             }
             
@@ -267,98 +161,19 @@ app.post("/store/:id", function (req, res) {
   });
   
 
-<<<<<<< HEAD
-app.get('/profilePage', function(req, res){
-    res.render('profilePage.ejs',{course:req.session.course})
-=======
 app.get('/main', function(req, res){
     console.log(req.session.userid)
     res.redirect(`/home`)
->>>>>>> select_box
-})
-
-let comment = "hello"
-
-<<<<<<< HEAD
-app.get('/workList', function(req, res){
-    let dbCourseId = req.session.course[req.session.courseId].id
-    console.log("req.session.courseId: "+req.session.courseId)
-    console.log(dbCourseId)
-    let dbGroupid = 3
-    // dbGroupid는 로그인한 사람에 의해 정해지고
-    // dbCourseId는 강좌에 의해 정해짐
-    let sql = `select distinct mdl_groups.name, groupid, firstname, lastname, mdl_user.id, mdl_groups_members.to_do_list,courseid
-               from mdl_groups_members, mdl_user,mdl_groups
-               where mdl_groups_members.userid = mdl_user.id and
-                        mdl_groups_members.groupid=${dbGroupid} and
-                        mdl_groups_members.groupid = mdl_groups.id and
-                        mdl_groups.courseid = ${dbCourseId};`
-
-    const names = []
-    let group_user=[]
-    let to_do_list = []
-    conn.query(sql, function(err,rows, fields){
-      
-        console.log(rows)
-        
-        rows.forEach((element)=>{
-            if(element.courseid === dbCourseId){
-                names.push(element.firstname + element.lastname);
-                to_do_list.push(element.to_do_list);
-                group_user.push(element.groupid + '_' + element.id);
-            }
-        })
-
-        req.session.name = names
-        
-        let index = rows.findIndex((element)=> {
-            return element.groupid === dbGroupid
-        })
-        req.session.groupName = rows[index].name;
-        req.session.to_do_list = to_do_list;
-        req.session.group_user = group_user;
-        req.session.save(function(){
-            res.render('workList.ejs', {
-                memberName:names,
-                groupName:req.session.groupName.name, 
-                comment: req.session.to_do_list,
-                group_user: req.session.group_user,
-                course:req.session.course
-            })
-        })
-    })
 })
 
 
-
-app.get('/course?:id', function(req, res){
-    //console.log(req.session.isLogined)
-    //console.log(req.session.course)
-    
-
-    let _url = req.url;
-    let queryData = url.parse(_url,true).query;
-    console.log(req.session.course)
-    if(Object.keys(queryData).length > 0){
-        console.log(queryData.id)
-        console.log(req.session.course[queryData.id].id)
-        req.session.courseId = queryData.id
-        req.session.save(function(){
-            res.render('course.ejs',{course:req.session.course, courseId:queryData.id})
-        })
-    }
-=======
 
 app.get('/home', function(req, res){
     res.redirect(`/?id=${req.session.userid}`)
->>>>>>> select_box
 })
 
 
 
-<<<<<<< HEAD
-
-=======
 app.get('/profilePage', function(req, res){
     res.render('profilePage.ejs',{course:req.session.course})
 })
@@ -451,7 +266,6 @@ app.get('/course?:id', function(req, res){
         })
     }
 })
->>>>>>> select_box
 
 
 
