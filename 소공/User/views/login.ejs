@@ -1,5 +1,6 @@
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
         <title>로그인</title>
         <style type="text/css">
@@ -68,19 +69,20 @@
         </style>
     </head>
     <body>
+        
         <h2 id="title">로그인</h2>
 
         <div>
             <form action='/loginFunc' method='post'>
             <div class="imgcontainer">
-                <img src="img_avatar2.png" alt="Avatar" class="avatar">
+                <img src="avatar.jpg" alt="Avatar" class="avatar">
             </div>
 
             <div id="container">
                 <label for="uid"><b>ID</b></label>
                 <input type='text' placeholder="Enter ID" name='id' id="userid" required><br>
                 <label for="psw"><b>Password</b></label>
-                <input type='text' placeholder="Enter Password" name='pw' id="userpw" required><br>
+                <input type='password' placeholder="Enter Password" name='pw' id="userpw" required><br>
             </div>
             <div id="login_container">
                 <button type="submit" value="로그인" ">로그인</button> 

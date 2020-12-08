@@ -4,7 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>History</title>
+    <title>Review</title>
     <style>
         #Review-title1 {
             border: 1px solid;
@@ -65,7 +65,7 @@
 
         .bgimg {
             background-image: url("bolt.jpg");
-            min-height: 50%;
+            min-height: 100%;
             background-position: center;
             background-size: cover;
             height: 150px;
@@ -73,7 +73,6 @@
             margin: 8px 0;
             border: none;
         }
-        #resid{ background-color: aquamarine;}
     </style>
 </head>
 
@@ -81,37 +80,42 @@
     <div class="bgimg w3-display-container w3-animate-opacity">
         <div id="Review-title1"><button onClick="location.href='/main'">홈으로</button> </div>
         <div style=" margin-top: 50px; margin-bottom: 50px; text-align: center;">
-            <h1>Order History</h1>
+            <h1>Restaurant Review</h1>
         </div>
     </div>
 
     <div id="Review-history"><br>
-        <b>Your Past Order</b><br><br>
-        <% var bo = 'false'; %>
-        <!--리뷰데이터 테이블 조회 후 넣는것들-->
-        <% for(i = 0; i< length; i++) { %>
-        <% if(bo == 'true') {bo = 'false'; continue;}%>
-        <div id="review1">
-            <div id="first">
-                <div id="resid">
-                 <%=resid[i]%>
-                </div>
-
-                <div id="history-date1">
-               <u><%=date[i]%></u> 
-                </div>
-                <div id="history-review1">
-            <br>You Ate : <%=content[i] %>
-                </div>
-                <br>
+        <form action="/viewHistory" method="get">
+            <div id="ask-history">
+              About This Restaurant...
             </div>
-
-            [Total : <%=totalprice[i] %>₩]
-        </div><br><hr/>
+        </form>
+        <!--리뷰마다 들어갈 것들-->
+        <% for(i = 0; i< length; i++) { %>
+        <div id="review1">
+            <div id="review1-1">
+                <img src="images/profile.png" alt="">
+            </div>
+            <div id="review1-2">
+                <div id="review1-2-1">
+                    <div id="review1-2-1-1">
+                        <div id="review1-name">
+                            <%=userId[i] %>
+                            <%=date[i] %>
+                        </div>
+                        <div id="review1-rate">
+                            rate : <%=rate[i] %>
+                        </div>
+                    </div>
+                    <div id="review1-2-1-2">
+                        <%=content[i] %>
+                    </div>
+                </div>
+            </div>
+        </div><br><br><hr/>
         <% } %>
-        <br><br>
-    </div>
 
+        <br style="clear:both"><br><br>
     </div>
 </body>
 </body>

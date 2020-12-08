@@ -8,7 +8,7 @@
 <body style="max-width:400px;margin:16px;border:1px solid #ccc">
 
     <header class="w3-container w3-card-4 w3-theme">
-        <h1>Manager</br>홍길동</h1>
+        <h1>Manager</br><%=name%></h1>
     </header>
 
     <div class="w3-panel">
@@ -32,6 +32,18 @@
             </div>
         </div>
         <hr>
+
+        <div class="w3-row">
+            <div class="w3-col s3">
+                <img src="images/notice.png" style="width:100%">
+            </div>
+            <div class="w3-col s9 w3-container">
+                <h3><a a href="notification" style="text-decoration:none">공지 사항</a></h3>
+ 
+            </div>
+        </div>
+        <hr>
+
         <div class="w3-row">
             <div class="w3-col s3">
                 <img src="images/review.png" style="width:100%">
@@ -51,6 +63,9 @@
             </div>
         </div>-->
     </div>
+    <form action="/logout" method="get">
+        <button class="w3-button w3-black w3-border" type="submit">로그 아웃</button>
+    </form>
 </body>
 
 </html>

@@ -3,17 +3,11 @@ CREATE TABLE ACCOUNT
 	userId                VARCHAR(20)  NOT NULL ,
 	name                  VARCHAR(20)  NULL ,
 	userPw                VARCHAR(20)  NOT NULL ,
-<<<<<<< HEAD
-	userNum               INT  NOT NULL ,
-	isManager             BOOLEAN  NOT NULL, 
-=======
-	userNum               INT  NOT NULL auto_increment,
-	
->>>>>>> master
+	userNum               INT  NOT NULL,
+	 
 
     primary key (userId, userNum)
 );
-
 
 CREATE TABLE FINANCE
 (
@@ -48,31 +42,18 @@ CREATE TABLE CART
 CREATE TABLE ITEM
 (
 	name                  VARCHAR(20)  NOT NULL ,
-	price                 INT  NOT NULL ,
-	itemNum               INT  NOT NULL ,
+	price                 INT  NOT NULL,
 
-    primary key(itemNum)
+    primary key(name)
 );
 
-CREATE TABLE ORDER_ITEM_Detail
-(
-	cartNum              INT  NOT NULL ,
-	itemNum              INT  NOT NULL ,
-	count                INT  NOT NULL ,
 
-    primary key(cartNum, itemNum),
-    constraint cartConstraint foreign key (cartNum) references CART(cartNum),
-    constraint itemConstraint foreign key(itemNum) references ITEM(itemNum)
-);
 
-alter table CART
-add constraint itemNumConstraint 
-foreign key(itemNum) references ORDER_ITEM_Detail(itemNum);
 
 
 CREATE TABLE REVIEW
 (
-	reviewNum             INT NOT NULL ,
+	reviewNum             INT NOT NULL AUTO_INCREMENT,
 	userId                VARCHAR(20)  NOT NULL ,
 	userNum               INT  NOT NULL ,
 	historyNum	 INT NOT NULL,
@@ -84,37 +65,32 @@ CREATE TABLE REVIEW
     constraint reviewConstraint foreign key(userId, userNum, historyNum) references HISTORY(userId, userNum, historyNum) on delete cascade
 );
 
-<<<<<<< HEAD
-INSERT INTO account (userId, name, userPw, userNum,isManager) VALUES
-=======
-INSERT INTO account (userId, name, userPw, userNum) VALUES
->>>>>>> master
+CREATE TABLE NOTIFICATION
 (
-	"tollea1234",
-	"Kim",
-	"1234",
-	1
+	notiNum             INT NOT NULL AUTO_INCREMENT,
+	title                     VARCHAR(20)  NOT NULL ,
+	content                VARCHAR(100)  NOT NULL ,
+	date              	  DATE  NULL ,
+ 
+    primary key(notiNum)
 );
 
-<<<<<<< HEAD
-select item_num
-from ORDER_ITEM_Detail, (
-	select cartNum
-	from history, cart
-	where history.userid = cart.userid;
-) as A
-where ORDER_ITEM_Detail.cartNum = A.cartNum;
+create table temp_cart(name varchar(20), price int, number int);
 
-select distinct itemNum
-from order_item_detail, (select cartNum from history, cart where history.userid=cart.userid) as A
-where order_item_detail.cartNum = A.cartNum;
+CREATE table temp_history (
+       userId      VARCHAR(20),
+       date        TEXT,
+       content      VARCHAR(100),
+       totalPrice    INT,
+        restaurantId TEXT);
 
-select name, B.date, B.totalPrice
-from item, (select distinct itemNum, A.date, A.totalPrice
-			from order_item_detail, (select cartNum, date, totalPrice from history, cart where history.userid=cart.userid) as A
-			where order_item_detail.cartNum = A.cartNum) as B
-where item.itemNum = B.itemNum;
-=======
+
+CREATE table temp_review (
+      resBlock      TEXT,
+      userId      VARCHAR(20),
+       rate    INT,
+       comment    VARCHAR(100)
+);
 
 CREATE TABLE Manager
 (
@@ -136,4 +112,3 @@ INSERT INTO Manager (managerId, name, managerPw) VALUES
 	"Lee",
 	"qwer"
 )
->>>>>>> master

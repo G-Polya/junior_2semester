@@ -67,20 +67,23 @@
 
         </style>
     </head>
-    <body>
-        <h2 id="title">로그인</h2>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+    <body style="max-width:400px;margin:16px;border:1px solid #ccc">
+        <h2 id="title"  class="w3-container w3-card-4 w3-theme">로그인</h2>
 
         <div>
             <form action='/loginFunc' method='post'>
             <div class="imgcontainer">
-                <img src="img_avatar2.png" alt="Avatar" class="avatar">
+                <img src="images/login.jpg" alt="Avatar" class="avatar">
             </div>
 
             <div id="container">
                 <label for="uid"><b>ID</b></label>
                 <input type='text' placeholder="Enter ID" name='id' id="userid" required><br>
                 <label for="psw"><b>Password</b></label>
-                <input type='text' placeholder="Enter Password" name='pw' id="userpw" required><br>
+                <input type='password' placeholder="Enter Password" name='pw' id="userpw" required><br>
             </div>
             <div id="login_container">
                 <button type="submit" value="로그인" ">로그인</button> 

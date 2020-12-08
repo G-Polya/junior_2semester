@@ -1,4 +1,7 @@
 const express = require('express');
+var moment = require('moment');
+require('moment-timezone');
+moment.tz.setDefault("Asia/Seoul");
 const app = express();
 const db_config = require(__dirname + '/config/database.js');
 const conn = db_config.init();
@@ -53,7 +56,8 @@ app.use(session({
 
 //매니저 메뉴 페이지
 app.get('/manager_menu', function (req, res) {
-    res.render('manager_menu.ejs');
+    console.log(req.session.name)
+    res.render('manager_menu.ejs', {name : req.session.name});
     //res.send('ROOT');
 });
 
@@ -73,12 +77,61 @@ app.get('/edit_menu',function(req,res){
 
 //리뷰확인 페이지 review_confirm
 app.get('/review_confirm',function(req,res){
-    let sql = 'SELECT * FROM REVIEW';    
+    let sql = 'SELECT * FROM TEMP_REVIEW';    
     conn.query(sql, function (err, rows, fields) {
         if(err) console.log('query is not excuted. select fail...\n' + err);
         else res.render('review_confirm.ejs', {review : rows});
     });
 });
+
+//공지확인
+app.get('/notification',function(req,res){
+    let sql = 'SELECT * FROM NOTIFICATION';    
+    conn.query(sql, function (err, rows, fields) {
+        if(err) console.log('query is not excuted. select fail...\n' + err);
+        else res.render('notification.ejs', {notification : rows});
+    });
+});
+
+app.get('/write_notification', function (req, res) {
+    res.render('write_notification.ejs');
+});
+
+//공지작성
+app.post('/post_noti',function(req,res){
+    let _url = req.url;
+    let queryData = url.parse(_url, true).query;
+    var title = req.body.title;
+    var content = req.body.content;
+     
+    var date = moment().format('YYYY-MM-DD HH:mm:ss');
+    console.log(title, content, date);
+    try{
+        let result = connection.query(
+          `INSERT INTO NOTIFICATION(title, content, date) VALUES (?,?,?)`,
+          [title,content,date]
+        );
+        console.log('Insert Notification Suceess!');
+      }
+      catch(exception){
+        console.log('오류 발생');
+        console.log(exception);
+      }
+      let sql = 'SELECT * FROM NOTIFICATION'; 
+      conn.query(sql, function (err, rows, fields) {
+          if(err) console.log('query is not excuted. select fail...\n' + err);
+          else res.render('notification.ejs', {notification : rows});
+      });
+});
+
+
+//공지삭제
+app.get('/delete_noti/:notiNum', function(req,res){
+    conn.query('delete from NOTIFICATION where notiNum=?', [req.params.notiNum], function() {
+        res.redirect('/notification');
+        });   
+});
+
 
 //매출량 페이지 sale
 app.get('/sale',function(req,res){
@@ -190,7 +243,9 @@ app.get('/duplicateFunc', function(req, res){
             if(flag){
                 res.render('register.ejs', {duplicateMsg:"중복되는 ID입니다."})
             } else {
-                res.render('register.ejs', {duplicateMsg:"회원가입되었습니다."})
+        
+                
+                res.send('<script> alert("회원가입 성공"); location.href="/login"; </script>')
                 sql = `insert into Manager(managerId, name, managerPw) values (?, ?, ?)`
 
                 conn.query(sql,[inputId,inputName, inputPw])
@@ -210,57 +265,72 @@ app.get('/login', function(req,res) {
 
 app.post('/loginFunc', function (req, res) {
 
-  const body = req.body
-  const inputId = body.id
-  const inputPw = body.pw
-//  console.log(inputId,inputPw)
-
-  const managerInfo = []
-
+    const body = req.body
+    const inputId = body.id
+    const inputPw = body.pw
+  //  console.log(inputId,inputPw)
   
-
-  const sql = "SELECT managerid, managerPw FROM Manager";
-  conn.query(sql, function(err, rows, fields){
-    if(err) throw err
-    else{
-        for(var i = 0; i < rows.length; i++){   
-            managerInfo.push( {managerid:rows[i].managerid, managerPw: rows[i].managerPw})
-        }
-        
-        console.log(managerInfo)
-
-        let flag = managerInfo.some(function(element){
-            if(element.managerid === inputId && element.managerPw === inputPw){
-                return true;
-            }
-        })
-
-        console.log(flag)
-
-        if(inputId === "") {
-            res.render('login.ejs', {loginMsg:""})
-        } else {
-            if(flag){
-                req.session.managerid = inputId
-                req.session.managerPw = inputPw
-                req.session.isLogined = flag
-
-                console.log(inputId, inputPw)
-                req.session.save(function(){
-                    res.redirect('/manager_menu')
-                })
-            } else {
-                res.render('login.ejs', {loginMsg:"등록되지 않은 ID 또는 PW입니다"})
-            }  
-        }
-
-    }
+    const managerInfo = []
+  
     
-  })
+  
+    const sql = "SELECT managerid, managerPw, name FROM Manager";
+    conn.query(sql, function(err, rows, fields){
+      if(err) throw err
+      else{
+          for(var i = 0; i < rows.length; i++){   
+              managerInfo.push( {managerid:rows[i].managerid, managerPw: rows[i].managerPw, name : rows[i].name})
+          }
+          
+          console.log(managerInfo)
+  
+          let flag = managerInfo.some(function(element){
+              if(element.managerid === inputId && element.managerPw === inputPw){
+                  return true;
+              }
+          })
+             
+          let managerIndex = managerInfo.findIndex(function(element){
+              if(element.managerid === inputId && element.managerPw===inputPw){
+                  return true
+              }
+          })
+          
+          console.log(flag)
+          console.log(managerInfo[managerIndex])
+  
+          if(inputId === "") {
+              res.render('login.ejs', {loginMsg:""})
+          } else {
+              if(flag){
+                  req.session.managerid = managerInfo[managerIndex].managerid
+                  req.session.managerPw = managerInfo[managerIndex].managerPw
+                  req.session.name = managerInfo[managerIndex].name
+                  req.session.isLogined = true
+  
+                  console.log(managerInfo[managerIndex].name)
+                  req.session.save(function(){
+                      res.send('<script> alert("로그인 성공"); location.href="/manager_menu"; </script>')
+                  })
+              } else {
+                  res.render('login.ejs', {loginMsg:"등록되지 않은 ID 또는 PW입니다"})
+              }  
+          }
+  
+      }
+      
+    })
+  
+  });
 
-});
 
-
+//로그아웃
+app.get("/logout", function (req, res) {
+    req.session.destroy(function () {
+      req.session;
+    });
+    res.redirect("/login");
+  });
 
 
 //이미지 경로
