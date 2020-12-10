@@ -45,6 +45,9 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.get('/', function(req,res){
     let _url = req.url;
     let queryData = url.parse(_url,true).query;
+    let loginId = queryData.id
+
+    
     
 
     let sql = `select id, shortname
@@ -57,7 +60,7 @@ app.get('/', function(req,res){
     conn.query(sql, function(err, rows, fields){
         if(err) console.log('query is not excuted. select fail...\n'+err)
         else {
-            req.session.userid = queryData.id
+            req.session.userid = loginId
             req.session.course = rows
             req.session.isLogined=true
             req.session.save(function(){
