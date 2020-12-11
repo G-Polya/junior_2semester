@@ -51,7 +51,6 @@
     .silex-id-1606318304197-25 {width: 150px; min-height: 53px; background-color: rgba(210,208,208,1); position: absolute; top: 250px; left: 290px;}
     .silex-id-1606318644502-34 {width: 150px; min-height: 75px; background-color: rgba(210,208,208,1); position: absolute; top: 250px; left: 450px;}
     .silex-id-1606318669855-36 {width: 521px; min-height: 53px; background-color: transparent; position: absolute; top: 250px; left: 610px;}
-    .silex-id-1605169710227-28 {width: 200px; min-height: 70px; position: absolute; top: 194px; left: 15px; background-color: transparent;}
   </style>
   <body>
     <!-- Sidebar/menu -->
@@ -91,7 +90,7 @@
         </a>
         <a href="/teamPage" class="w3-bar-item w3-button w3-padding">-Group정보</a>
         <a href="/workList" class="w3-bar-item w3-button w3-padding">-작업리스트</a>
-        <a href="/fileUpload" class="w3-bar-item w3-button w3-padding">-파일업로드</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding">-파일업로드</a>
         <br />
 
         <a href="/rate" class="w3-bar-item w3-button w3-padding w3-blue"
@@ -123,65 +122,8 @@
 
       <hr />
       <div class="w3-row-padding w3-margin-top" id="content_container">
-        <div data-silex-type="html-element" class="editable-style html-element silex-id-1606318077720-19 page-list paged-element" data-silex-id="silex-id-1606318077720-19" style="">
-          <div class="silex-element-content">
-            <ul style="list-style-type:none">
-              <span style="font-weight: bold; color: white;" "="">
-                <li>공동작업명: </li>
-              </span>
-            </ul>
-          </div>
-        </div>
-    
-        <div data-silex-type="html-element" class="editable-style html-element silex-id-1606318503383-27 page-list paged-element" data-silex-id="silex-id-1606318503383-27" style="">
-          <div class="silex-element-content">
-            <p><strong></strong></p><center><strong><font size="">Part</font></strong><center><strong></strong><p></p></center></center>
-          </div>
-        </div>
-    
-        <div data-silex-type="html-element" class="editable-style html-element silex-id-1606318304197-25 page-list paged-element" data-silex-id="silex-id-1606318304197-25" style="">
-          
-          <% for(i = 0; i < memberName.length; i++) { %>  
-            
-              <div class="silex-element-content">
-                <p style="height:6px; margin-bottom: 7px;"><strong></strong></p><center><strong><font color="black"> <%=i+1 %></font></center></strong>
-                  <center><strong></strong><p></p></center>
-              </div>
-              
-          <% } %>
-        </div>
-          
-        <div data-silex-type="html-element" class="editable-style html-element silex-id-1606318669855-36 page-list paged-element" data-silex-id="silex-id-1606318669855-36" style="">
-          <% for(i = 0; i < memberName.length; i++) { %>  
-          <div class="silex-element-content" style="height: 52.5px;">
-            <form action='/store/<%=group_user[i] %>' method='post'></form>
-              <textarea name="memo" style="width: 454px; height:50px;"><%=comment[i] %></textarea>
-              <!-- <input type="reset" value="재입력" style="float: right;"> -->
-              <button type='submit' style="width: 55px; height: 30px; ">저장</button>
-            </form>
-     
-          </div>
-          <% } %>
-        </div>
+       
       
-          
-        
-        <div data-silex-type="html-element" class="editable-style html-element silex-id-1606318644502-34 page-list paged-element" data-silex-id="silex-id-1606318644502-34" style="">
-          <% for(i = 0; i < memberName.length; i++) { %>  
-          
-          <div class="silex-element-content">
-                <p style="height:6px; margin-bottom: 7px;"><strong></strong></p>
-                <center><strong><font color="black"> <%=memberName[i] %></font></strong></center>
-                  <center><strong></strong><p></p></center>
-          </div>
-          <% } %>
-        </div>
-
-
-
-    </div>
-        
-               
   
   
         
