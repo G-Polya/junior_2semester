@@ -85,7 +85,11 @@ ${style.css()}
       <br />
       <div class="w3-container w3-row">
         <img src="logo.637cfd18.jpg" id="logo" />
-        <div id="logotext">PLASS DGU</div>
+        <div id="logotext">
+          <a href="/home">
+            PLASS DGU
+          </a>  
+        </div>
         <div data-silex-type="text-element" class="editable-style text-element silex-id-1605169710227-28 page-main paged-element style-all-style1" data-silex-id="silex-id-1605169710227-28" style="">
             <select name="course" onchange="location=this.value;">
                 <option value="select-course" > 강좌를 선택하세요 </option>
