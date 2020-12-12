@@ -1,27 +1,30 @@
-const express = require('express')
 var http = require("http");
 var fs = require("fs");
+const express = require('express')
+const app = express()
 var Inko = require('inko');
 var inko = new Inko();
 const qs = require("querystring");
-
-const app = express()
-const db_config = require(__dirname+'/config/database.js')
-const conn = db_config.init()
 const bodyParser = require('body-parser')
-var session=require('express-session')
-var mySqlStore= require('express-mysql-session')(session)
-let router = express.Router();
 
 var myRouter = require("./myrouter.js");
 var template = require("./template.js");
 var j = 0;
 
+const mysql = require("mysql")
+const db_config = require(__dirname+'/config/database.js')
+const conn = db_config.init()
+
+var session=require('express-session')
+var mySqlStore= require('express-mysql-session')(session)
+let router = express.Router();
+
+
 var url = require("url")
-const { Console, group } = require('console')
-const { RSA_NO_PADDING } = require('constants')
-const { read } = require('fs');
-const e = require('express');
+// const { Console, group } = require('console')
+// const { RSA_NO_PADDING } = require('constants')
+// const { read } = require('fs');
+// const e = require('express');
 
 var options = {
     host : 'localhost',
@@ -43,16 +46,20 @@ app.use(session({
 
 
 db_config.connect(conn);
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:false}))
 
-app.set('views', __dirname+'/views')
-app.set('view engine', 'ejs')
 app.use(express.static("public"));
 app.use("/grouprepository", express.static("grouprepository"));
 
+
 app.use("/myrouter", myRouter);
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended:false}))
+app.set('views', __dirname+'/views')
+app.set('view engine', 'ejs')
+
+
+var IdRepository = [];
 
 app.get('/', function(req,res){
     let _url = req.url;
@@ -60,7 +67,7 @@ app.get('/', function(req,res){
     let loginId = queryData.id
 
     IdRepository = [];
-
+    newrpos_list = []
     for (var j in db) {
       if (db[j].guid == loginId) {
         if (db[j].g_path) {
@@ -74,12 +81,16 @@ app.get('/', function(req,res){
               }"
                           where id=${db[j].gid};`
             );
+            
             dbqueryinput();
           });
+          newrpos_list.push(db[j].c_name + "_" + db[j].gid)
+          
         }
       }
     }
-  
+    console.log(newrpos_list)
+    
     function getFiles(dir, files_) {
       files_ = files_ || [];
       var files = fs.readdirSync(dir);
@@ -111,10 +122,7 @@ app.get('/', function(req,res){
             req.session.userid = loginId
             req.session.course = rows
             req.session.isLogined=true
-            var tt = getFiles("./grouprepository", 0);
-            console.log(tt)
-            req.session.tt = tt
-            
+            req.session.newrpos_list = newrpos_list
             req.session.save(function(){
                 res.render('home.ejs', {course:rows})
             })
@@ -139,7 +147,7 @@ app.get('/fileUpload', function(req, res){
             rows.forEach((element)=>{
                 group_course.push({courseid : element.courseid, groupid : element.id})
             })
-
+            
             let dbCourseId = req.session.course[req.session.courseId].id
             
             const courseIndex = group_course.findIndex(function(element){
@@ -200,6 +208,7 @@ app.get('/teamPage', function(req, res){
                 group_course.push({courseid : element.courseid, groupid : element.id})
             })
            
+            
             let dbCourseId = req.session.course[req.session.courseId].id
             
             const courseIndex = group_course.findIndex(function(element){
@@ -365,14 +374,13 @@ app.get('/workList', function(req, res){
 
 
 
-app.get('/course?:id', function(req, res){
-    
-
+app.get('/course?:courseid', function(req, res){
     let _url = req.url;
     let queryData = url.parse(_url,true).query;
     console.log(req.session.course)
+    
     if(Object.keys(queryData).length > 0){
-        req.session.courseId = queryData.id
+        req.session.courseId = queryData.courseid
         req.session.save(function(){
             res.render('course2.ejs',{course:req.session.course, courseId:queryData.id, userid:req.session.userid})
         })
@@ -382,17 +390,21 @@ app.get('/course?:id', function(req, res){
 
 app.get("/:id", function (req, res) {
     var loginId = req.query.id;
+    
+    
     var group = req.params.id;
+    //console.log("newRpos: "+ req.session.newrpos_list)
     group = "./grouprepository/" + group;
     
     IdRepository = [];
-  
+    
     for (var j in db) {
       if (db[j].guid == loginId) {
         if (db[j].g_path) {
           IdRepository.push(db[j].g_path);
         } else {
-          var newrpos = "./grouprepository/" + db[j].c_name + "_" + db[j].gid;
+          newrpos = "./grouprepository/" + db[j].c_name + "_" + db[j].gid;
+          
           fs.mkdir(newrpos, (err) => {
             conn.query(
               `Update mdl_groups set group_path = "${
@@ -405,7 +417,9 @@ app.get("/:id", function (req, res) {
         }
       }
     }
-  
+    
+    console.log("newrpos: "+ newrpos_list)
+
     function getFiles2(dir, files_) {
       files_ = files_ || [];
       var files = fs.readdirSync(dir);
@@ -435,6 +449,7 @@ app.get("/:id", function (req, res) {
       var idx = 0;
       for (var i in files) {
         var name = dir + "/" + files[i].filename;
+        
         var forbid = "_content";
         if (name.indexOf(forbid) != -1) {
           continue;
@@ -548,7 +563,7 @@ app.get("/:id", function (req, res) {
         // files_.push(`<select name="course" onchange="location=this.value;">`)
         //options.push(`<option value="select-course" > 강좌를 선택하세요 </option>`)
         for (var i=0; i < course.length; i ++){
-            options.push(`<option value="course?id=${i}"> ${course[i].shortname} </option>`)
+            options.push(`<option value="course?courseid=${i}"> ${course[i].shortname} </option>`)
         }
         // files_.push("</select>")
         options = options.join("");
@@ -566,6 +581,8 @@ app.get("/:id", function (req, res) {
     );
     res.writeHead(200);
     res.end(html);
+    
+    
 });
   
   var db = [];
