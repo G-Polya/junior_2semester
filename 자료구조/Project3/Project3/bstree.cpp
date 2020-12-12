@@ -175,6 +175,7 @@ void Tree::fireSub(TreeNode* p)
 void Tree::print()
 {
 	printSub(root, 0);
+	cout << "=================================================" << endl;
 }
 
 void Tree::printSub(TreeNode* p, int level)
