@@ -1,48 +1,74 @@
-#pragma once
-#include <string>
+//--------------------------------------------------------------------
+//
+//  Laboratory 12                                           bstree.h
+//
+//  Class declarations for the linked implementation of the Binary
+//  Search Tree ADT -- including the recursive partners of the
+//  public member functions
+//
+//--------------------------------------------------------------------
 
+#include <iostream>
 using namespace std;
+template < class TE, class KF > class BSTree;
+template < class TE, class KF > class BSTreeNode;
 
-class TreeNode
+template < class TE, class KF >
+class BSTreeNode             // Facilitator class for the BSTree class
 {
 private:
+
 	// Constructor
-	TreeNode(string name, TreeNode* child, TreeNode* sibling);
+	BSTreeNode(const TE& elem,
+		BSTreeNode* firstPtr, BSTreeNode* secondPtr, BSTreeNode* thirdPtr);
 
 	// Data members
-	string name;
-	TreeNode* child,
-		* sibling;
+	TE element;          // Binary search tree element
+	BSTreeNode* first,   // Pointer to the first child
+		* second,	 // Pointer to the second child
+		* third;   // Pointer to the third child
 
-	friend class Tree;
+	friend class BSTree<TE, KF>;
 };
 
-class Tree
+//--------------------------------------------------------------------
+
+template < class TE, class KF >    // TE : tree element
+class BSTree                       // KF : key field
 {
 public:
+
 	// Constructor
-	Tree();
+	BSTree();
 
 	// Destructor
-	~Tree();
+	~BSTree();
 
-	// Operations
-	void setCEO(string name);
-	void hire(string name1, string name2);
-	bool fire(string name);
-	void print();
-	void clear();
-	bool isEmpty();
+	// Binary search tree manipulation operations
+	void insert(const TE& newElement2);			 // Insert element
+	int retrieve(KF searchKey, TE& searchElement);
+	// Retrieve element
+	int remove(KF deleteKey);                    // Remove element
+	void clear();                                // Clear tree
+
+	// Binary search tree status operations
+	int empty() const;                           // Tree is empty
+	int full() const;                            // Tree is full
+
+	// Output the tree structure -- used in testing/debugging
+	void showStructure() const;
 
 private:
-	void hireSub(TreeNode* p, string name);
-	void fireSub(TreeNode* p);
-	void printSub(TreeNode* p, int level);
-	void clearSub(TreeNode* p);
-	TreeNode* find(string name);
-	TreeNode* findSub(TreeNode* p, string name);
-	//bool find(string name);
-	//bool findSub(TreeNode* p, string name);
-	TreeNode* parent; // 노드를 삭제할 때 부모의 위치
-	TreeNode* root;
+
+	// Recursive partners of the public member functions
+	void insertSub(BSTreeNode<TE, KF>*& p, const TE& newElement2);
+	int retrieveSub(BSTreeNode<TE, KF>* p, KF searchKey, TE& searchElement);
+	int removeSub(BSTreeNode<TE, KF>*& p, KF deleteKey);
+	void clearSub(BSTreeNode<TE, KF>* p);
+	void showSub(BSTreeNode<TE, KF>* p, int level) const;
+	void move(BSTreeNode<TE, KF>* ptr);
+
+	// Data member
+	BSTreeNode<TE, KF>* root;   // Pointer to the root node
+	BSTreeNode<TE, KF>* cursor;
 };

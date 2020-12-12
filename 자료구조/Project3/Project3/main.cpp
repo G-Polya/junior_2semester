@@ -1,60 +1,93 @@
-#include "bstree.h"
-#include <cstring>
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <string>
-
+#include "bstree.cpp"
 using namespace std;
 
-void main()
+class TestData
 {
-	Tree company;
-	string str;
-	string str_arr[3];
+public:
 
+	void setKey(string newKey)
+	{
+		keyField = newKey;
+	}   // Set the key
+
+	string key() const
+	{
+		return keyField;
+	}   // Returns the key
+
+private:
+
+	string keyField; // Key for the element
+};
+
+//--------------------------------------------------------------------
+
+int main()
+{
+	char str[100];
+	char* input[3] = { NULL, };
+	int loop = 0;
+	string str1 = "";
+	string str2 = "";
+	string str3 = "";
+
+	BSTree<TestData, string> testTree; // Test binary search tree
+	TestData testElement1;             // Binary search tree element
+	TestData testElement2;             // Binary search tree element
+	cout << "CEO: ";
 	while (true)
 	{
-		if (company.isEmpty())
-		{
-			cout << "CEO : ";
-			cin >> str;
-			company.setCEO(str);
-			cin.ignore();
+		cin.getline(str, 100, '\n');
+		char* ptr = strtok(str, " ");
+
+		while (ptr != NULL) {
+			input[loop] = ptr;
+			loop++;
+			ptr = strtok(NULL, " ");
 		}
-		else
-		{
-			getline(cin, str);
 
-			char* str_buff = new char[100];
-			char* context = new char[100];
-			strcpy_s(str_buff, 100, str.c_str());
-			int str_count = 0;
+		if (input[0] != NULL) str1 = input[0];
+		if (input[1] != NULL) str2 = input[1];
+		if (input[2] != NULL) str3 = input[2];
 
-			char* tok = strtok_s(str_buff, " ", &context);
-			while (tok != NULL)
-			{
-				str_arr[str_count++] = string(tok);
-				tok = strtok_s(NULL, " ", &context);
-			}
-
-			if (str_arr[1] == "Hires" || str_arr[1] == "hires")
-				company.hire(str_arr[0], str_arr[2]);
-			else if (str_arr[0] == "Fire" || str_arr[0] == "fire")
-			{
-				if (company.fire(str_arr[1]))
-					cout << str_arr[1] << " is fired" << endl;
-				else
-					cout << "There is not " << str_arr[1] << " in this company" << endl;
-			}
-			else if (str_arr[0] == "Print" || str_arr[0] == "print")
-				company.print();
-			else if (str_arr[0] == "Clear" || str_arr[0] == "clear")
-				company.clear();
-			else if (str_arr[0] == "Q" || str_arr[0] == "q")
-				break;
-			else cout << "invalid command" << endl;
-
-			for (int i = 0; i < 3; i++)
-				str_arr[i] = "";
+		if (tolower(str1[0]) == 'p') { // Print
+			for (int i = 0; i < str1[i]; i++) str1[i] = tolower(str1[i]);
+			if (str1.compare("print") == 0) testTree.showStructure();
 		}
+		else if (tolower(str1[0]) == 'f') { // Fire
+			for (int i = 0; i < str1[i]; i++) str1[i] = tolower(str1[i]);
+			if (str1.compare("fire") == 0) {
+				if (testTree.retrieve(str2, testElement1))
+					testTree.remove(str2);
+			}
+		}
+		else if (tolower(str2[0]) == 'h') { // Hire
+			for (int i = 0; i < str2[i]; i++) str2[i] = tolower(str2[i]);
+			if (str2.compare("hires") == 0) {
+				testElement2.setKey(str3);
+				if (testTree.retrieve(str1, testElement1))
+					testTree.insert(testElement2);
+			}
+		}
+		else if (testTree.empty()) { // 첫 번째 input
+			testElement2.setKey(str1);
+			testTree.insert(testElement2);
+		}
+
+		// 입력이 끝나면 초기화
+		loop = 0;
+		for (int i = 0; i < 3; i++) {
+			input[i] = NULL;
+		}
+		str1 = "";
+		str2 = "";
+		str3 = "";
+		testElement1.setKey("");
+		testElement2.setKey("");
 	}
+
+	return 0;
 }

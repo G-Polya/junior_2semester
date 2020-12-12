@@ -1,213 +1,284 @@
+#include <assert.h>
 #include "bstree.h"
-#include <iostream>
-#include <algorithm>
 
-using namespace std;
-
-TreeNode::TreeNode(string name, TreeNode* child, TreeNode* sibling)
+template < class TE, class KF >
+BSTreeNode<TE, KF>::BSTreeNode(const TE& elem, BSTreeNode* firstPtr, BSTreeNode* secondPtr, BSTreeNode* thirdPtr)
 {
-	this->name = name;
-	this->child = child;
-	this->sibling = sibling;
+	element = elem;
+	first = firstPtr;
+	second = secondPtr;
+	third = thirdPtr;
 }
 
-Tree::Tree()
+//--------------------------------------------------------------------
+
+template < class TE, class KF >
+BSTree<TE, KF>::BSTree()
+// Constructor. Creates an empty binary search tree.
 {
-	this->root = NULL;
-	this->parent = NULL;
+	root = NULL;
+	cursor = NULL;
 }
 
-Tree::~Tree()
+template < class TE, class KF >
+BSTree<TE, KF>::~BSTree()
+// Destructor. Deallocates (frees) the memory used to store a binary search tree.
 {
 	clear();
 }
 
-void Tree::setCEO(string name)
+template < class TE, class KF >
+void BSTree<TE, KF>::insert(const TE& newElement2)
+// Inserts newDataItem into a binary search tree. If a data item with the same key as
+// newDataItem already exists in the tree, then updates that data item’s nonkey fields
+// with newDataItem’s nonkey fields.
 {
-	root = new TreeNode(name, NULL, NULL);
+	if (full()) cout << "Failed -- Tree is full" << endl;
+	else insertSub(cursor, newElement2);
 }
 
-TreeNode* Tree::find(string name)
+template < class TE, class KF >
+int BSTree<TE, KF>::retrieve(KF searchKey, TE& searchElement)
+// Searches a binary search tree for the data item with key searchKey. If this data item is
+// found, then copies the data item to searchDataItem and returns true. Otherwise,
+// returns false with searchDataItem undefined.
 {
-	if (root != NULL)
-	{
-		parent = root;
-		return findSub(root, name);
+	if (empty()) {
+		cout << "Failed -- Tree is empty" << endl;
+		return 0;
 	}
+	else return retrieveSub(root, searchKey, searchElement);
+}
+
+template < class TE, class KF >
+int BSTree<TE, KF>::remove(KF deleteKey)
+// Deletes the data item with key deleteKey from a binary search tree. If this data item
+// is found, then deletes it from the tree and returns true. Otherwise, returns false.
+{
+	if (empty()) {
+		cout << "Failed -- Tree is empty" << endl;
+		return 0;
+	}
+	else return removeSub(cursor, deleteKey);
+}
+
+template < class TE, class KF >
+void BSTree<TE, KF>::clear()
+// Removes all the data items in a binary search tree.
+{
+	if (empty()) cout << "Failed -- Tree is already empty" << endl;
+	else {
+		clearSub(root);
+		root = NULL;
+	}
+}
+
+template < class TE, class KF >
+int BSTree<TE, KF>::empty() const
+// Returns true if a binary search tree is empty. Otherwise, returns false.
+{
+	if (root == NULL) return 1;
 	else return 0;
 }
 
-TreeNode* Tree::findSub(TreeNode* p, string name)
+template < class TE, class KF >
+int BSTree<TE, KF>::full() const
+// Returns true if a binary search tree is full. Otherwise, returns false.
 {
-	TreeNode* result = NULL;
-	if (p->name == name)
+	return 0;
+}
+
+template < class TE, class KF >
+void BSTree<TE, KF>::showStructure() const
+// Outputs the keys in a binary search tree. The tree is output with its branches oriented
+// from left(root) to right(leaves); that is, the tree is output rotated counterclockwise 90
+// degrees from its conventional orientation.If the tree is empty, outputs “Empty tree”.
+// Note that this operation is intended for debugging purposes only.
+{
+	if (empty()) cout << "Empty tree" << endl;
+	else {
+		cout << endl;
+		showSub(root, 0);
+		cout << "============================================================" << endl;
+	}
+}
+
+//--------------------------------------------------------------------
+
+template < class TE, class KF >
+void BSTree<TE, KF>::insertSub(BSTreeNode<TE, KF>*& p, const TE& newElement2)
+{
+	if (p == NULL) {
+		p = new BSTreeNode<TE, KF>(newElement2, NULL, NULL, NULL);
+		if (root == NULL) {
+			root = p;
+			cursor = root;
+		}
+	}
+	else {
+		if (p->first == NULL) insertSub(p->first, newElement2);
+		else if (p->second == NULL) insertSub(p->second, newElement2);
+		else if (p->third == NULL) insertSub(p->third, newElement2);
+	}
+}
+
+template < class TE, class KF >
+int BSTree<TE, KF>::retrieveSub(BSTreeNode<TE, KF>* p, KF searchKey, TE& searchElement)
+{
+	int result;
+
+	if (p == NULL)
+		result = 0;
+
+	else if (p->element.key() != searchKey)
 	{
-		return p;
+		result = retrieveSub(p->first, searchKey, searchElement);
+		if (result == 0)
+			result = retrieveSub(p->second, searchKey, searchElement);
+		if (result == 0)
+			result = retrieveSub(p->third, searchKey, searchElement);
 	}
 	else
 	{
-		if (p->sibling != NULL)
-		{
-			result = findSub(p->sibling, name);
-			if (result != NULL) return result;
-		}
-		if (p->child != NULL)
-		{
-			parent = p;
-			result = findSub(p->child, name);
-			if (result != NULL) return result;
-		}
+		searchElement = p->element;
+		cursor = p;
+		result = 1;
 	}
-	return NULL;
+
+	return result;
 }
 
-void Tree::hire(string name1, string name2)
+template < class TE, class KF >
+int BSTree<TE, KF>::removeSub(BSTreeNode<TE, KF>*& p, KF deleteKey)
 {
-	TreeNode* superior = find(name1); // superior는 name1을 가진 노드
-	if (superior != NULL)
-	{
-		if (findSub(root, name2) == NULL) // 조직도에 name2를 가진 노드가 없으면
-			hireSub(superior, name2); // hireSub를 통해 name2를 고용
-	}
-}
+	BSTreeNode<TE, KF>* temp;
+	int result;
 
-void Tree::hireSub(TreeNode* p, string name)
-{
-	if (p->child == NULL) // p가 가리키는 노드가 비어 있어야 그 자리에 name의 노드를 생성
-		p->child = new TreeNode(name, NULL, NULL);
-	else // 아니면 p의 sibling에서 실행
-	{
-		TreeNode* addPtr = p->child;
-		while (addPtr->sibling != NULL)
-		{
-			addPtr = addPtr->sibling;
-		}
-		addPtr->sibling = new TreeNode(name, NULL, NULL);
-	}
-}
+	if (p == NULL)
+		result = 0;
 
-bool Tree::fire(string name)
-{
-	TreeNode* delPtr = find(name);
-	if (delPtr != NULL)
+	else if (p->element.key() == deleteKey)
 	{
-		fireSub(delPtr);
-		return true;
-	}
-	else
-		return false;
-}
+		temp = p;
 
-void Tree::fireSub(TreeNode* p)
-{
-	TreeNode* tmp = p;
-	TreeNode* pre;
-	if (tmp == parent->child) // p가 첫째일 때
-	{
-		pre = parent;
-		while (tmp->child != NULL) // p의 부하직원이 존재
+		if (p->first == NULL) // deleting leaf node (no child)
 		{
-			tmp->name = tmp->child->name; // 부하직원을 승진시킴
-			pre = tmp;
-			tmp = tmp->child;
-		}
-		while (tmp->sibling != NULL) // p의 형제 노드가 존재
-		{
-			tmp->name = tmp->sibling->name; // 형제 노드를 하나씩 올려줌
-			pre = tmp;
-			tmp = tmp->sibling;
-		} // 정렬이 끝나면
-		if (pre->child == tmp) // 삭제하려는 노드가 상사의 자식 노드일 경우
-			pre->child = NULL;
-		else if (pre->sibling == tmp) // 삭제하려는 노드가 동료의 형제 노드일 경우
-			pre->sibling = NULL;
-		delete tmp; // tmp를 삭제
-	}
-	else // p가 첫째가 아닐 때
-	{
-		if (tmp != root) // p가 CEO가 아닐 때
-		{
-			if (tmp->child != NULL) // 부하직원이 존재
-			{
-				pre = parent;
-				while (tmp->child != NULL) // p의 부하직원이 존재
-				{
-					tmp->name = tmp->child->name; // 부하직원을 승진시킴
-					pre = tmp;
-					tmp = tmp->child;
+			BSTreeNode<TE, KF>* location;
+			location = root;
+			// delete하려는 node의 parent node를 가리키도록 location 이동
+			while (location->first != p && location->second != p && location->third != p) {
+				if (location->first == p || location->second == p || location->third == p) break;
+				location = location->first;
+			}
+
+			if (location->first == p) {
+				location->first = NULL;
+				if (location->second != NULL) {
+					location->first = location->second;
+					location->second = NULL;
 				}
-				while (tmp->sibling != NULL) // p의 형제 노드가 존재
-				{
-					tmp->name = tmp->sibling->name; // 형제 노드를 하나씩 올려줌
-					pre = tmp;
-					tmp = tmp->sibling;
-				} // 정렬이 끝나면
-				if (pre->child == tmp) // 삭제하려는 노드가 상사의 자식 노드일 경우
-					pre->child = NULL;
-				else if (pre->sibling == tmp) // 삭제하려는 노드가 동료의 형제 노드일 경우
-					pre->sibling = NULL;
+				if (location->third != NULL) {
+					location->second = location->third;
+					location->third = NULL;
+				}
 			}
-			else // 부하직원이 존재하지 않을 경우
-			{
-				pre = parent->child;
-				while (pre->sibling != tmp)
-					pre = pre->sibling; // 삭제하려는 노드의 이전 노드까지 pre를 옮겨줌
-				pre->sibling = tmp->sibling; // 앞뒤 노드를 연결
+			else if (location->second == p) {
+				location->second = NULL;
+				if (location->third != NULL) {
+					location->second = location->third;
+					location->third = NULL;
+				}
 			}
-			delete tmp;
+			delete temp;
 		}
-		else // p가 CEO일 때
+		else if (temp == root) // deleting root node
 		{
-			if (tmp->child == NULL) // 부하직원이 없으면
-			{
-				delete tmp;
-				root = NULL; // 그대로 삭제
+			TE elem;
+			elem = cursor->first->element;
+			cursor->element = elem;
+
+			TE elem2;
+			elem2 = cursor->first->first->element;
+			cursor->first->element = elem2;
+
+			move(cursor->first->first);
+		}
+		else // deleting middle node
+		{
+			BSTreeNode<TE, KF>* location;
+			location = root;
+			while (location->first != p) { // delete하려는 node의 parent node를 가리키도록
+				if (location->first == p) break;
+				location = location->first;
 			}
-			else // 부하직원이 있으면
-			{
-				swap(tmp->name, tmp->child->name); // CEO와 부하직원을 바꿔줌
-				fireSub(tmp->child); // 바꾼 CEO를 삭제하는 함수 호출
+
+			TE elem;
+			elem = cursor->first->element;
+			cursor->element = elem;
+
+			if (cursor->first->first != NULL) { // first node를 2개 이동해야 하는 경우
+				move(cursor->first);
+			}
+			else { // first node를 1개만 이동해도 되는 경우
+				if (cursor->second != NULL) {
+					cursor->first = cursor->second;
+					cursor->second = NULL;
+				}
+				if (cursor->third != NULL) {
+					cursor->second = cursor->third;
+					cursor->third = NULL;
+				}
 			}
 		}
+		result = 1;
 	}
+	return result;
 }
 
-void Tree::print()
+template < class TE, class KF >
+void BSTree<TE, KF>::clearSub(BSTreeNode<TE, KF>* p)
 {
-	printSub(root, 0);
-}
-
-void Tree::printSub(TreeNode* p, int level)
-{
-	if (p != NULL)
-	{
-		for (int i = 0; i < level; i++)
-			cout << '+';
-		cout << p->name << endl;
-	}
-	if (p->child != NULL)
-		printSub(p->child, level + 1);
-	if (p->sibling != NULL)
-		printSub(p->sibling, level);
-}
-
-void Tree::clear()
-{
-	clearSub(root);
-	root = NULL;
-}
-
-void Tree::clearSub(TreeNode* p)
-{
-	if (p != NULL)
-	{
-		clearSub(p->child);
-		clearSub(p->sibling);
+	if (p != NULL) {
+		clearSub(p->first);
+		clearSub(p->second);
+		clearSub(p->third);
 		delete p;
 	}
 }
 
-bool Tree::isEmpty()
+template < class TE, class KF >
+void BSTree<TE, KF>::showSub(BSTreeNode<TE, KF>* p, int level) const
 {
-	return (root == NULL); // root가 NULL이면 비어있으므로 true 반환
+	int i;
+
+	if (p != NULL) {
+		for (i = 0; i < level; i++) {
+			cout << '+';
+		}
+
+		cout << p->element.key() << endl;
+
+		showSub(p->first, level + 1);
+		showSub(p->second, level + 1);
+		showSub(p->third, level + 1);
+	}
+}
+
+//--------------------------------------------------------------------
+
+template < class TE, class KF >
+void BSTree<TE, KF>::move(BSTreeNode<TE, KF>* ptr)
+{
+	TE element;
+	element = ptr->first->element;
+	ptr->element = element;
+
+	if (ptr->second != NULL) {
+		ptr->first = ptr->second;
+		ptr->second = NULL;
+	}
+	if (ptr->third != NULL) {
+		ptr->second = ptr->third;
+		ptr->third = NULL;
+	}
 }
