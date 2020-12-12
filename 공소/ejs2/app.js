@@ -78,6 +78,7 @@ app.get('/', function(req,res){
             conn.query(
               `Update mdl_groups set group_path = "${
                 db[j].c_name + "_" + db[j].gid
+                // group + "_" + db[j].gid
               }"
                           where id=${db[j].gid};`
             );
@@ -89,24 +90,7 @@ app.get('/', function(req,res){
         }
       }
     }
-    console.log(newrpos_list)
-    
-    function getFiles(dir, files_) {
-      files_ = files_ || [];
-      var files = fs.readdirSync(dir);
-      files_.push("<ul>");
-      for (var i in files) {
-        if (IdRepository.indexOf(files[i]) === -1) continue;
-        else
-          files_.push(
-            `<a href="/${files[i]}?id=${loginId}" class="w3-bar-item w3-button w3-padding">-파일업로드</a>`
-            // `<li><a href="/${files[i]}?id=${loginId}">${files[i]}</a></li>`
-          );
-      }
-      files_.push("</ul>");
-      files_ = files_.join("");
-      return files_;
-    }
+   
     
 
     let sql = `select id, shortname
@@ -376,6 +360,8 @@ app.get('/workList', function(req, res){
 
 app.get('/course?:courseid', function(req, res){
     let _url = req.url;
+    
+
     let queryData = url.parse(_url,true).query;
     console.log(req.session.course)
     
@@ -390,11 +376,10 @@ app.get('/course?:courseid', function(req, res){
 
 app.get("/:id", function (req, res) {
     var loginId = req.query.id;
-    
-    
+
     var group = req.params.id;
-    //console.log("newRpos: "+ req.session.newrpos_list)
-    group = "./grouprepository/" + group;
+    
+    group = "./grouprepository/tst_1" 
     
     IdRepository = [];
     
@@ -408,7 +393,8 @@ app.get("/:id", function (req, res) {
           fs.mkdir(newrpos, (err) => {
             conn.query(
               `Update mdl_groups set group_path = "${
-                db[j].c_name + "_" + db[j].gid
+                 db[j].g_name + "_" + db[j].gid
+                //group +"_" + db[j].gid
               }"
                           where id=${db[j].gid};`
             );
@@ -418,7 +404,7 @@ app.get("/:id", function (req, res) {
       }
     }
     
-    console.log("newrpos: "+ newrpos_list)
+    
 
     function getFiles2(dir, files_) {
       files_ = files_ || [];
@@ -584,8 +570,8 @@ app.get("/:id", function (req, res) {
     
     
 });
-  
-  var db = [];
+
+var db = [];
   
 var server = http.createServer(app).listen(app.get("port"), function () {
     dbqueryinput();
@@ -593,10 +579,11 @@ var server = http.createServer(app).listen(app.get("port"), function () {
   
 function dbqueryinput() {
     conn.query(
-      `SELECT gm.id, gm.groupid, gm.userid, g.group_path, c.fullname
+      `SELECT gm.id, gm.groupid, gm.userid, g.group_path, c.fullname, g.name
           from mdl_groups_members gm
           left outer join mdl_groups g on gm.groupid=g.id
-          left outer join mdl_course c on g.courseid=c.id`,
+          left outer join mdl_course c on g.courseid=c.id
+          where gm.groupid = 1`,
       (error, rows) => {
         db = [];
         if (error) throw error;
@@ -607,8 +594,11 @@ function dbqueryinput() {
             guid: rows[i].userid,
             g_path: rows[i].group_path,
             c_name: rows[i].fullname,
+            g_name: rows[i].name
           });
         }
+        
+
       }
     );
   }
