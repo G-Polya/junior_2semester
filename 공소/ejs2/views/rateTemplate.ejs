@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <title>W3.CSS Template</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
+  <style>
+    body {
+      color: white;
+      font-family: "Roboto", sans-serif;
+      background-color: black;
+    }
+    html,
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      color: white;
+      font-family: "Roboto", sans-serif;
+    }
+    #mySidebar {
+      background-color: rgba(38, 38, 39, 1);
+    }
+    #logo {
+      width: 135px;
+      height: 125px;
+      top: 50px;
+      left: 60px;
+    }
+    #logotext {
+      font-weight: bold;
+      font-size: 32px;
+    }
+    #ratebox {
+      width: 200px;
+      margin-left: 10px;
+    }
+    .silex-id-1605169710227-28 {
+      width: 200px;
+      min-height: 70px;
+      position: absolute;
+      top: 194px;
+      left: 15px;
+      background-color: transparent;
+    }
+  </style>
+  <body>
+    <!-- Sidebar/menu -->
+    <nav
+      class="w3-sidebar w3-collapse w3-animate-left"
+      style="z-index: 3; width: 270px"
+      id="mySidebar"
+    >
+      <br />
+      <div class="w3-container w3-row">
+        <img src="logo.637cfd18.jpg" id="logo" />
+        <div id="logotext">
+          <a href="/main">PLASS DGU</a>
+        </div>
+        <div
+        data-silex-type="text-element"
+        class="editable-style text-element silex-id-1605169710227-28 page-main paged-element style-all-style1"
+        data-silex-id="silex-id-1605169710227-28"
+        style=""
+      >
+        <select name="course" onchange="location=this.value;">
+          <option value="select-course">강좌를 선택하세요</option>
+          <% for(var i = 0 ; i < course.length; i++ ) { %>
+          <option value="course?id=<%=i%>"><%= course[i].shortname %></option>
+          <% } %>
+        </select>
+      </div>
+        <br />
+      </div>
+
+      <hr />
+
+      <div class="w3-bar-block">
+        <a href="/teamPage" class="w3-bar-item w3-button w3-padding"
+          ><i class="fa fa-users fa-fw"></i><b>공동문서작업</b>
+        </a>
+        <a href="/teamPage" class="w3-bar-item w3-button w3-padding"
+          >-Group정보</a
+        >
+        <a href="/workList" class="w3-bar-item w3-button w3-padding"
+          >-작업리스트</a
+        >
+
+        <a href="/fileUpload" class="w3-bar-item w3-button w3-padding"
+          >-파일업로드</a
+        >
+        <br />
+
+        <a href="/rate" class="w3-bar-item w3-button w3-padding w3-blue"
+          ><i class="far fa-star fa-fw"></i><b>평가하기</b> </a
+        >
+        <a href="/notfinished"  class="w3-bar-item w3-button w3-padding"
+          ><i class="far fa-clipboard fa-fw"></i><b>평가점수표</b> </a
+        >
+      </div>
+    </nav>
+
+    <!-- Overlay effect when opening sidebar on small screens -->
+    <div
+      class="w3-overlay w3-hide-large w3-animate-opacity"
+      onclick="w3_close()"
+      style="cursor: pointer"
+      title="close side menu"
+      id="myOverlay"
+    ></div>
+
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main w3-black" style="margin-left: 270px">
+      <!-- Header -->
+      <header class="w3-container" style="padding-top: 22px">
+        <h5>
+          <b><i class="far fa-star"></i> 평가하기</b>
+        </h5>
+      </header>
+      <form method="post" action="/insertRate">
+        <% for (var i = 0; i < length; i++) { %>
+
+        <div class="w3-block w3-red w3-quarter w3-padding-16" id="ratebox">
+          <div class="w3-clear"></div>
+          <div class="w3-left">
+            <i class="fas fa-user-circle w3-xxxlarge"></i>
+          </div>
+          <b><%= name[i] %></b><br /><br />
+          <br />
+        </div>
+
+        <div class="w3-panel w3-threequarter">
+          <div class="w3-row-padding" style="margin: 0 -16px">
+            <table class="w3-table w3-striped w3-white">
+              <tr>
+                <td>
+                  <i class="fas fa-user-tie w3-text-blue w3-large"></i>
+                </td>
+                <td>리더쉽</td>
+                <td><i>0~10</i></td>
+                <td>
+                  <label>점수입력</label
+                  ><input class="w3-input" type="text" name="leadership" />
+                </td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-user-circle w3-text-red w3-large"></i></td>
+                <td>참여도</td>
+                <td><i>0~10</i></td>
+                <td>
+                  <label>점수입력</label
+                  ><input class="w3-input" type="text" name="assertiveness" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <i class="far fa-handshake w3-text-yellow w3-large"></i>
+                </td>
+                <td>팀워크</td>
+                <td><i>0~10</i></td>
+                <td>
+                  <label>점수입력</label
+                  ><input class="w3-input" type="text" name="teamwork" />
+                </td>
+              </tr>
+              <tr>
+                <td><i class="far fa-lightbulb w3-text-red w3-large"></i></td>
+                <td>창의성</td>
+                <td><i>0~10</i></td>
+                <td>
+                  <label>점수입력</label
+                  ><input class="w3-input" type="text" name="creativeness" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <i class="fas fa-user-circle w3-text-blue w3-large"></i>
+                </td>
+                <td>발표능력</td>
+                <td><i>0~10</i></td>
+                <td>
+                  <label>점수입력</label
+                  ><input class="w3-input" type="text" name="orator" />
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <% } %>
+        <input class="w3-right" type="submit" />
+      </form>
+    </div>
+  </body>
+</html>
