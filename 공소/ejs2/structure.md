@@ -20,3 +20,14 @@
 db에 추가한것
 mdl_groups_members테이블에 작업리스트의 작성을 위한 to_do_list 칼럼추가
 mdl_groups에 파일이 저장될 경로가 되는 group_path 칼럼추가
+mdl_groups_member에 hasrated(int, null) 추가
+create table a_rate
+(
+    userid int(20), 
+    leadership float, 
+    teamwork float, 
+    creativeness float, 
+    assertiveness float, 
+    orator float, 
+    courseid int
+);
