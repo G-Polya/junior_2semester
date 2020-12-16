@@ -19,10 +19,7 @@ var j = 0;
 
 var url = require("url");
 const { Console, group } = require("console");
-const {
-  RSA_NO_PADDING,
-  SSL_OP_SSLEAY_080_CLIENT_DH_BUG,
-} = require("constants");
+const { RSA_NO_PADDING } = require("constants");
 const { read } = require("fs");
 const e = require("express");
 
@@ -102,7 +99,7 @@ app.get("/rate", (req, res) => {
 
       if (result5[0].hasrated === 1) {
         res.send(
-          '<script>alert("이미 평가하셨습니다.");location.href="/home";</script>'
+          '<script>alert("이미 평가하셨습니다.");location.href="/scoreboard";</script>'
         );
       } else {
         //let groupid = session.groupid;
@@ -220,7 +217,7 @@ app.post("/insertRate", (req, res) => {
           console.log(userids[k]);
           console.log(userids.length);
           var result2 = conn2.query(
-            `select * from a_rate where userid = ${userids[k]} AND groupid = ${dbGroupid}`
+            "select * from a_rate where userid = ${userids[k]} AND groupid = ${dbGroupid}"
           );
           console.log("result2[0].leadership" + result2[0].leadership);
           leadership[k] += result2[0].leadership;
@@ -319,66 +316,14 @@ app.get("/dividescore", (req, res) => {
           });
         }
       });
-      res.redirect("/notfinished");
-    }
-  });
-});
-
-app.get("/notfinished", (req, res) => {
-  let dbGroupid;
-  let dbCourseId = req.session.course[req.session.courseId].id;
-  const userid = req.session.userid;
-  console.log("userid: " + userid);
-  let sql = `select courseid, id
-               from mdl_groups
-               where id in (select groupid
-                            from mdl_groups_members
-                            where userid=${userid})`;
-  const group_course = [];
-  conn.query(sql, function (err, rows, fiels) {
-    if (err) console.log("query is not excuted. select fail...\n" + err);
-    else {
-      rows.forEach((element) => {
-        group_course.push({ courseid: element.courseid, groupid: element.id });
-      });
-      const courseIndex = group_course.findIndex(function (element) {
-        if (element.courseid === dbCourseId) {
-          return true;
-        }
-      });
-
-      dbGroupid = group_course[courseIndex].groupid;
-      console.log("평가삽입groupid: " + dbGroupid);
-
-      var result23 = conn2.query(
-        `SELECT id FROM mdl_groups WHERE courseid = ${dbCourseId}`
-      );
-
-      let gnum = 0;
-      console.log(result23.length);
-
-      for (var k = 0; k < result23.length; k++) {
-        var result9 = conn2.query(
-          `SELECT COUNT(*) AS mc FROM mdl_groups_members WHERE groupid = ${result23[k].id} and HASRATED IS NULL  `
-        );
-        console.log(result23[k].id);
-        console.log(result9[0].mc);
-        gnum += result9[0].mc;
-      }
-
-      if (gnum === 1) {
-        res.redirect("/scoreboard");
-      } else {
-        res.send(
-          '<script>alert("아직 평가가 진행중입니다.");location.href="/home";</script>'
-        );
-      }
+      res.redirect("/scoreboard");
     }
   });
 });
 
 app.get("/scoreboard", (req, res) => {
   //mdl_roleassingment에 roleid가 role을 결정
+
   let dbGroupid;
   let dbCourseId = req.session.course[req.session.courseId].id;
   const userid = req.session.userid;
@@ -403,7 +348,6 @@ app.get("/scoreboard", (req, res) => {
 
       dbGroupid = group_course[courseIndex].groupid;
       console.log("평가삽입groupid: " + dbGroupid);
-
       let userids = [];
       var result22 = conn2.query(
         `SELECT userid FROM mdl_groups_members WHERE groupid = ${dbGroupid}`
