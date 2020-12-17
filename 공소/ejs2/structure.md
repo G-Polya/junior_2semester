@@ -14,7 +14,7 @@
       |_ ParkSungHo3 (userid:11) 
       |_ ParkSungHo4 (userid:12)
       |_ ParkSungHo5 (userid:13) 
-  |_ group3(groupid:3)    
+  |_ group3(groupid:8)    
       |_ KimSungSu  (userid:14)           >> 팀장 honoka1234
       |_ KimSungSu2 (userid:15)           >> 학생 honoka1235
       |_ KimSungSu3  (userid:16)
