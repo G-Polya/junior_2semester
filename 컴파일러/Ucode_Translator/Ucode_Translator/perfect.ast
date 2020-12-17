@@ -1,8 +1,8 @@
  Nonterminal: PROGRAM
       Nonterminal: DCL
            Nonterminal: DCL_SPEC
-                Nonterminal: CONST_TYPE
-                Nonterminal: INT_TYPE
+                Nonterminal: CONST_NODE
+                Nonterminal: INT_NODE
            Nonterminal: DCL_ITEM
                 Nonterminal: SIMPLE_VAR
                      Terminal: max
@@ -10,14 +10,14 @@
       Nonterminal: FUNC_DEF
            Nonterminal: FUNC_HEAD
                 Nonterminal: DCL_SPEC
-                     Nonterminal: VOID_TYPE
+                     Nonterminal: VOID_NODE
                 Terminal: main
                 Nonterminal: FORMAL_PARA
            Nonterminal: COMPOUND_ST
                 Nonterminal: DCL_LIST
                      Nonterminal: DCL
                           Nonterminal: DCL_SPEC
-                               Nonterminal: INT_TYPE
+                               Nonterminal: INT_NODE
                           Nonterminal: DCL_ITEM
                                Nonterminal: SIMPLE_VAR
                                     Terminal: i
@@ -29,7 +29,7 @@
                                     Terminal: k
                      Nonterminal: DCL
                           Nonterminal: DCL_SPEC
-                               Nonterminal: INT_TYPE
+                               Nonterminal: INT_NODE
                           Nonterminal: DCL_ITEM
                                Nonterminal: SIMPLE_VAR
                                     Terminal: rem
@@ -37,63 +37,285 @@
                                Nonterminal: SIMPLE_VAR
                                     Terminal: sum
                 Nonterminal: STAT_LIST
-                     Nonterminal: EXP_ST
-                          Nonterminal: ASSIGN_OP
-                               Terminal: i
-                               Terminal: 2
                      Nonterminal: WHILE_ST
-                          Nonterminal: LE
-                               Terminal: i
-                               Terminal: max
+                          Nonterminal: RETURN_ST
+                               Nonterminal: LT
+                                    Terminal: i
+                                    Nonterminal: GT
+                                         Nonterminal: DIV
+                                              Nonterminal: PRE_INC
+                                                   Nonterminal: POST_INC
+                                                        Terminal: 2
+                     Nonterminal: MOD_ASSIGN
+                          Nonterminal: GT
+                               Nonterminal: DIV
+                                    Nonterminal: CALL
+                                         Nonterminal: PRE_INC
+                                              Nonterminal: POST_INC
+                                                   Terminal: i
+                                         Nonterminal: POST_INC
+                                              Terminal: max
                           Nonterminal: COMPOUND_ST
                                Nonterminal: DCL_LIST
                                Nonterminal: STAT_LIST
-                                    Nonterminal: EXP_ST
-                                         Nonterminal: ASSIGN_OP
-                                              Terminal: sum
-                                              Terminal: 0
-                                    Nonterminal: EXP_ST
-                                         Nonterminal: ASSIGN_OP
-                                              Terminal: k
-                                              Nonterminal: DIV
-                                                   Terminal: i
-                                                   Terminal: 2
-                                    Nonterminal: EXP_ST
-                                         Nonterminal: ASSIGN_OP
-                                              Terminal: j
-                                              Terminal: 1
                                     Nonterminal: WHILE_ST
-                                         Nonterminal: LE
-                                              Terminal: j
-                                              Terminal: k
+                                         Nonterminal: RETURN_ST
+                                              Nonterminal: LT
+                                                   Terminal: sum
+                                                   Nonterminal: GT
+                                                        Nonterminal: DIV
+                                                             Nonterminal: PRE_INC
+                                                                  Nonterminal: POST_INC
+                                                                       Terminal: 0
+                                    Nonterminal: WHILE_ST
+                                         Nonterminal: RETURN_ST
+                                              Nonterminal: LT
+                                                   Terminal: k
+                                                   Nonterminal: GT
+                                                        Nonterminal: DIV
+                                                             Nonterminal: PRE_INC
+                                                                  Nonterminal: POST_INC
+                                                                       Terminal: i
+                                                                       Terminal: 2
+                                    Nonterminal: WHILE_ST
+                                         Nonterminal: RETURN_ST
+                                              Nonterminal: LT
+                                                   Terminal: j
+                                                   Nonterminal: GT
+                                                        Nonterminal: DIV
+                                                             Nonterminal: PRE_INC
+                                                                  Nonterminal: POST_INC
+                                                                       Terminal: 1
+                                    Nonterminal: MOD_ASSIGN
+                                         Nonterminal: GT
+                                              Nonterminal: DIV
+                                                   Nonterminal: CALL
+                                                        Nonterminal: PRE_INC
+                                                             Nonterminal: POST_INC
+                                                                  Terminal: j
+                                                        Nonterminal: POST_INC
+                                                             Terminal: k
                                          Nonterminal: COMPOUND_ST
                                               Nonterminal: DCL_LIST
                                               Nonterminal: STAT_LIST
-                                                   Nonterminal: EXP_ST
-                                                        Nonterminal: ASSIGN_OP
-                                                             Terminal: rem
-                                                             Nonterminal: REMAINDER
-                                                                  Terminal: i
-                                                                  Terminal: j
-                                                   Nonterminal: IF_ST
-                                                        Nonterminal: EQ
-                                                             Terminal: rem
-                                                             Terminal: 0
-                                                        Nonterminal: EXP_ST
-                                                             Nonterminal: ADD_ASSIGN
-                                                                  Terminal: sum
-                                                                  Terminal: j
-                                                   Nonterminal: EXP_ST
+                                                   Nonterminal: WHILE_ST
+                                                        Nonterminal: RETURN_ST
+                                                             Nonterminal: LT
+                                                                  Terminal: rem
+                                                                  Nonterminal: GT
+                                                                       Nonterminal: DIV
+                                                                            Nonterminal: PRE_INC
+                                                                                 Nonterminal: POST_INC
+                                                                                      Terminal: i
+                                                                                      Terminal: j
+                                                   Nonterminal: MUL_ASSIGN
+                                                        Nonterminal: GT
+                                                             Nonterminal: DIV
+                                                                  Nonterminal: UNARY_MINUS
+                                                                       Nonterminal: PRE_INC
+                                                                            Nonterminal: POST_INC
+                                                                                 Terminal: rem
+                                                                       Nonterminal: PRE_INC
+                                                                            Nonterminal: POST_INC
+                                                                                 Terminal: 0
+                                                        Nonterminal: WHILE_ST
+                                                             Nonterminal: RETURN_ST
+                                                                  Nonterminal: GE
+                                                                       Terminal: sum
+                                                                       Nonterminal: GT
+                                                                            Nonterminal: DIV
+                                                                                 Nonterminal: PRE_INC
+                                                                                      Nonterminal: POST_INC
+                                                                                           Terminal: j
+                                                   Nonterminal: WHILE_ST
+                                                        Nonterminal: RETURN_ST
+                                                             Nonterminal: GT
+                                                                  Nonterminal: DIV
+                                                                       Nonterminal: PRE_INC
+                                                                            Nonterminal: POST_INC
+                                                                                 Terminal: j
+                                    Nonterminal: MUL_ASSIGN
+                                         Nonterminal: GT
+                                              Nonterminal: DIV
+                                                   Nonterminal: UNARY_MINUS
                                                         Nonterminal: PRE_INC
-                                                             Terminal: j
-                                    Nonterminal: IF_ST
-                                         Nonterminal: EQ
-                                              Terminal: i
-                                              Terminal: sum
-                                         Nonterminal: EXP_ST
-                                              Nonterminal: CALL
-                                                   Terminal: write
-                                                   Terminal: i
-                                    Nonterminal: EXP_ST
+                                                             Nonterminal: POST_INC
+                                                                  Terminal: i
+                                                        Nonterminal: PRE_INC
+                                                             Nonterminal: POST_INC
+                                                                  Terminal: sum
+                                         Nonterminal: WHILE_ST
+                                              Nonterminal: RETURN_ST
+                                                   Nonterminal: GT
+                                                        Nonterminal: DIV
+                                                             Nonterminal: PRE_INC
+                                                                  Nonterminal: POST_INC
+                                                                       Terminal: write
+                                                                       Nonterminal: GT
+                                                                            Nonterminal: DIV
+                                                                                 Nonterminal: PRE_INC
+                                                                                      Nonterminal: POST_INC
+                                                                                           Terminal: i
+                                    Nonterminal: WHILE_ST
+                                         Nonterminal: RETURN_ST
+                                              Nonterminal: GT
+                                                   Nonterminal: DIV
+                                                        Nonterminal: PRE_INC
+                                                             Nonterminal: POST_INC
+                                                                  Terminal: i
+ Nonterminal: FUNC_DEF
+      Nonterminal: FUNC_HEAD
+           Nonterminal: DCL_SPEC
+                Nonterminal: VOID_NODE
+           Terminal: main
+           Nonterminal: FORMAL_PARA
+      Nonterminal: COMPOUND_ST
+           Nonterminal: DCL_LIST
+                Nonterminal: DCL
+                     Nonterminal: DCL_SPEC
+                          Nonterminal: INT_NODE
+                     Nonterminal: DCL_ITEM
+                          Nonterminal: SIMPLE_VAR
+                               Terminal: i
+                     Nonterminal: DCL_ITEM
+                          Nonterminal: SIMPLE_VAR
+                               Terminal: j
+                     Nonterminal: DCL_ITEM
+                          Nonterminal: SIMPLE_VAR
+                               Terminal: k
+                Nonterminal: DCL
+                     Nonterminal: DCL_SPEC
+                          Nonterminal: INT_NODE
+                     Nonterminal: DCL_ITEM
+                          Nonterminal: SIMPLE_VAR
+                               Terminal: rem
+                     Nonterminal: DCL_ITEM
+                          Nonterminal: SIMPLE_VAR
+                               Terminal: sum
+           Nonterminal: STAT_LIST
+                Nonterminal: WHILE_ST
+                     Nonterminal: RETURN_ST
+                          Nonterminal: LT
+                               Terminal: i
+                               Nonterminal: GT
+                                    Nonterminal: DIV
                                          Nonterminal: PRE_INC
+                                              Nonterminal: POST_INC
+                                                   Terminal: 2
+                Nonterminal: MOD_ASSIGN
+                     Nonterminal: GT
+                          Nonterminal: DIV
+                               Nonterminal: CALL
+                                    Nonterminal: PRE_INC
+                                         Nonterminal: POST_INC
                                               Terminal: i
+                                    Nonterminal: POST_INC
+                                         Terminal: max
+                     Nonterminal: COMPOUND_ST
+                          Nonterminal: DCL_LIST
+                          Nonterminal: STAT_LIST
+                               Nonterminal: WHILE_ST
+                                    Nonterminal: RETURN_ST
+                                         Nonterminal: LT
+                                              Terminal: sum
+                                              Nonterminal: GT
+                                                   Nonterminal: DIV
+                                                        Nonterminal: PRE_INC
+                                                             Nonterminal: POST_INC
+                                                                  Terminal: 0
+                               Nonterminal: WHILE_ST
+                                    Nonterminal: RETURN_ST
+                                         Nonterminal: LT
+                                              Terminal: k
+                                              Nonterminal: GT
+                                                   Nonterminal: DIV
+                                                        Nonterminal: PRE_INC
+                                                             Nonterminal: POST_INC
+                                                                  Terminal: i
+                                                                  Terminal: 2
+                               Nonterminal: WHILE_ST
+                                    Nonterminal: RETURN_ST
+                                         Nonterminal: LT
+                                              Terminal: j
+                                              Nonterminal: GT
+                                                   Nonterminal: DIV
+                                                        Nonterminal: PRE_INC
+                                                             Nonterminal: POST_INC
+                                                                  Terminal: 1
+                               Nonterminal: MOD_ASSIGN
+                                    Nonterminal: GT
+                                         Nonterminal: DIV
+                                              Nonterminal: CALL
+                                                   Nonterminal: PRE_INC
+                                                        Nonterminal: POST_INC
+                                                             Terminal: j
+                                                   Nonterminal: POST_INC
+                                                        Terminal: k
+                                    Nonterminal: COMPOUND_ST
+                                         Nonterminal: DCL_LIST
+                                         Nonterminal: STAT_LIST
+                                              Nonterminal: WHILE_ST
+                                                   Nonterminal: RETURN_ST
+                                                        Nonterminal: LT
+                                                             Terminal: rem
+                                                             Nonterminal: GT
+                                                                  Nonterminal: DIV
+                                                                       Nonterminal: PRE_INC
+                                                                            Nonterminal: POST_INC
+                                                                                 Terminal: i
+                                                                                 Terminal: j
+                                              Nonterminal: MUL_ASSIGN
+                                                   Nonterminal: GT
+                                                        Nonterminal: DIV
+                                                             Nonterminal: UNARY_MINUS
+                                                                  Nonterminal: PRE_INC
+                                                                       Nonterminal: POST_INC
+                                                                            Terminal: rem
+                                                                  Nonterminal: PRE_INC
+                                                                       Nonterminal: POST_INC
+                                                                            Terminal: 0
+                                                   Nonterminal: WHILE_ST
+                                                        Nonterminal: RETURN_ST
+                                                             Nonterminal: GE
+                                                                  Terminal: sum
+                                                                  Nonterminal: GT
+                                                                       Nonterminal: DIV
+                                                                            Nonterminal: PRE_INC
+                                                                                 Nonterminal: POST_INC
+                                                                                      Terminal: j
+                                              Nonterminal: WHILE_ST
+                                                   Nonterminal: RETURN_ST
+                                                        Nonterminal: GT
+                                                             Nonterminal: DIV
+                                                                  Nonterminal: PRE_INC
+                                                                       Nonterminal: POST_INC
+                                                                            Terminal: j
+                               Nonterminal: MUL_ASSIGN
+                                    Nonterminal: GT
+                                         Nonterminal: DIV
+                                              Nonterminal: UNARY_MINUS
+                                                   Nonterminal: PRE_INC
+                                                        Nonterminal: POST_INC
+                                                             Terminal: i
+                                                   Nonterminal: PRE_INC
+                                                        Nonterminal: POST_INC
+                                                             Terminal: sum
+                                    Nonterminal: WHILE_ST
+                                         Nonterminal: RETURN_ST
+                                              Nonterminal: GT
+                                                   Nonterminal: DIV
+                                                        Nonterminal: PRE_INC
+                                                             Nonterminal: POST_INC
+                                                                  Terminal: write
+                                                                  Nonterminal: GT
+                                                                       Nonterminal: DIV
+                                                                            Nonterminal: PRE_INC
+                                                                                 Nonterminal: POST_INC
+                                                                                      Terminal: i
+                               Nonterminal: WHILE_ST
+                                    Nonterminal: RETURN_ST
+                                         Nonterminal: GT
+                                              Nonterminal: DIV
+                                                   Nonterminal: PRE_INC
+                                                        Nonterminal: POST_INC
+                                                             Terminal: i
