@@ -123,6 +123,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="EmitCode.c" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="sdt.c" />
+    <ClCompile Include="SymTab.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
