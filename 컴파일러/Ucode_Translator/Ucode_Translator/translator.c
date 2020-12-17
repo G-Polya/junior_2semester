@@ -32,24 +32,25 @@ FILE* sourceFile;
 char filename[FNAME_SIZE];
 struct tokenType scanner();
 
-enum tsymbol { 
+enum tsymbol
+{
 	tnull = -1,
-	/*********************** Operator Symbol **************************/ 
-	tnot,		tnotequ,	tmod,		tmodAssign,	tident,		tnumber,
-	/*0			1			2			3			4			5	*/
-	tand,		tlparen,	trparen,	tmul,		tmulAssign,	tplus,
-	/*6			7			8			9			10			11	*/
-	tinc,		taddAssign,	tcomma,		tminus,		tdec,		tsubAssign,
-	/*12		13			14			15			16			17 	*/
-	tdiv,		tdivAssign,	tsemicolon,	tless,		tlesse,		tassign,
-	/*18		19			20			21			22			23 	*/
-	tequal,		tgreat,		tgreate,	tlbracket,	trbracket,	teof,
-	/*24		25			26			27			28			29	*/
-	/************************** Word Symbol ***************************/ 
-	tconst,		telse,		tif,		tint,		treturn,	tvoid,
-	/*30		31			32			33			34			35	*/
-	twhile,		tlbrace,	tor,		trbrace		
-	/*36		37			38			39	*/
+	tnot, tnotequ, tremainder, tremAssign, tident, tnumber,
+	/* 0          1            2         3            4          5     */
+	tand, tlparen, trparen, tmul, tmulAssign, tplus,
+	/* 6          7            8         9           10         11     */
+	tinc, taddAssign, tcomma, tminus, tdec, tsubAssign,
+	/* 12         13          14        15           16         17     */
+	tdiv, tdivAssign, tcolon, tsemicolon, tless, tlesse,
+	/* 18         19          20        21           22         23     */
+	tassign, tequal, tgreat, tgreate, tlbracket, trbracket,
+	/* 24         25          26        27           28         29     */
+	teof, tbreak, tcase, tconst, tcontinue, tdefault,
+	/* 30         31          32        33           34         35     */
+	tdo, telse, tfor, tif, tint, treturn,
+	/* 36         37          38        39           40         41     */
+	tswitch, tvoid, twhile, tlbrace, tor, trbrace,
+	/* 42         43          44        45           46         47     */
 };
 
 const char* tokenName[] =
@@ -1350,16 +1351,16 @@ void processStatement(Node* ptr) {
 			break;
 
 		case IF_ST:
-			{
-				char label[LABEL_SIZE];
+				{
+					char label[LABEL_SIZE];
 
-				genLabel(label);
-				processCondition(ptr->son);
-				emitJump("fjp", label);
-				processStatement(ptr->son->brother);
-				emitLabel(label);
-			}
-			break;
+					genLabel(label);
+					processCondition(ptr->son);
+					emitJump("fjp", label);
+					processStatement(ptr->son->brother);
+					emitLabel(label);
+				}
+				break;
 
 		case IF_ELSE_ST:
 		{
