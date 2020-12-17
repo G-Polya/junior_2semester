@@ -1,7 +1,7 @@
 var style = require("./style.js");
 
 module.exports = {
-  HTML: function (course, getfiles, db, group, username) {
+  HTML: function (course, getfiles, db, group, username,coursename) {
     // return `
     // <!doctype html>
     // <head>
@@ -144,7 +144,7 @@ ${style.css()}
       <!-- Header -->
       <header class="w3-container" style="padding-top: 22px">
         <h5>
-          <b> <i class="far fa-folder-open"></i> 파일업로드</b>
+          <b> <i class="far fa-folder-open"></i>${coursename} : 파일업로드</b>
         </h5>
       </header>
 
