@@ -1407,7 +1407,7 @@ void processFuncHeader(Node* ptr) {
 	int stIndex;
 	Node* p = ptr;
 
-	printf("processFunctionHeader\n\n");
+	//printf("processFunctionHeader\n\n");
 
 	if (ptr->token.number != FUNC_HEAD) {
 		printf("error in processFunctionHeader!\n");
@@ -1482,7 +1482,7 @@ int checkPredefined(Node* ptr) {
 	int noArguments;
 	int stIndex;
 	functionName = p->token.value.id;
-
+	
 	if (strcmp(functionName, "read") == 0) {
 		noArguments = 1;
 		emit0("ldp");
