@@ -511,7 +511,7 @@ app.get("/scoreboard", (req, res) => {
               orator: orator_sb,
               length: length,
               course:req.session.course,
-              username:req.session.username
+              name:req.session.username
             });
           }
         }
@@ -653,7 +653,7 @@ app.get("/prof", (req, res) => {
               orator: orator_sb,
               length: length,
               course:req.session.course,
-              username:req.session.username,
+              name:req.session.username,
     
             });
           }

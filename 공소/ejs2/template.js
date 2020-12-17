@@ -156,7 +156,7 @@ ${style.css()}
                       <div class=origin>
                        <br>
                       </div>
-                      <div class=origin>
+                      <div class=origin style="position:relative; left:5%;">
                           <form action="myrouter/addpart/${group}" method="post">
                               <input type="text" name="part" size=8 maxlength=8>
                               <input type="submit" value="파트추가">
