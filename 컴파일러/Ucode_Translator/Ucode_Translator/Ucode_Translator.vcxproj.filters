@@ -15,17 +15,31 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="parser.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="sdt.c">
+    <ClCompile Include="scanner.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="EmitCode.c">
+    <ClCompile Include="translator.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="SymTab.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="main.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="parser.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="scanner.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="translator.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
