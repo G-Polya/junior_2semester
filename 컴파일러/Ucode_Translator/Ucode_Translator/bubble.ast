@@ -562,10 +562,4 @@
                                                                                            Nonterminal: PRE_INC
                                                                                                 Nonterminal: POST_INC
                                                                                                      Terminal: i
-                               Nonterminal: WHILE_ST
-                                    Nonterminal: RETURN_ST
-                                         Nonterminal: GT
-                                              Nonterminal: DIV
-                                                   Nonterminal: PRE_INC
-                                                        Nonterminal: POST_INC
-                                                             Terminal: i
+            

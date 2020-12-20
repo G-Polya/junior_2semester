@@ -186,9 +186,9 @@ def main():
     for i in range(0, len(train_labels)):
         weights[i] = class_weight[train_labels[i]]
 
-    hn_1 = [128, 64, 32]
-    hn_2 = [64, 32, 16]
-    hn_3 = [32, 16, 8]
+    hn_1 = [128]
+    hn_2 = [64]
+    hn_3 = [32]
     steps = [2000]
 
     for h1 in hn_1:
